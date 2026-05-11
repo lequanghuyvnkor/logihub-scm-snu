@@ -39,9 +39,6 @@ LogiHub_Project_Archive/
 │   ├── 📄 08_OUT_CostEngine6Comp.md           # Cost Engine 6-Component Simulation Breakdown [OUT]
 │   └── 📄 09_OUT_OutcomeAnalysisExample.md    # SCM Case Study Strategic Outcome Report (Bilingual English-Korean 🇰🇷🇺🇸) [OUT]
 │
-├── 📄 LogiHub_Project_Onboarding.md  # 🚀 Main Team Onboarding Guide (Vietnamese - Start Here!)
-├── 📄 LogiHub_Engine_v2_Redesign.md  # Engine Architectural Specification & Schema Redesign
-├── 📄 LogiHub_Midterm_Plan_3People_18days.md # Team Schedule, Deliverables & WBS
 ├── 📄 engine_contract.schema.json    # Strict JSON Draft-07 API Contract Schema
 └── 📄 .gitignore                     # Optimized git filters (ignores massive PDF textbooks/raw data)
 ```
@@ -100,4 +97,4 @@ LogiHub is developed by a high-performing 3-person engineering team structured u
 - **Group B (Costs, Capacity & Optimization)**: LP modeling, PuLP integration, cost-formula tuning, and stress tests.
 - **Group C (Segmentation, Synthesis & Business Case)**: Product family heuristics, role assignment engine, business-cockpit reporting, and executive summary generation.
 
-*For full project timelines, meeting schedules, and detailed guides, please refer to the [LogiHub Project Onboarding Guide](file:///c:/Users/PC/Downloads/LogiHub_Project_Archive/LogiHub_Project_Onboarding.md).*
+*For detailed team guides, deliverables, and role specifications, please refer to the onboarding packages in the [docs/](file:///c:/Users/PC/Downloads/LogiHub_Project_Archive/docs) directory.*

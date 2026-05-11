@@ -38,7 +38,7 @@ LogiHub circumvents this by generating a comprehensive set of **20 intermediate 
 Once all three groups have successfully tested their modules against the mock data, the system is assembled in a central execution script (e.g., `runner.py`):
 
 1.  **Ingestion:** Real Korean Freight O/D data is fed into Group A's modules.
-2.  **Handoff A $\rightarrow$ B:** Group A outputs Pandas DataFrames matching the `group_A` schema, passing them directly into Group B's modules in memory.
+2.  **Handoff A → B:** Group A outputs Pandas DataFrames matching the `group_A` schema, passing them directly into Group B's modules in memory.
 3.  **Optimization:** Group B's solvers compute the scenarios and output DataFrames matching the `group_B` schema, passing them to Group C.
 4.  **Synthesis:** Group C applies business heuristics, diagnoses the network, and compiles the final `engine_output_final.json`.
 5.  **Render:** The JSON is consumed by the outcome renderer to generate the final Markdown report (`outcome_sample_full.md`) and served via API to the Next.js frontend.

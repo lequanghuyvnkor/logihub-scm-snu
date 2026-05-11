@@ -43,7 +43,7 @@ To transition from a public-data proxy to an enterprise-grade production engine,
 
 공공 데이터 기반의 Proxy 엔진에서 기업용 Production 엔진으로 전환하기 위해서는 다음과 같이 각 입력 변수들을 실제 운영 데이터로 일대일 매핑하고 대체해야 합니다:
 
-*   **Public Freight O/D Patterns $\rightarrow$ Historical Corporate Orders/Shipments**
+*   **Public Freight O/D Patterns → Historical Corporate Orders/Shipments**
     *   *Rationale:* Regional flows do not identify specific customer accounts, distribution channels, or promised delivery dates.
     *   *Minimum Required Fields:* `customer_id`, `ship_to_id`, `order_date`, `quantity`, `weight`, `volume_cube`, `service_class`
     *   *한국어 설명:* 지역 물동량 흐름은 구체적인 고객 계정, 유통 채널 또는 약속된 배송일을 반영하지 못함.
@@ -160,17 +160,17 @@ The mathematical model must shift from simple, single-commodity, unconstrained r
 수학적 모형은 단순한 단일 품목 무제약 모형에서 벗어나, 다기간(Multi-period), 다품목(Multi-commodity), 용량 제약이 있는(Capacity-constrained) 수식으로 업그레이드되어야 실제 비즈니스 제약을 온전히 반영할 수 있습니다.
 
 ### Indices and Sets / 인덱스 및 세트
-*   \(i \in I\): Customers / Demand nodes (고객 / 수요지 노드)
-*   \(j \in J\): Candidate warehouses / Hubs (후보 물류창고 / 허브 노드)
-*   \(k \in K\): Product families / SKUs (제품군 / SKU 세트)
-*   \(t \in T\): Planning periods (e.g., months) (계획 기간 - 월 단위 등)
+*   $i \in I$: Customers / Demand nodes (고객 / 수요지 노드)
+*   $j \in J$: Candidate warehouses / Hubs (후보 물류창고 / 허브 노드)
+*   $k \in K$: Product families / SKUs (제품군 / SKU 세트)
+*   $t \in T$: Planning periods (e.g., months) (계획 기간 - 월 단위 등)
 
 ### Decision Variables / 결정 변수
-*   \(x_j \in \{0, 1\}\): Equals 1 if warehouse \(j\) is opened/activated; 0 otherwise (창고 \(j\) 개설 여부)
-*   \(q_{ijkt} \ge 0\): Quantity of product \(k\) shipped from warehouse \(j\) to customer \(i\) in period \(t\) (기간 \(t\) 동안 창고 \(j\)에서 고객 \(i\)에게 배송된 제품 \(k\)의 물동량)
-*   \(I_{jkt} \ge 0\): On-hand inventory of product \(k\) at warehouse \(j\) at the end of period \(t\) (기간 \(t\) 말 기준 창고 \(j\)의 제품 \(k\) 재고 보유량)
-*   \(u_{ikt} \ge 0\): Quantity of outsourced fulfillment for customer \(i\), product \(k\), in period \(t\) (아웃소싱/3PL 처리량)
-*   \(b_{ikt} \ge 0\): Backlog / stockout volume for customer \(i\), product \(k\), in period \(t\) (미납/이월 물동량)
+*   $x_j \in \{0, 1\}$: Equals 1 if warehouse $j$ is opened/activated; 0 otherwise (창고 $j$ 개설 여부)
+*   $q_{ijkt} \ge 0$: Quantity of product $k$ shipped from warehouse $j$ to customer $i$ in period $t$ (기간 $t$ 동안 창고 $j$에서 고객 $i$에게 배송된 제품 $k$의 물동량)
+*   $I_{jkt} \ge 0$: On-hand inventory of product $k$ at warehouse $j$ at the end of period $t$ (기간 $t$ 말 기준 창고 $j$의 제품 $k$ 재고 보유량)
+*   $u_{ikt} \ge 0$: Quantity of outsourced fulfillment for customer $i$, product $k$, in period $t$ (아웃소싱/3PL 처리량)
+*   $b_{ikt} \ge 0$: Backlog / stockout volume for customer $i$, product $k$, in period $t$ (미납/이월 물동량)
 
 ### Objective Function / 목적 함수
 
@@ -178,7 +178,7 @@ The objective function minimizes total supply chain costs, encompassing fixed co
 
 목적 함수는 고정 비용, 운송 비용, 하역/핸들링 비용, 재고 보유 비용, 아웃소싱 비용 및 SLA 위반 패널티를 포함한 총 공급망 비용을 최소화합니다:
 
-\[
+$$
 \min \quad
 \sum_{j \in J} F_j x_j
 + \sum_{i \in I, j \in J, k \in K, t \in T} C^{tr}_{ijkt} \, q_{ijkt}
@@ -187,16 +187,16 @@ The objective function minimizes total supply chain costs, encompassing fixed co
 + \sum_{i \in I, k \in K, t \in T} C^{out}_{ik} \, u_{ikt}
 + \sum_{i \in I, k \in K, t \in T} P^{sla}_{ik} \, \ell_{ikt}
 + \sum_{i \in I, k \in K, t \in T} P^{bo}_{ik} \, b_{ikt}
-\]
+$$
 
 *Where:*
-*   \(F_j\): Fixed cost per year to keep warehouse \(j\) open (연간 고정 운영비)
-*   \(C^{tr}_{ijkt}\): Cost to transport one unit of product \(k\) from \(j\) to \(i\) in period \(t\) (노선별 운송 단가)
-*   \(C^{hd}_{jk}\): Variable handling/processing cost per unit of product \(k\) at warehouse \(j\) (하역/작업 단가)
-*   \(C^{inv}_{jk}\): Inventory holding cost per unit of product \(k\) at warehouse \(j\) per period (재고 보유 단가)
-*   \(C^{out}_{ik}\): Premium unit cost of outsourcing customer \(i\)'s demand for product \(k\) (아웃소싱 처리 단가)
-*   \(P^{sla}_{ik}\): Penalty per unit-hour for SLA violations on customer \(i\)'s deliveries of product \(k\) (SLA 위반 패널티 단가)
-*   \(P^{bo}_{ik}\): Backorder or lost sale cost per unit (미납/이월 패널티 단가)
+*   $F_j$: Fixed cost per year to keep warehouse $j$ open (연간 고정 운영비)
+*   $C^{tr}_{ijkt}$: Cost to transport one unit of product $k$ from $j$ to $i$ in period $t$ (노선별 운송 단가)
+*   $C^{hd}_{jk}$: Variable handling/processing cost per unit of product $k$ at warehouse $j$ (하역/작업 단가)
+*   $C^{inv}_{jk}$: Inventory holding cost per unit of product $k$ at warehouse $j$ per period (재고 보유 단가)
+*   $C^{out}_{ik}$: Premium unit cost of outsourcing customer $i$'s demand for product $k$ (아웃소싱 처리 단가)
+*   $P^{sla}_{ik}$: Penalty per unit-hour for SLA violations on customer $i$'s deliveries of product $k$ (SLA 위반 패널티 단가)
+*   $P^{bo}_{ik}$: Backorder or lost sale cost per unit (미납/이월 패널티 단가)
 
 ---
 
@@ -206,51 +206,51 @@ The objective function minimizes total supply chain costs, encompassing fixed co
 Every unit of customer demand must be satisfied either via direct assignment, outsourced fulfillment, or registered as backlog:
 
 각 고객의 기별 제품 수요는 허브 배송, 아웃소싱 처리 또는 이월 처리를 합산하여 반드시 일치되어야 합니다:
-\[
+$$
 \sum_{j \in J} q_{ijkt} + u_{ikt} + b_{ikt} - b_{ik,t-1} = D_{ikt} \quad \forall i \in I, k \in K, t \in T
-\]
+$$
 
 #### 2. Warehouse Throughput Capacity / 창고 처리량 제약
 The total volume processed through a warehouse in any given period cannot exceed its physical or operational throughput limit, and can only occur if the warehouse is active:
 
 특정 기간 동안 물류창고에서 출고 처리되는 총 물동량은 창고의 기별 처리 용량을 초과할 수 없으며, 활성화된(개설된) 창고에서만 처리 가능합니다:
-\[
+$$
 \sum_{i \in I, k \in K} q_{ijkt} \le \text{ThroughputCap}_{jt} \cdot x_j \quad \forall j \in J, t \in T
-\]
+$$
 
 #### 3. Warehouse Storage Capacity / 창고 보관 용량 제약
 The inventory stored at a warehouse at the end of any period must not exceed its maximum storage capacity:
 
 특정 기간 말 기준 물류창고에 보관되는 총 재고는 창고의 기별 보관 용량을 초과할 수 없습니다:
-\[
+$$
 \sum_{k \in K} \alpha_k I_{jkt} \le \text{StorageCap}_{jt} \cdot x_j \quad \forall j \in J, t \in T
-\]
-*(where \(\alpha_k\) is the conversion coefficient from product units to physical storage units, e.g., pallets).*
+$$
+*(where $\alpha_k$ is the conversion coefficient from product units to physical storage units, e.g., pallets).*
 
 #### 4. Service Level Agreement (SLA) Constraints / 서비스 수준 제약 (SLA)
 No direct assignment is allowed if the transit time between the candidate warehouse and the customer exceeds the promised SLA:
 
 후보 물류창고와 고객 간의 리드타임이 계약상 약속된 SLA 한계를 초과하는 노선(Lane)에 대해서는 직접 배송 할당이 원천적으로 불가능합니다:
-\[
+$$
 q_{ijkt} = 0 \quad \text{if} \quad \text{LeadTime}_{ij} > \text{SLA}_{i}
-\]
+$$
 
 #### 5. Product-Warehouse Compatibility / 제품-창고 호환성 제약
 Products can only be assigned to warehouses equipped to handle them (e.g., cold chain storage, hazmat-certified docks):
 
 특정 제품은 해당 제품을 처리할 수 있는 보관 설비 및 작업 능력을 갖춘 물류창고에만 할당될 수 있습니다 (예: 저온 보관 시설, 위험물 인증 등):
-\[
+$$
 q_{ijkt} \le M \cdot \text{Compat}_{jk} \quad \forall i \in I, j \in J, k \in K, t \in T
-\]
-*(where \(\text{Compat}_{jk} \in \{0, 1\}\) indicates compatibility, and \(M\) is a sufficiently large number).*
+$$
+*(where $\text{Compat}_{jk} \in \{0, 1\}$ indicates compatibility, and $M$ is a sufficiently large number).*
 
 #### 6. Hub Bounds & Capex Limits / 허브 수 및 예산 제약
 Enforces the maximum number of hubs that can be opened or restricts total fixed warehouse CAPEX to a budget limit:
 
 개설 가능한 최대 허브의 수를 제한하거나, 개설되는 창고들의 총 연간 고정 비용 합이 할당된 예산 한도를 넘지 않도록 통제합니다:
-\[
+$$
 L \le \sum_{j \in J} x_j \le U \quad \text{or} \quad \sum_{j \in J} F_j x_j \le B
-\]
+$$
 
 ---
 
@@ -272,9 +272,9 @@ Before recommending network modifications to corporate executives, the model's p
 ### 3. Gap Analysis (격차 분석)
 *   **Action:** Quantify the discrepancies between the model's simulated outputs and the actual performance metrics of that historical period.
 *   **주요 지표:**
-    *   **Cost Gap (비용 격차):** \(\Delta \text{Cost} = \text{Model Cost} - \text{Actual Cost}\)
-    *   **Service Gap (SLA 격차):** \(\Delta \text{SLA} = \text{Model SLA Pct} - \text{Actual SLA Pct}\)
-    *   **Utilization Gap (가동률 격차):** \(\Delta \text{Util} = \text{Model Warehouse Util} - \text{Actual Warehouse Util}\)
+    *   **Cost Gap (비용 격차):** $\Delta \text{Cost} = \text{Model Cost} - \text{Actual Cost}$
+    *   **Service Gap (SLA 격차):** $\Delta \text{SLA} = \text{Model SLA Pct} - \text{Actual SLA Pct}$
+    *   **Utilization Gap (가동률 격차):** $\Delta \text{Util} = \text{Model Warehouse Util} - \text{Actual Warehouse Util}$
 
 ### 4. Parameter Calibration (매개변수 보정)
 *   **Action:** Adjust unit costs, processing speeds, transit times, and penalty factors in the `cost_parameters` and `assumptions_registry` to align the model closer with physical reality.

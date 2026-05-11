@@ -6,6 +6,38 @@
 
 ---
 
+## PROJECT WORK BREAKDOWN STRUCTURE (WBS)
+
+```mermaid
+wbs
+    * All Tasks
+      * Research Planning
+        * Project Scope
+        * Literature Review
+      * Data Processing Pipeline
+        * Raw Data Ingestion (Group A)
+        * Data Cleaning
+        * O/D Matrix Construction
+        * Demand Forecasting
+      * Model & Algorithm Dev
+        * Cost Model (Group B)
+        * Capacity Model
+        * Optimization Models
+          * P-Median
+          * UFLP
+          * CFLP
+      * Output Generation
+        * Synthesis (Group C)
+        * Network Diagnosis
+        * Business Case
+        * JSON Generation
+      * Documentation
+        * Markdown Report
+        * Presentation Slides
+```
+
+---
+
 ## ABSTRACT / 초록
 
 This study builds an analytical and optimization engine for logistics hub networks of large Korean enterprises, using publicly available Korean Freight Origin-Destination (O/D) data from MOLIT as a proxy for internal shipment data. The engine consists of 10 sequential processing modules—from raw data ingestion to management recommendation generation—applying three classical Facility Location models: P-median, UFLP, and CFLP. Five scenarios (P = 3, 5, 7 hubs; current vs. optimal network; capacity-constrained) plus sensitivity analysis are run across 17 administrative regions. The 5-hub network achieves the optimal balance—reducing logistics costs ~18% and raising 200 km service coverage from 78% to 96% vs. the current 3-hub baseline. Results are auto-generated as a 16-section markdown report simulating SCM output.

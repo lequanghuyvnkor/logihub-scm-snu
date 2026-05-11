@@ -9,19 +9,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        maersk: {
-          blue: "#42B0D5",
-          navy: "#00243D",
-          light: "#E1EDF2",
-          gray: "#F2F2F2",
-          darkgray: "#333333"
+        background: "#050505",
+        foreground: "#FAFAFA",
+        logihub: {
+          900: "#0A0A0A",
+          800: "#121212",
+          700: "#1A1A1A",
+          dark: "#0F1115",
+          panel: "#161920",
+          border: "#2A2E39",
+          neon: "#00E5FF",
+          violet: "#8A2BE2",
+          success: "#00E676",
+          warning: "#FFEA00",
+          danger: "#FF1744"
         }
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #8A2BE222 0deg, #00E5FF22 180deg, #8A2BE222 360deg)',
       },
     },
   },
   plugins: [],
 };
 export default config;
-

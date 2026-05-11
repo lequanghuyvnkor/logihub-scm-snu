@@ -111,9 +111,27 @@ uvicorn main:app --reload
 
 Open a **separate terminal window**, navigate to your project root, and start the UI development server:
 
+#### 💻 Windows (Command Prompt - CMD)
 ```cmd
 cd /path/to/LogiHub_Project_Archive
 cd logihub_application_code\frontend
+npm install
+npm run dev
+```
+
+#### 🟦 Windows (PowerShell)
+```powershell
+cd /path/to/LogiHub_Project_Archive
+cd logihub_application_code/frontend
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+npm install
+npm run dev
+```
+
+#### 🍎 macOS / Linux (Bash/Zsh)
+```bash
+cd /path/to/LogiHub_Project_Archive
+cd logihub_application_code/frontend
 npm install
 npm run dev
 ```

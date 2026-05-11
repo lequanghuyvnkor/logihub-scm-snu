@@ -28,14 +28,16 @@ LogiHub_Project_Archive/
 │       ├── 📁 src/components/        # DashboardView, OptimizerWizard, MapViewer, ScenariosView
 │       └── 📁 src/app/               # Application Routing & Layout (TailwindCSS)
 │
-├── 📁 docs/                          # Structured Project Delivery Packages (Markdown)
-│   ├── 📄 01_Package_for_Group_A.md  # Group A: Demand Analytics & Ingestion Specs
-│   ├── 📄 02_Package_for_Group_B.md  # Group B: Cost Modeling & Solver Specifications
-│   ├── 📄 03_Package_for_Group_C.md  # Group C: Heuristics, Synthesis & Copywriting Specs
-│   ├── 📄 04_MID_ProxyEngine.md      # Midterm Engine Specs & Flowcharts
-│   ├── 📄 05_OUT_DocsResearch.md     # E2E Master Research Report (Bilingual English-Korean 🇰🇷🇺🇸)
-│   ├── 📄 06_OUT_CostEngine6Comp.md  # Cost Engine Simulation Breakdown
-│   └── 📄 07_OUT_OutcomeAnalysisExample.md # SCM Strategic Case Study Report (Bilingual English-Korean 🇰🇷🇺🇸)
+├── 📁 docs/                                   # Structured Project Delivery Packages (Markdown)
+│   ├── 📄 01_IN_Package_for_Group_A.md        # Group A: Demand Analytics & Ingestion Specs [IN]
+│   ├── 📄 02_IN_Package_for_Group_B.md        # Group B: Cost Modeling & Solver Specifications [IN]
+│   ├── 📄 03_IN_Package_for_Group_C.md        # Group C: Heuristics, Synthesis & Copywriting Specs [IN]
+│   ├── 📄 04_IN_Async_MockData_Workflow.md    # Async Mock-Driven Pipeline & Team Onboarding Workflow [IN]
+│   ├── 📄 05_MID_ProxyEngine.md               # Midterm Proxy Engine Architecture & Solver Specifications [MID]
+│   ├── 📄 06_MID_Proxy_to_Production_Engine.md # Bilingual Transition Paper: Proxy O/D to Production Engine [MID]
+│   ├── 📄 07_OUT_DocsResearch.md              # E2E Master Research Report (Bilingual English-Korean 🇰🇷🇺🇸) [OUT]
+│   ├── 📄 08_OUT_CostEngine6Comp.md           # Cost Engine 6-Component Simulation Breakdown [OUT]
+│   └── 📄 09_OUT_OutcomeAnalysisExample.md    # SCM Case Study Strategic Outcome Report (Bilingual English-Korean 🇰🇷🇺🇸) [OUT]
 │
 ├── 📄 LogiHub_Project_Onboarding.md  # 🚀 Main Team Onboarding Guide (Vietnamese - Start Here!)
 ├── 📄 LogiHub_Engine_v2_Redesign.md  # Engine Architectural Specification & Schema Redesign

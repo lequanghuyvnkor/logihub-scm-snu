@@ -118,6 +118,9 @@ npm install
 npm run dev
 ```
 
+> [!TIP]
+> **Windows Terminal Freezing?** If your Command Prompt or PowerShell seems "stuck" or "frozen" while running commands, you might have accidentally clicked inside the window (which activates Windows QuickEdit selection mode). Simply press **`ESC`** or **`Enter`** to unfreeze and resume execution!
+
 ---
 
 ## 👥 Meet the Team & WBS Roles

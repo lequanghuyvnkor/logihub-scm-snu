@@ -81,11 +81,11 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
     <div className={`transition-opacity ${!isEnabled ? "opacity-50 pointer-events-none" : "opacity-100"}`}>
       <div className="space-y-5">
         <div>
-          <label className="text-xs font-bold text-maersk-navy uppercase tracking-wider block mb-2">Filter by Industry / Storage</label>
+          <label className="text-xs font-bold text-white uppercase tracking-wider block mb-2">Filter by Industry / Storage</label>
           <select 
             value={storageType}
             onChange={(e) => setStorageType(e.target.value)}
-            className="w-full border border-gray-300 p-2 text-sm bg-white text-maersk-navy font-medium outline-none focus:border-maersk-blue"
+            className="w-full border border-logihub-border p-2 text-sm bg-logihub-panel text-white font-medium outline-none focus:border-maersk-blue"
           >
             {STORAGE_TYPES.map(st => (
               <option key={st} value={st}>{st === "All" ? "All Industry Types (No Filter)" : st}</option>
@@ -94,28 +94,28 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
         </div>
 
         <div>
-          <label className="text-xs font-bold text-maersk-navy uppercase tracking-wider block mb-2">Optimization Model</label>
-          <div className="grid grid-cols-2 gap-0 border border-gray-300">
+          <label className="text-xs font-bold text-white uppercase tracking-wider block mb-2">Optimization Model</label>
+          <div className="grid grid-cols-2 gap-0 border border-logihub-border">
             <button
               onClick={() => setMethod("p-median")}
-              className={`py-2 px-2 text-xs font-bold transition-colors border-b border-r border-gray-300 ${
-                method === "p-median" ? "bg-maersk-blue text-white" : "bg-white text-gray-500 hover:bg-gray-50"
+              className={`py-2 px-2 text-xs font-bold transition-colors border-b border-r border-logihub-border ${
+                method === "p-median" ? "bg-logihub-violet text-white" : "bg-logihub-panel text-gray-400 hover:bg-[#0a0a0a]"
               }`}
             >
               P-Median
             </button>
             <button
               onClick={() => setMethod("cflp")}
-              className={`py-2 px-2 text-xs font-bold transition-colors border-b border-gray-300 ${
-                method === "cflp" ? "bg-maersk-blue text-white" : "bg-white text-gray-500 hover:bg-gray-50"
+              className={`py-2 px-2 text-xs font-bold transition-colors border-b border-logihub-border ${
+                method === "cflp" ? "bg-logihub-violet text-white" : "bg-logihub-panel text-gray-400 hover:bg-[#0a0a0a]"
               }`}
             >
               CFLP
             </button>
             <button
               onClick={() => setMethod("uflp")}
-              className={`py-2 px-2 text-xs font-bold transition-colors border-r border-gray-300 ${
-                method === "uflp" ? "bg-maersk-blue text-white" : "bg-white text-gray-500 hover:bg-gray-50"
+              className={`py-2 px-2 text-xs font-bold transition-colors border-r border-logihub-border ${
+                method === "uflp" ? "bg-logihub-violet text-white" : "bg-logihub-panel text-gray-400 hover:bg-[#0a0a0a]"
               }`}
             >
               UFLP
@@ -123,14 +123,14 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
             <button
               onClick={() => setMethod("mclp")}
               className={`py-2 px-2 text-xs font-bold transition-colors ${
-                method === "mclp" ? "bg-maersk-blue text-white" : "bg-white text-gray-500 hover:bg-gray-50"
+                method === "mclp" ? "bg-logihub-violet text-white" : "bg-logihub-panel text-gray-400 hover:bg-[#0a0a0a]"
               }`}
             >
               MCLP
             </button>
           </div>
-          <p className="text-[10px] text-gray-500 mt-2 flex items-center gap-1 font-medium">
-            <Info className="w-3 h-3 text-maersk-blue" /> 
+          <p className="text-[10px] text-gray-400 mt-2 flex items-center gap-1 font-medium">
+            <Info className="w-3 h-3 text-logihub-neon" /> 
             {method === "p-median" ? "Minimizes total distance for P hubs without capacity limits." :
              method === "cflp" ? "Optimizes flows considering capacity and fixed costs." :
              method === "uflp" ? "Determines optimal hub count minimizing fixed + transport costs." :
@@ -140,7 +140,7 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
 
         {(method === "p-median" || method === "mclp") && (
           <div>
-            <label className="text-xs font-bold text-maersk-navy uppercase tracking-wider block mb-2">Number of Hubs (P)</label>
+            <label className="text-xs font-bold text-white uppercase tracking-wider block mb-2">Number of Hubs (P)</label>
             <input
               type="range"
               min="1"
@@ -149,9 +149,9 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
               onChange={(e) => setPCount(parseInt(e.target.value))}
               className="w-full h-1.5 bg-gray-200 appearance-none cursor-pointer accent-maersk-blue"
             />
-            <div className="flex justify-between text-xs text-gray-500 mt-2 font-medium">
+            <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
               <span>1</span>
-              <span className="font-bold text-maersk-blue">{pCount} hubs selected</span>
+              <span className="font-bold text-logihub-neon">{pCount} hubs selected</span>
               <span>20</span>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
 
         {method === "mclp" && (
           <div>
-            <label className="text-xs font-bold text-maersk-navy uppercase tracking-wider block mb-2">Coverage Radius</label>
+            <label className="text-xs font-bold text-white uppercase tracking-wider block mb-2">Coverage Radius</label>
             <input
               type="range"
               min="50"
@@ -169,9 +169,9 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
               onChange={(e) => setRadius(parseInt(e.target.value))}
               className="w-full h-1.5 bg-gray-200 appearance-none cursor-pointer accent-maersk-blue"
             />
-            <div className="flex justify-between text-xs text-gray-500 mt-2 font-medium">
+            <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
               <span>50km</span>
-              <span className="font-bold text-maersk-blue">{radius} km SLA target</span>
+              <span className="font-bold text-logihub-neon">{radius} km SLA target</span>
               <span>300km</span>
             </div>
           </div>
@@ -186,11 +186,11 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
         <button
           onClick={handleOptimize}
           disabled={running || !isEnabled}
-          className="w-full bg-maersk-navy text-white py-3 px-4 font-bold uppercase tracking-wide text-sm flex items-center justify-center gap-2 hover:bg-[#001829] transition-colors disabled:opacity-50"
+          className="w-full bg-logihub-900 text-white py-3 px-4 font-bold uppercase tracking-wide text-sm flex items-center justify-center gap-2 hover:bg-[#001829] transition-colors disabled:opacity-50"
         >
           {running ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin text-maersk-blue" /> Solving Algorithm...
+              <Loader2 className="w-4 h-4 animate-spin text-logihub-neon" /> Solving Algorithm...
             </>
           ) : (
             <>

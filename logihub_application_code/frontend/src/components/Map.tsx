@@ -70,8 +70,8 @@ export default function Map({ result, candidateHubs = [] }: { result: any, candi
       hubMarkers.push(
         <Marker key={`hub-${hub.id}`} position={pos} icon={hubIcon}>
           <Popup className="maersk-popup">
-            <div className="font-bold text-maersk-navy uppercase tracking-wider border-b border-gray-200 pb-1 mb-2">Selected Hub: {hub.id}</div>
-            <div className="text-xs space-y-1 text-gray-700">
+            <div className="font-bold text-white uppercase tracking-wider border-b border-logihub-border pb-1 mb-2">Selected Hub: {hub.id}</div>
+            <div className="text-xs space-y-1 text-gray-300">
               <div className="flex justify-between"><span className="font-semibold">Role:</span> Regional Distribution</div>
               <div className="flex justify-between"><span className="font-semibold">Total Volume:</span> {fmtNum(load)} tons</div>
               <div className="flex justify-between"><span className="font-semibold">Max Capacity:</span> {fmtNum(capacity)} tons</div>
@@ -81,7 +81,7 @@ export default function Map({ result, candidateHubs = [] }: { result: any, candi
                   {utilPct.toFixed(1)}%
                 </span>
               </div>
-              <div className="mt-2 pt-2 border-t border-gray-100 text-[10px] text-gray-500 italic">
+              <div className="mt-2 pt-2 border-t border-logihub-border/50 text-[10px] text-gray-400 italic">
                 Selected by algorithm to minimize total weighted distance.
               </div>
             </div>
@@ -169,8 +169,8 @@ export default function Map({ result, candidateHubs = [] }: { result: any, candi
           >
             <Tooltip direction="top" offset={[0, -5]}>
               <div className="text-[10px]">
-                <div className="font-bold text-maersk-navy">{hub.company_name || hub.hub_id}</div>
-                <div className="text-gray-500 uppercase tracking-wider mt-0.5">{hub.storage_item}</div>
+                <div className="font-bold text-white">{hub.company_name || hub.hub_id}</div>
+                <div className="text-gray-400 uppercase tracking-wider mt-0.5">{hub.storage_item}</div>
               </div>
             </Tooltip>
           </CircleMarker>

@@ -10,12 +10,12 @@ interface DashboardViewProps {
 export default function DashboardView({ baseline, optimized }: DashboardViewProps) {
   if (!baseline) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center bg-white border border-gray-200">
-        <div className="w-16 h-16 bg-gray-100 flex items-center justify-center mb-4">
-          <Ship className="w-8 h-8 text-maersk-blue" />
+      <div className="flex-1 flex flex-col items-center justify-center bg-logihub-panel border border-logihub-border">
+        <div className="w-16 h-16 bg-[#111111] flex items-center justify-center mb-4">
+          <Ship className="w-8 h-8 text-logihub-neon" />
         </div>
-        <h2 className="text-xl font-bold text-maersk-navy tracking-wide uppercase">Waiting for Data</h2>
-        <p className="text-gray-500 mt-2 max-w-md text-center text-sm">
+        <h2 className="text-xl font-bold text-white tracking-wide uppercase">Waiting for Data</h2>
+        <p className="text-gray-400 mt-2 max-w-md text-center text-sm">
           Upload your logistics data to generate the current network baseline and start simulating scenarios.
         </p>
       </div>
@@ -42,21 +42,21 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
     const change = optValue !== undefined ? getChange(baseValue, optValue, isLowerBetter) : null;
     
     return (
-      <div className="bg-white p-5 border border-gray-200 shadow-sm flex flex-col relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-1 h-full bg-maersk-blue transform -translate-x-full group-hover:translate-x-0 transition-transform"></div>
+      <div className="bg-logihub-panel p-5 border border-logihub-border shadow-sm flex flex-col relative overflow-hidden group">
+        <div className="absolute top-0 left-0 w-1 h-full bg-logihub-violet transform -translate-x-full group-hover:translate-x-0 transition-transform"></div>
         <div className="flex justify-between items-start mb-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-gray-500">{title}</span>
-          <div className="text-maersk-blue">
+          <span className="text-xs font-bold uppercase tracking-widest text-gray-400">{title}</span>
+          <div className="text-logihub-neon">
             {icon}
           </div>
         </div>
         <div className="mt-auto pt-2">
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-maersk-navy">{formatFn(optValue ?? baseValue)}</span>
+            <span className="text-2xl font-bold text-white">{formatFn(optValue ?? baseValue)}</span>
           </div>
           
           {change ? (
-            <div className={`flex items-center gap-1 mt-2 text-[11px] font-bold uppercase tracking-wider ${change.isGood ? 'text-emerald-600' : 'text-rose-600'}`}>
+            <div className={`flex items-center gap-1 mt-2 text-[11px] font-bold uppercase tracking-wider ${change.isGood ? 'text-emerald-600' : 'text-logihub-danger'}`}>
               {change.raw > 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
               {change.value.toFixed(1)}% vs baseline
             </div>
@@ -80,8 +80,8 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
     <div className="flex-1 flex flex-col gap-6 overflow-y-auto pr-2 pb-4">
       {/* 1. Executive KPI Summary */}
       <div>
-        <h2 className="text-sm font-bold text-maersk-navy mb-3 uppercase tracking-widest flex items-center gap-2">
-          <div className="w-2 h-2 bg-maersk-blue"></div>
+        <h2 className="text-sm font-bold text-white mb-3 uppercase tracking-widest flex items-center gap-2">
+          <div className="w-2 h-2 bg-logihub-violet"></div>
           Executive Summary
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -94,39 +94,39 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* 2. Current vs Optimized Comparison Table */}
-        <div className="xl:col-span-2 bg-white border border-gray-200 shadow-sm flex flex-col">
-          <div className="px-5 py-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
-            <h2 className="text-sm font-bold text-maersk-navy uppercase tracking-widest flex items-center gap-2">
-              <div className="w-2 h-2 bg-maersk-blue"></div>
+        <div className="xl:col-span-2 bg-logihub-panel border border-logihub-border shadow-sm flex flex-col">
+          <div className="px-5 py-4 border-b border-logihub-border bg-[#0a0a0a] flex justify-between items-center">
+            <h2 className="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
+              <div className="w-2 h-2 bg-logihub-violet"></div>
               Current vs Optimized Network
             </h2>
             {optimized && (
-              <span className="px-2 py-0.5 bg-maersk-blue text-white text-[10px] font-bold uppercase tracking-wider">
+              <span className="px-2 py-0.5 bg-logihub-violet text-white text-[10px] font-bold uppercase tracking-wider">
                 Active Scenario: {optimized.name}
               </span>
             )}
           </div>
           <div className="overflow-x-auto flex-1">
             <table className="w-full text-sm text-left">
-              <thead className="bg-white text-gray-500 uppercase text-[10px] tracking-widest border-b border-gray-200">
+              <thead className="bg-logihub-panel text-gray-400 uppercase text-[10px] tracking-widest border-b border-logihub-border">
                 <tr>
                   <th className="px-5 py-3 font-bold">Metric</th>
                   <th className="px-5 py-3 font-bold text-right">Baseline</th>
-                  <th className="px-5 py-3 font-bold text-right text-maersk-navy bg-maersk-light/30">Optimized</th>
+                  <th className="px-5 py-3 font-bold text-right text-white bg-maersk-light/30">Optimized</th>
                   <th className="px-5 py-3 font-bold text-right">Impact</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-100">
-                  <td className="px-5 py-3 font-medium text-gray-700">Active Hubs</td>
+                <tr className="border-b border-logihub-border/50">
+                  <td className="px-5 py-3 font-medium text-gray-300">Active Hubs</td>
                   <td className="px-5 py-3 text-right">{baseline.opened_hubs?.length || "-"}</td>
-                  <td className="px-5 py-3 text-right font-bold text-maersk-blue bg-maersk-light/30">{optimized?.opened_hubs ? optimized.opened_hubs.length : (optimized?.error ? "Error" : "-")}</td>
+                  <td className="px-5 py-3 text-right font-bold text-logihub-neon bg-maersk-light/30">{optimized?.opened_hubs ? optimized.opened_hubs.length : (optimized?.error ? "Error" : "-")}</td>
                   <td className="px-5 py-3 text-right font-medium">-</td>
                 </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="px-5 py-3 font-medium text-gray-700">Total Distance Cost</td>
+                <tr className="border-b border-logihub-border/50">
+                  <td className="px-5 py-3 font-medium text-gray-300">Total Distance Cost</td>
                   <td className="px-5 py-3 text-right">{baseline.total_cost ? fmtNum(baseline.total_cost) : "-"} km-t</td>
-                  <td className="px-5 py-3 text-right font-bold text-maersk-blue bg-maersk-light/30">{optimized?.total_cost ? fmtNum(optimized.total_cost) + " km-t" : "-"}</td>
+                  <td className="px-5 py-3 text-right font-bold text-logihub-neon bg-maersk-light/30">{optimized?.total_cost ? fmtNum(optimized.total_cost) + " km-t" : "-"}</td>
                   <td className="px-5 py-3 text-right">
                     {optimized?.total_cost ? (
                       <span className="text-emerald-600 font-bold text-xs uppercase">
@@ -135,10 +135,10 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
                     ) : "-"}
                   </td>
                 </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="px-5 py-3 font-medium text-gray-700">Average Distance</td>
+                <tr className="border-b border-logihub-border/50">
+                  <td className="px-5 py-3 font-medium text-gray-300">Average Distance</td>
                   <td className="px-5 py-3 text-right">{bMetrics ? fmtNum(bMetrics.avg_distance_km) : "-"} km</td>
-                  <td className="px-5 py-3 text-right font-bold text-maersk-blue bg-maersk-light/30">{oMetrics ? fmtNum(oMetrics.avg_distance_km) + " km" : "-"}</td>
+                  <td className="px-5 py-3 text-right font-bold text-logihub-neon bg-maersk-light/30">{oMetrics ? fmtNum(oMetrics.avg_distance_km) + " km" : "-"}</td>
                   <td className="px-5 py-3 text-right">
                     {(bMetrics && oMetrics) ? (
                       <span className="text-emerald-600 font-bold text-xs uppercase">
@@ -151,9 +151,9 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
             </table>
           </div>
           {(optimized && !optimized.error && bMetrics && oMetrics) && (
-            <div className="p-4 bg-maersk-navy text-white text-sm">
-              <span className="font-bold uppercase tracking-wider text-maersk-blue block mb-1 text-[10px]">Decision Support</span>
-              By redesigning the network to the <span className="font-bold">{optimized.name}</span> scenario, total transport costs are reduced by <span className="font-bold text-maersk-blue">{getChange(bMetrics.total_cost_usd, oMetrics.total_cost_usd)?.value.toFixed(1)}%</span>.
+            <div className="p-4 bg-logihub-900 text-white text-sm">
+              <span className="font-bold uppercase tracking-wider text-logihub-neon block mb-1 text-[10px]">Decision Support</span>
+              By redesigning the network to the <span className="font-bold">{optimized.name}</span> scenario, total transport costs are reduced by <span className="font-bold text-logihub-neon">{getChange(bMetrics.total_cost_usd, oMetrics.total_cost_usd)?.value.toFixed(1)}%</span>.
             </div>
           )}
           {optimized?.error && (
@@ -165,9 +165,9 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
         </div>
 
         {/* 3. Top Network Alerts */}
-        <div className="bg-white border border-gray-200 shadow-sm flex flex-col">
-          <div className="px-5 py-4 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
-            <h2 className="text-sm font-bold text-maersk-navy uppercase tracking-widest flex items-center gap-2">
+        <div className="bg-logihub-panel border border-logihub-border shadow-sm flex flex-col">
+          <div className="px-5 py-4 border-b border-logihub-border bg-[#0a0a0a] flex items-center justify-between">
+            <h2 className="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
               <div className="w-2 h-2 bg-amber-500"></div>
               Current Bottlenecks
             </h2>
@@ -176,14 +176,14 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
             <h3 className="text-[10px] font-bold text-gray-400 uppercase mb-3 tracking-widest">Top Expensive Lanes (Baseline)</h3>
             <div className="space-y-4">
               {topLanes.map((lane: any, idx: number) => (
-                <div key={idx} className="flex justify-between items-center border-b border-gray-100 pb-3 last:border-0 last:pb-0">
+                <div key={idx} className="flex justify-between items-center border-b border-logihub-border/50 pb-3 last:border-0 last:pb-0">
                   <div>
-                    <div className="font-bold text-sm text-maersk-navy">{lane.hub_id} <span className="text-maersk-blue mx-1">→</span> {lane.region_id}</div>
-                    <div className="text-[10px] text-amber-600 mt-0.5 font-bold uppercase">High transport distance</div>
+                    <div className="font-bold text-sm text-white">{lane.hub_id} <span className="text-logihub-neon mx-1">→</span> {lane.region_id}</div>
+                    <div className="text-[10px] text-logihub-warning mt-0.5 font-bold uppercase">High transport distance</div>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-sm text-gray-800">{fmtNum(lane.distance_km)} km</div>
-                    <div className="text-[10px] text-gray-500 font-medium">{fmtNum(lane.demand_tons)} tons</div>
+                    <div className="font-bold text-sm text-gray-100">{fmtNum(lane.distance_km)} km</div>
+                    <div className="text-[10px] text-gray-400 font-medium">{fmtNum(lane.demand_tons)} tons</div>
                   </div>
                 </div>
               ))}

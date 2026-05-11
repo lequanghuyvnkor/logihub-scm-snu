@@ -139,6 +139,9 @@ npm run dev
 > [!TIP]
 > **Windows Terminal Freezing?** If your Command Prompt or PowerShell seems "stuck" or "frozen" while running commands, you might have accidentally clicked inside the window (which activates Windows QuickEdit selection mode). Simply press **`ESC`** or **`Enter`** to unfreeze and resume execution!
 
+> [!WARNING]
+> **NEVER run `npm audit fix --force`**: After running `npm install`, you might see warnings about vulnerabilities (`npm warn deprecated...`) and a suggestion from your terminal to run `npm audit fix --force`. **Do NOT run this command.** It will forcefully upgrade core frameworks (like Next.js/ESLint) and cause severe dependency conflicts (ERESOLVE) that will break the application and prevent it from starting.
+
 ---
 
 ## 👥 Meet the Team & WBS Roles

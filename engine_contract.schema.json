@@ -1,190 +1,1926 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "LogiHubEngineContract_Comprehensive",
-  "description": "Comprehensive JSON Contract Schema representing the full pipeline output from the LogiHub Logistics Engine, including both frontend payload and backend master state.",
-  "type": "OBJECT",
-  "properties": {
-    "run_info": {
-      "type": "OBJECT",
-      "description": "Metadata about the engine execution run.",
-      "properties": {
-        "scenario_run_id": { "type": "STRING" },
-        "engine_version": { "type": "STRING" },
-        "execution_time_ms": { "type": "NUMBER" },
-        "timestamp": { "type": "STRING" }
-      },
-      "required": ["scenario_run_id", "execution_time_ms", "timestamp"]
-    },
-    "proxy_scope": {
-      "type": "OBJECT",
-      "description": "Information about the proxy data used, enforcing transparency.",
-      "properties": {
-        "is_proxy": { "type": "BOOLEAN" },
-        "data_source": { "type": "STRING" },
-        "disclaimer": { "type": "STRING" }
-      },
-      "required": ["is_proxy", "data_source", "disclaimer"]
-    },
-    "input_data_summary": {
-      "type": "OBJECT",
-      "description": "Summary statistics of the ingested data.",
-      "properties": {
-        "total_rows_ingested": { "type": "INTEGER" },
-        "total_tons_processed": { "type": "NUMBER" },
-        "date_range": { "type": "STRING" }
-      }
-    },
-    "master_data": {
-      "type": "OBJECT",
-      "description": "Reference master data used in the run.",
-      "properties": {
-        "total_regions": { "type": "INTEGER" },
-        "total_warehouses": { "type": "INTEGER" },
-        "product_families": { "type": "ARRAY", "items": { "type": "STRING" } }
-      }
-    },
-    "demand": {
-      "type": "OBJECT",
-      "description": "Aggregated demand and flows (Group A output).",
-      "properties": {
-        "total_demand_tons": { "type": "NUMBER" },
-        "top_origin": { "type": "STRING" },
-        "top_destination": { "type": "STRING" }
-      }
-    },
-    "product_segmentation": {
-      "type": "OBJECT",
-      "description": "Results from the product segmentation heuristic (Group C early output).",
-      "properties": {
-        "rules_applied": { "type": "INTEGER" },
-        "distribution": { "type": "OBJECT" }
-      }
-    },
-    "baseline_network": {
-      "type": "OBJECT",
-      "description": "The current/assumed network state before optimization (S0).",
-      "properties": {
-        "opened_hubs": { "type": "ARRAY", "items": { "type": "STRING" } },
-        "total_cost": { "type": "NUMBER" }
-      }
-    },
-    "capacity_model": {
-      "type": "OBJECT",
-      "description": "Warehouse capacity boundaries (Group B output).",
-      "properties": {
-        "total_network_capacity": { "type": "NUMBER" },
-        "utilization_rate": { "type": "NUMBER" }
-      }
-    },
-    "diagnosis": {
-      "type": "OBJECT",
-      "description": "Health check of the baseline network.",
-      "properties": {
-        "overloaded_hubs": { "type": "ARRAY", "items": { "type": "STRING" } },
-        "high_cost_lanes": { "type": "ARRAY", "items": { "type": "STRING" } }
-      }
-    },
-    "optimization_models": {
-      "type": "OBJECT",
-      "description": "The mathematical optimization scenarios and their solver stats (Group B output).",
-      "properties": {
-        "solvers_used": { "type": "ARRAY", "items": { "type": "STRING" } },
-        "scenarios": {
-          "type": "ARRAY",
-          "items": {
-            "type": "OBJECT",
-            "properties": {
-              "id": { "type": "STRING" },
-              "label": { "type": "STRING" },
-              "cost_index": { "type": "NUMBER" },
-              "service_level": { "type": "NUMBER" },
-              "risk_score": { "type": "NUMBER" },
-              "opened_hubs": { "type": "ARRAY", "items": { "type": "STRING" } }
-            },
-            "required": ["id", "label", "cost_index", "service_level", "risk_score", "opened_hubs"]
-          }
-        }
-      },
-      "required": ["scenarios"]
-    },
-    "recommended_network": {
-      "type": "OBJECT",
-      "description": "The chosen network topology and hub details.",
-      "properties": {
-        "recommended_scenario": { "type": "STRING" },
-        "hubs": {
-          "type": "ARRAY",
-          "items": {
-            "type": "OBJECT",
-            "properties": {
-              "hub_id": { "type": "STRING" },
-              "role": { "type": "STRING" },
-              "status": { "type": "STRING" }
-            },
-            "required": ["hub_id", "role"]
-          }
-        }
-      },
-      "required": ["recommended_scenario", "hubs"]
-    },
-    "allocation": {
-      "type": "ARRAY",
-      "description": "Detailed region-to-hub assignments.",
-      "items": {
-        "type": "OBJECT",
-        "properties": {
-          "region": { "type": "STRING" },
-          "hub_id": { "type": "STRING" },
-          "product": { "type": "STRING" }
-        },
-        "required": ["region", "hub_id"]
-      }
-    },
-    "warnings": {
-      "type": "ARRAY",
-      "description": "Non-fatal warnings during the pipeline execution.",
-      "items": { "type": "STRING" }
-    },
-    "errors": {
-      "type": "ARRAY",
-      "description": "Fatal errors if any.",
-      "items": { "type": "STRING" }
-    },
-    "artifacts": {
-      "type": "ARRAY",
-      "description": "List of intermediate CSV/JSON files dumped to disk.",
-      "items": { "type": "STRING" }
-    },
-    "outcome_report": {
-      "type": "OBJECT",
-      "description": "Final synthesis including roadmap and business case.",
-      "properties": {
-        "markdown_path": { "type": "STRING" },
-        "roadmap": { "type": "ARRAY", "items": { "type": "OBJECT" } },
-        "business_case": {
-          "type": "OBJECT",
-          "properties": {
-            "cost_saving_pct": { "type": "NUMBER" },
-            "executive_summary": { "type": "STRING" }
-          }
-        }
-      }
-    }
-  },
+  "$id": "https://logihub-intelligence.local/schemas/engine_contract_v1_0.schema.json",
+  "title": "LogiHubEngineContract",
+  "description": "Full JSON Contract Schema for the LogiHub Logistics Engine. This schema represents the complete engine output payload used by backend modules, outcome renderer, report generator, and Decision Cockpit frontend.",
+  "type": "object",
+  "additionalProperties": false,
   "required": [
+    "contract_version",
     "run_info",
     "proxy_scope",
     "input_data_summary",
+    "data_quality_report",
     "master_data",
     "demand",
     "product_segmentation",
     "baseline_network",
+    "cost_model",
     "capacity_model",
     "diagnosis",
     "optimization_models",
+    "scenarios",
     "recommended_network",
     "allocation",
+    "seasonal_playbook",
+    "business_case",
+    "roadmap",
+    "outcome_report",
     "artifacts",
-    "outcome_report"
-  ]
+    "warnings",
+    "errors"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "description": "Locked schema contract version.",
+      "pattern": "^v[0-9]+\\.[0-9]+(-locked)?$",
+      "examples": [
+        "v1.0-locked"
+      ]
+    },
+    "run_info": {
+      "$ref": "#/definitions/runInfo"
+    },
+    "proxy_scope": {
+      "$ref": "#/definitions/proxyScope"
+    },
+    "input_data_summary": {
+      "$ref": "#/definitions/inputDataSummary"
+    },
+    "data_quality_report": {
+      "$ref": "#/definitions/dataQualityReport"
+    },
+    "master_data": {
+      "$ref": "#/definitions/masterData"
+    },
+    "demand": {
+      "$ref": "#/definitions/demand"
+    },
+    "product_segmentation": {
+      "$ref": "#/definitions/productSegmentation"
+    },
+    "baseline_network": {
+      "$ref": "#/definitions/baselineNetwork"
+    },
+    "cost_model": {
+      "$ref": "#/definitions/costModel"
+    },
+    "capacity_model": {
+      "$ref": "#/definitions/capacityModel"
+    },
+    "diagnosis": {
+      "$ref": "#/definitions/diagnosis"
+    },
+    "optimization_models": {
+      "$ref": "#/definitions/optimizationModels"
+    },
+    "scenarios": {
+      "type": "array",
+      "description": "Scenario-level outputs S0-S8. This is the primary block consumed by the frontend scenario comparison view.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/scenario"
+      }
+    },
+    "recommended_network": {
+      "$ref": "#/definitions/recommendedNetwork"
+    },
+    "allocation": {
+      "type": "array",
+      "description": "Detailed region/product-to-hub allocation records for the recommended scenario unless scenario_id is otherwise specified.",
+      "items": {
+        "$ref": "#/definitions/allocationRecord"
+      }
+    },
+    "seasonal_playbook": {
+      "type": "array",
+      "description": "Operational playbook for predictable demand spikes, product launches, and seasonal capacity actions.",
+      "items": {
+        "$ref": "#/definitions/seasonalEvent"
+      }
+    },
+    "business_case": {
+      "$ref": "#/definitions/businessCase"
+    },
+    "roadmap": {
+      "type": "array",
+      "description": "Implementation roadmap divided into phases.",
+      "items": {
+        "$ref": "#/definitions/roadmapPhase"
+      }
+    },
+    "outcome_report": {
+      "$ref": "#/definitions/outcomeReport"
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Generated artifacts and intermediate output files.",
+      "items": {
+        "$ref": "#/definitions/artifact"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Non-fatal warnings, assumptions, and limitations that should be surfaced in report and frontend.",
+      "items": {
+        "$ref": "#/definitions/warning"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "description": "Fatal or module-level errors. Empty array means no fatal errors.",
+      "items": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  },
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ratio": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "nonNegativeNumber": {
+      "type": "number",
+      "minimum": 0
+    },
+    "nonNegativeInteger": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "USD",
+        "KRW",
+        "VND",
+        "EUR",
+        "JPY"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "ton",
+        "kg",
+        "pallet",
+        "unit",
+        "shipment",
+        "carton",
+        "cbm",
+        "index"
+      ]
+    },
+    "regionName": {
+      "type": "string",
+      "enum": [
+        "Seoul",
+        "Busan",
+        "Daegu",
+        "Incheon",
+        "Gwangju",
+        "Daejeon",
+        "Ulsan",
+        "Sejong",
+        "Gyeonggi",
+        "Gangwon",
+        "Chungbuk",
+        "Chungnam",
+        "Jeonbuk",
+        "Jeonnam",
+        "Gyeongbuk",
+        "Gyeongnam",
+        "Jeju",
+        "Unknown"
+      ]
+    },
+    "productFamily": {
+      "type": "string",
+      "enum": [
+        "mobile_launch",
+        "bulky_appliance",
+        "high_value_secure",
+        "finished_goods",
+        "spare_parts",
+        "ecommerce_small",
+        "general_cargo"
+      ]
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ]
+    },
+    "hubStatus": {
+      "type": "string",
+      "enum": [
+        "underused",
+        "healthy",
+        "watchlist",
+        "seasonal_watch",
+        "overload",
+        "critical",
+        "crisis"
+      ]
+    },
+    "hubRole": {
+      "type": "string",
+      "enum": [
+        "metro_fulfillment",
+        "secure_node",
+        "central_balancing",
+        "launch_hub",
+        "bulky_appliance",
+        "southern_port",
+        "regional_hub",
+        "service_node",
+        "crossdock",
+        "overflow"
+      ]
+    },
+    "scenarioId": {
+      "type": "string",
+      "pattern": "^S[0-8]$"
+    },
+    "runInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_run_id",
+        "engine_version",
+        "run_mode",
+        "created_at",
+        "execution_time_ms",
+        "status"
+      ],
+      "properties": {
+        "scenario_run_id": {
+          "type": "string",
+          "description": "Unique ID for this engine execution run.",
+          "pattern": "^run_[A-Za-z0-9_.:-]+$"
+        },
+        "run_uuid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "engine_version": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "run_mode": {
+          "type": "string",
+          "enum": [
+            "mock",
+            "proxy",
+            "production"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "partial_success",
+            "failed"
+          ]
+        }
+      }
+    },
+    "proxyScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "is_proxy",
+        "data_source_type",
+        "data_sources",
+        "geographic_scope",
+        "analysis_period",
+        "target_company_context",
+        "disclaimer"
+      ],
+      "properties": {
+        "is_proxy": {
+          "type": "boolean"
+        },
+        "data_source_type": {
+          "type": "string",
+          "enum": [
+            "mock",
+            "public_proxy",
+            "enterprise_internal",
+            "mixed"
+          ]
+        },
+        "data_sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dataSource"
+          }
+        },
+        "geographic_scope": {
+          "type": "string"
+        },
+        "analysis_period": {
+          "type": "string"
+        },
+        "target_company_context": {
+          "type": "string"
+        },
+        "disclaimer": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "dataSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "source_name",
+        "source_type",
+        "role_in_engine"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "source_name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "public_dataset",
+            "market_report",
+            "mock",
+            "enterprise_internal",
+            "manual_assumption",
+            "generated"
+          ]
+        },
+        "file_path": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "role_in_engine": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "inputDataSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_rows_ingested",
+        "total_rows_processed",
+        "date_range",
+        "records_by_input",
+        "unit_standardization"
+      ],
+      "properties": {
+        "total_rows_ingested": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "total_rows_processed": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "total_volume_processed": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "volume_unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "date_range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "string"
+            },
+            "end": {
+              "type": "string"
+            }
+          }
+        },
+        "records_by_input": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dataset_name",
+              "rows_ingested",
+              "rows_processed"
+            ],
+            "properties": {
+              "dataset_name": {
+                "$ref": "#/definitions/nonEmptyString"
+              },
+              "rows_ingested": {
+                "$ref": "#/definitions/nonNegativeInteger"
+              },
+              "rows_processed": {
+                "$ref": "#/definitions/nonNegativeInteger"
+              }
+            }
+          }
+        },
+        "unit_standardization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "standard_unit",
+            "conversion_notes"
+          ],
+          "properties": {
+            "standard_unit": {
+              "$ref": "#/definitions/unit"
+            },
+            "conversion_notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "dataQualityReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "usable_rate",
+        "quality_level",
+        "missing_fields",
+        "imputed_fields",
+        "invalid_region_count",
+        "duplicate_records_count",
+        "warnings"
+      ],
+      "properties": {
+        "usable_rate": {
+          "$ref": "#/definitions/ratio"
+        },
+        "quality_level": {
+          "type": "string",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ]
+        },
+        "missing_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "imputed_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "missing_origin_count": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "missing_destination_count": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "missing_volume_count": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "invalid_region_count": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "duplicate_records_count": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "geocode_success_rate": {
+          "$ref": "#/definitions/ratio"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "masterData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "regions",
+        "product_families",
+        "candidate_hubs"
+      ],
+      "properties": {
+        "regions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/region"
+          }
+        },
+        "product_families": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/productFamilyMaster"
+          }
+        },
+        "candidate_hubs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/candidateHub"
+          }
+        }
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "region_id",
+        "region_name",
+        "country",
+        "level",
+        "lat",
+        "lon"
+      ],
+      "properties": {
+        "region_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "country": {
+          "type": "string",
+          "enum": [
+            "KR"
+          ]
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "si_do",
+            "si_gun_gu",
+            "custom_zone"
+          ]
+        },
+        "parent_region_id": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      }
+    },
+    "productFamilyMaster": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "product_family",
+        "product_family_name",
+        "description",
+        "default_sla_radius_km"
+      ],
+      "properties": {
+        "product_family": {
+          "$ref": "#/definitions/productFamily"
+        },
+        "product_family_name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "description": {
+          "type": "string"
+        },
+        "default_sla_radius_km": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "default_unit": {
+          "$ref": "#/definitions/unit"
+        }
+      }
+    },
+    "candidateHub": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hub_id",
+        "hub_name",
+        "region_id",
+        "region_name",
+        "lat",
+        "lon",
+        "hub_type",
+        "base_capacity",
+        "capacity_unit",
+        "fixed_cost_usd_per_year",
+        "eligible_product_families"
+      ],
+      "properties": {
+        "hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "hub_name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "region_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "hub_type": {
+          "type": "string",
+          "enum": [
+            "metro",
+            "regional",
+            "launch",
+            "secure",
+            "service_node",
+            "crossdock",
+            "port",
+            "overflow"
+          ]
+        },
+        "area_m2": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "base_capacity": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "effective_capacity": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "capacity_unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "fixed_cost_usd_per_year": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "eligible_product_families": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/productFamily"
+          }
+        }
+      }
+    },
+    "demand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "annual_demand_by_region",
+        "monthly_demand_by_region_product",
+        "top_od_lanes"
+      ],
+      "properties": {
+        "total_annual_volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "volume_unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "annual_demand_by_region": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/annualDemandRecord"
+          }
+        },
+        "monthly_demand_by_region_product": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/monthlyDemandRecord"
+          }
+        },
+        "top_od_lanes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/odLane"
+          }
+        }
+      }
+    },
+    "annualDemandRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "region_id",
+        "region_name",
+        "volume",
+        "unit",
+        "share_pct"
+      ],
+      "properties": {
+        "region_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "share_pct": {
+          "$ref": "#/definitions/percentage"
+        }
+      }
+    },
+    "monthlyDemandRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "region_id",
+        "region_name",
+        "product_family",
+        "month",
+        "volume",
+        "unit",
+        "seasonal_index"
+      ],
+      "properties": {
+        "region_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "product_family": {
+          "$ref": "#/definitions/productFamily"
+        },
+        "month": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}$"
+        },
+        "volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "seasonal_index": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        }
+      }
+    },
+    "odLane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin_region",
+        "destination_region",
+        "volume",
+        "unit"
+      ],
+      "properties": {
+        "origin_region": {
+          "$ref": "#/definitions/regionName"
+        },
+        "destination_region": {
+          "$ref": "#/definitions/regionName"
+        },
+        "product_family": {
+          "$ref": "#/definitions/productFamily"
+        },
+        "volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "share_pct": {
+          "$ref": "#/definitions/percentage"
+        }
+      }
+    },
+    "productSegmentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "confidence_level",
+        "rules_applied",
+        "distribution",
+        "notes"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "rule_based",
+            "sku_master",
+            "ml_classifier",
+            "none"
+          ]
+        },
+        "confidence_level": {
+          "type": "string",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ]
+        },
+        "rules_file": {
+          "type": "string"
+        },
+        "rules_applied": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "distribution": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/productDistributionRecord"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "productDistributionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "product_family",
+        "volume",
+        "unit",
+        "share_pct"
+      ],
+      "properties": {
+        "product_family": {
+          "$ref": "#/definitions/productFamily"
+        },
+        "volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "share_pct": {
+          "$ref": "#/definitions/percentage"
+        }
+      }
+    },
+    "baselineNetwork": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_network_assumption",
+        "current_hubs",
+        "current_total_cost",
+        "current_service_level_pct",
+        "current_risk_score"
+      ],
+      "properties": {
+        "current_network_assumption": {
+          "type": "string"
+        },
+        "current_hubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/currentHub"
+          }
+        },
+        "current_total_cost": {
+          "$ref": "#/definitions/costSummary"
+        },
+        "current_service_level_pct": {
+          "$ref": "#/definitions/percentage"
+        },
+        "current_risk_score": {
+          "$ref": "#/definitions/ratio"
+        }
+      }
+    },
+    "currentHub": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hub_id",
+        "hub_name",
+        "region_name",
+        "capacity",
+        "assigned_volume",
+        "utilization_pct",
+        "status"
+      ],
+      "properties": {
+        "hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "hub_name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "role": {
+          "$ref": "#/definitions/hubRole"
+        },
+        "capacity": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "assigned_volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "utilization_pct": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "status": {
+          "$ref": "#/definitions/hubStatus"
+        }
+      }
+    },
+    "costSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "total_cost",
+        "cost_index"
+      ],
+      "properties": {
+        "currency": {
+          "$ref": "#/definitions/currency"
+        },
+        "total_cost": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "cost_index": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        }
+      }
+    },
+    "costModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "cost_basis",
+        "cost_components",
+        "cost_breakdown_baseline",
+        "cost_config"
+      ],
+      "properties": {
+        "currency": {
+          "$ref": "#/definitions/currency"
+        },
+        "cost_basis": {
+          "type": "string",
+          "enum": [
+            "mock",
+            "benchmark",
+            "contract",
+            "mixed"
+          ]
+        },
+        "cost_components": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "transport",
+              "warehouse_fixed",
+              "handling",
+              "inventory_holding",
+              "seasonal_flex",
+              "sla_penalty"
+            ]
+          }
+        },
+        "cost_config": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Rates and coefficients used by the cost engine. Values may be benchmark or contract-based. Kept flexible for config evolution."
+        },
+        "cost_breakdown_baseline": {
+          "$ref": "#/definitions/costBreakdown"
+        }
+      }
+    },
+    "costBreakdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transport",
+        "warehouse_fixed",
+        "handling",
+        "inventory_holding",
+        "seasonal_flex",
+        "sla_penalty",
+        "total"
+      ],
+      "properties": {
+        "transport": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "warehouse_fixed": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "handling": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "inventory_holding": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "seasonal_flex": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "sla_penalty": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "total": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        }
+      }
+    },
+    "capacityModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capacity_unit",
+        "total_network_capacity",
+        "average_utilization_pct",
+        "hub_utilization_by_month",
+        "capacity_gap_by_peak_period"
+      ],
+      "properties": {
+        "capacity_unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "total_network_capacity": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "average_utilization_pct": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "utilization_bands": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "hub_utilization_by_month": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hubUtilizationRecord"
+          }
+        },
+        "capacity_gap_by_peak_period": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/capacityGapRecord"
+          }
+        }
+      }
+    },
+    "hubUtilizationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "hub_id",
+        "month",
+        "assigned_volume",
+        "effective_capacity",
+        "utilization_pct",
+        "status"
+      ],
+      "properties": {
+        "scenario_id": {
+          "$ref": "#/definitions/scenarioId"
+        },
+        "hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "month": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}$"
+        },
+        "assigned_volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "effective_capacity": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "utilization_pct": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "status": {
+          "$ref": "#/definitions/hubStatus"
+        }
+      }
+    },
+    "capacityGapRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "hub_id",
+        "peak_month",
+        "capacity_gap",
+        "recommended_action"
+      ],
+      "properties": {
+        "scenario_id": {
+          "$ref": "#/definitions/scenarioId"
+        },
+        "hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "peak_month": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}$"
+        },
+        "capacity_gap": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "recommended_action": {
+          "type": "string"
+        }
+      }
+    },
+    "diagnosis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network_health_summary",
+        "overloaded_hubs",
+        "underused_hubs",
+        "high_cost_lanes",
+        "poor_coverage_regions"
+      ],
+      "properties": {
+        "network_health_summary": {
+          "type": "string"
+        },
+        "overloaded_hubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hubIssue"
+          }
+        },
+        "underused_hubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hubIssue"
+          }
+        },
+        "high_cost_lanes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/highCostLane"
+          }
+        },
+        "poor_coverage_regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/poorCoverageRegion"
+          }
+        }
+      }
+    },
+    "hubIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hub_id",
+        "hub_name",
+        "utilization_pct",
+        "severity",
+        "reason"
+      ],
+      "properties": {
+        "hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "hub_name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "utilization_pct": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "severity": {
+          "$ref": "#/definitions/riskLevel"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "highCostLane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lane_id",
+        "origin_region",
+        "destination_region",
+        "distance_km",
+        "cost",
+        "cost_share_pct",
+        "driver",
+        "recommended_action"
+      ],
+      "properties": {
+        "lane_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "origin_region": {
+          "$ref": "#/definitions/regionName"
+        },
+        "destination_region": {
+          "$ref": "#/definitions/regionName"
+        },
+        "product_family": {
+          "$ref": "#/definitions/productFamily"
+        },
+        "monthly_volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "distance_km": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "cost": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "currency": {
+          "$ref": "#/definitions/currency"
+        },
+        "cost_share_pct": {
+          "$ref": "#/definitions/percentage"
+        },
+        "driver": {
+          "type": "string"
+        },
+        "recommended_action": {
+          "type": "string"
+        }
+      }
+    },
+    "poorCoverageRegion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "region_name",
+        "nearest_hub_id",
+        "distance_km",
+        "sla_violation_pct",
+        "risk_level"
+      ],
+      "properties": {
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "nearest_hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "distance_km": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "sla_violation_pct": {
+          "$ref": "#/definitions/percentage"
+        },
+        "risk_level": {
+          "$ref": "#/definitions/riskLevel"
+        }
+      }
+    },
+    "optimizationModels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "models_run"
+      ],
+      "properties": {
+        "models_run": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelRun"
+          }
+        }
+      }
+    },
+    "modelRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_id",
+        "model_name",
+        "solver",
+        "status",
+        "solve_time_seconds"
+      ],
+      "properties": {
+        "model_id": {
+          "type": "string",
+          "enum": [
+            "pmedian",
+            "uflp",
+            "cflp",
+            "mclp",
+            "hybrid_cflp",
+            "assumption"
+          ]
+        },
+        "model_name": {
+          "type": "string"
+        },
+        "solver": {
+          "type": "string",
+          "enum": [
+            "CBC",
+            "Gurobi",
+            "CPLEX",
+            "OR-Tools",
+            "Heuristic",
+            "None"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "optimal",
+            "feasible",
+            "infeasible",
+            "timeout",
+            "error",
+            "not_run"
+          ]
+        },
+        "objective_value": {
+          "type": "number"
+        },
+        "solve_time_seconds": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "scenario_name",
+        "scenario_type",
+        "model_used",
+        "description",
+        "selected_hubs",
+        "cost_breakdown",
+        "total_cost",
+        "cost_index",
+        "service_level_pct",
+        "coverage_200km_pct",
+        "peak_utilization_pct",
+        "risk_score",
+        "risk_level",
+        "recommended",
+        "managerial_interpretation"
+      ],
+      "properties": {
+        "scenario_id": {
+          "$ref": "#/definitions/scenarioId"
+        },
+        "scenario_name": {
+          "type": "string"
+        },
+        "scenario_type": {
+          "type": "string",
+          "enum": [
+            "baseline",
+            "optimized",
+            "seasonal",
+            "stress_test",
+            "disruption",
+            "sensitivity"
+          ]
+        },
+        "model_used": {
+          "type": "string",
+          "enum": [
+            "pmedian",
+            "uflp",
+            "cflp",
+            "mclp",
+            "hybrid_cflp",
+            "assumption"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "selected_hubs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cost_breakdown": {
+          "$ref": "#/definitions/costBreakdown"
+        },
+        "total_cost": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "currency": {
+          "$ref": "#/definitions/currency"
+        },
+        "cost_index": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "service_level_pct": {
+          "$ref": "#/definitions/percentage"
+        },
+        "coverage_200km_pct": {
+          "$ref": "#/definitions/percentage"
+        },
+        "peak_utilization_pct": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "risk_score": {
+          "$ref": "#/definitions/ratio"
+        },
+        "risk_level": {
+          "$ref": "#/definitions/riskLevel"
+        },
+        "recommended": {
+          "type": "boolean"
+        },
+        "managerial_interpretation": {
+          "type": "string"
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/allocationRecord"
+          }
+        }
+      }
+    },
+    "recommendedNetwork": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recommended_scenario_id",
+        "recommendation_summary",
+        "recommended_hubs",
+        "why_this_scenario",
+        "why_not_other_scenarios"
+      ],
+      "properties": {
+        "recommended_scenario_id": {
+          "$ref": "#/definitions/scenarioId"
+        },
+        "recommendation_summary": {
+          "type": "string"
+        },
+        "recommended_hubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/recommendedHub"
+          }
+        },
+        "why_this_scenario": {
+          "type": "string"
+        },
+        "why_not_other_scenarios": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recommendedHub": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hub_id",
+        "hub_name",
+        "region_name",
+        "role",
+        "served_regions",
+        "served_product_families",
+        "reason_selected"
+      ],
+      "properties": {
+        "hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "hub_name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "role": {
+          "$ref": "#/definitions/hubRole"
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "served_regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/regionName"
+          }
+        },
+        "served_product_families": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/productFamily"
+          }
+        },
+        "reason_selected": {
+          "type": "string"
+        }
+      }
+    },
+    "allocationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "region_name",
+        "hub_id",
+        "product_family",
+        "volume",
+        "unit",
+        "allocation_share_pct"
+      ],
+      "properties": {
+        "scenario_id": {
+          "$ref": "#/definitions/scenarioId"
+        },
+        "region_id": {
+          "type": "string"
+        },
+        "region_name": {
+          "$ref": "#/definitions/regionName"
+        },
+        "hub_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "hub_name": {
+          "type": "string"
+        },
+        "product_family": {
+          "$ref": "#/definitions/productFamily"
+        },
+        "volume": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "unit": {
+          "$ref": "#/definitions/unit"
+        },
+        "allocation_share_pct": {
+          "$ref": "#/definitions/percentage"
+        },
+        "rationale": {
+          "type": "string"
+        }
+      }
+    },
+    "seasonalEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "event_name",
+        "months",
+        "affected_product_families",
+        "affected_hubs",
+        "risk",
+        "recommended_actions"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "event_name": {
+          "type": "string"
+        },
+        "months": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}$"
+          }
+        },
+        "affected_product_families": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/productFamily"
+          }
+        },
+        "affected_hubs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "risk": {
+          "type": "string"
+        },
+        "recommended_actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "businessCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline_scenario_id",
+        "recommended_scenario_id",
+        "saving_pct",
+        "service_level_improvement_pct_point",
+        "risk_reduction_summary",
+        "executive_summary"
+      ],
+      "properties": {
+        "baseline_scenario_id": {
+          "$ref": "#/definitions/scenarioId"
+        },
+        "recommended_scenario_id": {
+          "$ref": "#/definitions/scenarioId"
+        },
+        "annual_saving": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "currency": {
+          "$ref": "#/definitions/currency"
+        },
+        "saving_pct": {
+          "$ref": "#/definitions/percentage"
+        },
+        "additional_fixed_cost": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "payback_months": {
+          "$ref": "#/definitions/nonNegativeNumber"
+        },
+        "service_level_improvement_pct_point": {
+          "type": "number"
+        },
+        "risk_reduction_summary": {
+          "type": "string"
+        },
+        "executive_summary": {
+          "type": "string"
+        }
+      }
+    },
+    "roadmapPhase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase_id",
+        "phase_name",
+        "timeline",
+        "actions",
+        "owner",
+        "expected_impact"
+      ],
+      "properties": {
+        "phase_id": {
+          "type": "string"
+        },
+        "phase_name": {
+          "type": "string"
+        },
+        "timeline": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "owner": {
+          "type": "string"
+        },
+        "expected_impact": {
+          "type": "string"
+        }
+      }
+    },
+    "outcomeReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "markdown_path",
+        "sections_count",
+        "disclaimer_included"
+      ],
+      "properties": {
+        "markdown_path": {
+          "type": "string"
+        },
+        "docx_path": {
+          "type": "string"
+        },
+        "slides_path": {
+          "type": "string"
+        },
+        "sections_count": {
+          "$ref": "#/definitions/nonNegativeInteger"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "section_id",
+              "title"
+            ],
+            "properties": {
+              "section_id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "source_blocks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "disclaimer_included": {
+          "type": "boolean"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_type",
+        "path"
+      ],
+      "properties": {
+        "artifact_type": {
+          "type": "string",
+          "enum": [
+            "csv",
+            "json",
+            "markdown",
+            "docx",
+            "pptx",
+            "image",
+            "log",
+            "other"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "warning_code",
+        "message",
+        "severity"
+      ],
+      "properties": {
+        "warning_code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ]
+        },
+        "module": {
+          "type": "string"
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "error_code",
+        "message",
+        "module"
+      ],
+      "properties": {
+        "error_code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        },
+        "fatal": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
 }

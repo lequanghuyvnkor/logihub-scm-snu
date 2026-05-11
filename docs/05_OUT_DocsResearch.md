@@ -9,31 +9,47 @@
 ## PROJECT WORK BREAKDOWN STRUCTURE (WBS)
 
 ```mermaid
-wbs
-    * All Tasks
-      * Research Planning
-        * Project Scope
-        * Literature Review
-      * Data Processing Pipeline
-        * Raw Data Ingestion (Group A)
-        * Data Cleaning
-        * O/D Matrix Construction
-        * Demand Forecasting
-      * Model & Algorithm Dev
-        * Cost Model (Group B)
-        * Capacity Model
-        * Optimization Models
-          * P-Median
-          * UFLP
-          * CFLP
-      * Output Generation
-        * Synthesis (Group C)
-        * Network Diagnosis
-        * Business Case
-        * JSON Generation
-      * Documentation
-        * Markdown Report
-        * Presentation Slides
+graph TD
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef root fill:#d4ebf2,stroke:#2b6cb0,stroke-width:2px,font-weight:bold;
+    classDef main fill:#ebf8ff,stroke:#2b6cb0,stroke-width:1.5px;
+
+    All["All Tasks"]:::root
+    
+    RP["Research Planning"]:::main
+    DP["Data Processing Pipeline"]:::main
+    MA["Model & Algorithm Dev"]:::main
+    OG["Output Generation"]:::main
+    DO["Documentation"]:::main
+    
+    All --> RP
+    All --> DP
+    All --> MA
+    All --> OG
+    All --> DO
+    
+    RP --> ProjScope["Project Scope"]
+    RP --> LitRev["Literature Review"]
+    
+    DP --> RawIng["Raw Data Ingestion (Group A)"]
+    DP --> DataClean["Data Cleaning"]
+    DP --> ODMatrix["O/D Matrix Construction"]
+    DP --> DemandForecast["Demand Forecasting"]
+    
+    MA --> CostMod["Cost Model (Group B)"]
+    MA --> CapMod["Capacity Model"]
+    MA --> OptMod["Optimization Models"]
+    OptMod --> PM["P-Median"]
+    OptMod --> UF["UFLP"]
+    OptMod --> CF["CFLP"]
+    
+    OG --> Synth["Synthesis (Group C)"]
+    OG --> NetDiag["Network Diagnosis"]
+    OG --> BizCase["Business Case"]
+    OG --> JsonGen["JSON Generation"]
+    
+    DO --> MdRep["Markdown Report"]
+    DO --> PresSlides["Presentation Slides"]
 ```
 
 ---

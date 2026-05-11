@@ -66,27 +66,56 @@ LogiHub_Project_Archive/
 
 ## 🛠️ Quick Start & Local Setup
 
+> [!IMPORTANT]
+> **Before running any commands**, make sure you open your terminal (Command Prompt, PowerShell, or Bash) and navigate to the project root directory:
+> ```cmd
+> cd c:\Users\PC\Downloads\LogiHub_Project_Archive
+> ```
+
 ### 1. Backend API (FastAPI)
-Navigate to the backend directory, spin up a Python virtual environment, install dependencies, and run:
-```bash
+
+Choose the block below that matches your operating system and terminal shell to avoid errors when copy-pasting:
+
+#### 💻 Windows (Command Prompt - CMD)
+```cmd
+cd logihub_application_code\backend
+python -m venv venv
+call venv\Scripts\activate
+pip install -r requirements.txt
+python test_models.py
+uvicorn main:app --reload
+```
+
+#### 🟦 Windows (PowerShell)
+```powershell
 cd logihub_application_code/backend
 python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+.\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-python test_models.py          # Run end-to-end mathematical solver check
-uvicorn main:app --reload      # Start local development server on http://localhost:8000
+python test_models.py
+uvicorn main:app --reload
+```
+
+#### 🍎 macOS / Linux (Bash/Zsh)
+```bash
+cd logihub_application_code/backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python test_models.py
+uvicorn main:app --reload
 ```
 
 ### 2. Frontend Dashboard (Next.js + React Leaflet)
-In another terminal, set up and run the modern UI:
-```bash
-cd logihub_application_code/frontend
+
+Open a **separate terminal window**, navigate to your project root, and start the UI development server:
+
+```cmd
+cd c:\Users\PC\Downloads\LogiHub_Project_Archive
+cd logihub_application_code\frontend
 npm install
-npm run dev                    # Starts UI on http://localhost:3000
+npm run dev
 ```
 
 ---

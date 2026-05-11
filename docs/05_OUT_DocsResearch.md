@@ -336,7 +336,7 @@ Full 17x17 cost matrix (289 entries). Selected examples:
 
 **Fixed Cost $f_j$** — the annual fixed cost of operating hub $j$, estimated as:
 
-$$f_j = \text{base\_rent} \cdot \text{area}_j + \text{operations}_j + \text{security}_j + \text{system}_j$$
+$$f_j = \text{base rent} \cdot \text{area}_j + \text{operations}_j + \text{security}_j + \text{system}_j$$
 
 Base rent ranges from 50 to 300 USD/m²/year depending on the region (Seoul is highest, Jeolla is lowest). Operations account for ~30% of base rent, security 10-15%, and SCM systems 10-20%.
 
@@ -354,7 +354,7 @@ Benchmark $f_j$ table for a standard regional hub (~22,000 m²):
 
 **Capacity $Cap_j$** — the maximum annual throughput of hub $j$ (tons/year), calculated as:
 
-$$\text{Cap}_j = \text{area}_j \cdot \text{throughput\_per\_m2}$$
+$$\text{Cap}_j = \text{area}_j \cdot \text{throughput per m2}$$
 
 with an industry average throughput of ~25 tons/m²/year for general cargo. A standard 22,000 m² hub yields a capacity of 550,000 tons/year.
 

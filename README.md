@@ -67,9 +67,9 @@ LogiHub_Project_Archive/
 ## 🛠️ Quick Start & Local Setup
 
 > [!IMPORTANT]
-> **Before running any commands**, make sure you open your terminal (Command Prompt, PowerShell, or Bash) and navigate to the project root directory:
+> **Before running any commands**, make sure you open your terminal (Command Prompt, PowerShell, or Bash) and navigate to your local project root directory (replace `/path/to` with the actual path on your computer):
 > ```cmd
-> cd c:\Users\PC\Downloads\LogiHub_Project_Archive
+> cd /path/to/LogiHub_Project_Archive
 > ```
 
 ### 1. Backend API (FastAPI)
@@ -112,7 +112,7 @@ uvicorn main:app --reload
 Open a **separate terminal window**, navigate to your project root, and start the UI development server:
 
 ```cmd
-cd c:\Users\PC\Downloads\LogiHub_Project_Archive
+cd /path/to/LogiHub_Project_Archive
 cd logihub_application_code\frontend
 npm install
 npm run dev

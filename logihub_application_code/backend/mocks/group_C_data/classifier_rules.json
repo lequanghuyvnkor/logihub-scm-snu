@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {
+      "region": "Seoul",
+      "family": "mobile_launch",
+      "confidence": 0.9
+    }
+  ]
+}

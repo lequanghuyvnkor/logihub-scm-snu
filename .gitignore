@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+env/
+.venv/
+
+# Node.js
+node_modules/
+dist/
+build/
+.next/
+*.log
+
+# Large Data & Binary Files
+*.pdf
+*.zip
+*.tar.gz
+*.rar
+# Ignore specific massive data files but allow small mocks
+logistics_hub_research/data_processed/od_clean_long_2023.csv
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Raw Data and Excel
+logistics_hub_research/data_raw/
+*.xlsx

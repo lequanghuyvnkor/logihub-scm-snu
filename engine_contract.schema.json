@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LogiHubEngineContract_Comprehensive",
+  "description": "Comprehensive JSON Contract Schema representing the full pipeline output from the LogiHub Logistics Engine, including both frontend payload and backend master state.",
+  "type": "OBJECT",
+  "properties": {
+    "run_info": {
+      "type": "OBJECT",
+      "description": "Metadata about the engine execution run.",
+      "properties": {
+        "scenario_run_id": { "type": "STRING" },
+        "engine_version": { "type": "STRING" },
+        "execution_time_ms": { "type": "NUMBER" },
+        "timestamp": { "type": "STRING" }
+      },
+      "required": ["scenario_run_id", "execution_time_ms", "timestamp"]
+    },
+    "proxy_scope": {
+      "type": "OBJECT",
+      "description": "Information about the proxy data used, enforcing transparency.",
+      "properties": {
+        "is_proxy": { "type": "BOOLEAN" },
+        "data_source": { "type": "STRING" },
+        "disclaimer": { "type": "STRING" }
+      },
+      "required": ["is_proxy", "data_source", "disclaimer"]
+    },
+    "input_data_summary": {
+      "type": "OBJECT",
+      "description": "Summary statistics of the ingested data.",
+      "properties": {
+        "total_rows_ingested": { "type": "INTEGER" },
+        "total_tons_processed": { "type": "NUMBER" },
+        "date_range": { "type": "STRING" }
+      }
+    },
+    "master_data": {
+      "type": "OBJECT",
+      "description": "Reference master data used in the run.",
+      "properties": {
+        "total_regions": { "type": "INTEGER" },
+        "total_warehouses": { "type": "INTEGER" },
+        "product_families": { "type": "ARRAY", "items": { "type": "STRING" } }
+      }
+    },
+    "demand": {
+      "type": "OBJECT",
+      "description": "Aggregated demand and flows (Group A output).",
+      "properties": {
+        "total_demand_tons": { "type": "NUMBER" },
+        "top_origin": { "type": "STRING" },
+        "top_destination": { "type": "STRING" }
+      }
+    },
+    "product_segmentation": {
+      "type": "OBJECT",
+      "description": "Results from the product segmentation heuristic (Group C early output).",
+      "properties": {
+        "rules_applied": { "type": "INTEGER" },
+        "distribution": { "type": "OBJECT" }
+      }
+    },
+    "baseline_network": {
+      "type": "OBJECT",
+      "description": "The current/assumed network state before optimization (S0).",
+      "properties": {
+        "opened_hubs": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "total_cost": { "type": "NUMBER" }
+      }
+    },
+    "capacity_model": {
+      "type": "OBJECT",
+      "description": "Warehouse capacity boundaries (Group B output).",
+      "properties": {
+        "total_network_capacity": { "type": "NUMBER" },
+        "utilization_rate": { "type": "NUMBER" }
+      }
+    },
+    "diagnosis": {
+      "type": "OBJECT",
+      "description": "Health check of the baseline network.",
+      "properties": {
+        "overloaded_hubs": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "high_cost_lanes": { "type": "ARRAY", "items": { "type": "STRING" } }
+      }
+    },
+    "optimization_models": {
+      "type": "OBJECT",
+      "description": "The mathematical optimization scenarios and their solver stats (Group B output).",
+      "properties": {
+        "solvers_used": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "scenarios": {
+          "type": "ARRAY",
+          "items": {
+            "type": "OBJECT",
+            "properties": {
+              "id": { "type": "STRING" },
+              "label": { "type": "STRING" },
+              "cost_index": { "type": "NUMBER" },
+              "service_level": { "type": "NUMBER" },
+              "risk_score": { "type": "NUMBER" },
+              "opened_hubs": { "type": "ARRAY", "items": { "type": "STRING" } }
+            },
+            "required": ["id", "label", "cost_index", "service_level", "risk_score", "opened_hubs"]
+          }
+        }
+      },
+      "required": ["scenarios"]
+    },
+    "recommended_network": {
+      "type": "OBJECT",
+      "description": "The chosen network topology and hub details.",
+      "properties": {
+        "recommended_scenario": { "type": "STRING" },
+        "hubs": {
+          "type": "ARRAY",
+          "items": {
+            "type": "OBJECT",
+            "properties": {
+              "hub_id": { "type": "STRING" },
+              "role": { "type": "STRING" },
+              "status": { "type": "STRING" }
+            },
+            "required": ["hub_id", "role"]
+          }
+        }
+      },
+      "required": ["recommended_scenario", "hubs"]
+    },
+    "allocation": {
+      "type": "ARRAY",
+      "description": "Detailed region-to-hub assignments.",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "region": { "type": "STRING" },
+          "hub_id": { "type": "STRING" },
+          "product": { "type": "STRING" }
+        },
+        "required": ["region", "hub_id"]
+      }
+    },
+    "warnings": {
+      "type": "ARRAY",
+      "description": "Non-fatal warnings during the pipeline execution.",
+      "items": { "type": "STRING" }
+    },
+    "errors": {
+      "type": "ARRAY",
+      "description": "Fatal errors if any.",
+      "items": { "type": "STRING" }
+    },
+    "artifacts": {
+      "type": "ARRAY",
+      "description": "List of intermediate CSV/JSON files dumped to disk.",
+      "items": { "type": "STRING" }
+    },
+    "outcome_report": {
+      "type": "OBJECT",
+      "description": "Final synthesis including roadmap and business case.",
+      "properties": {
+        "markdown_path": { "type": "STRING" },
+        "roadmap": { "type": "ARRAY", "items": { "type": "OBJECT" } },
+        "business_case": {
+          "type": "OBJECT",
+          "properties": {
+            "cost_saving_pct": { "type": "NUMBER" },
+            "executive_summary": { "type": "STRING" }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "run_info",
+    "proxy_scope",
+    "input_data_summary",
+    "master_data",
+    "demand",
+    "product_segmentation",
+    "baseline_network",
+    "capacity_model",
+    "diagnosis",
+    "optimization_models",
+    "recommended_network",
+    "allocation",
+    "artifacts",
+    "outcome_report"
+  ]
+}

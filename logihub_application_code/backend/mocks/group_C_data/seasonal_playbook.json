@@ -1,0 +1,9 @@
+[
+  {
+    "event": "Q1_Galaxy_Launch",
+    "actions": [
+      "Pre-position inventory",
+      "Reserve extra line-haul"
+    ]
+  }
+]

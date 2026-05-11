@@ -9,10 +9,11 @@
 ## PROJECT WORK BREAKDOWN STRUCTURE (WBS)
 
 ```mermaid
-graph TD
-    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px;
-    classDef root fill:#d4ebf2,stroke:#2b6cb0,stroke-width:2px,font-weight:bold;
-    classDef main fill:#ebf8ff,stroke:#2b6cb0,stroke-width:1.5px;
+graph LR
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px,color:#000,font-size:15px;
+    classDef root fill:#d4ebf2,stroke:#1a657c,stroke-width:2.5px,font-weight:bold,color:#000,font-size:19px;
+    classDef main fill:#e8f4f8,stroke:#1a657c,stroke-width:2px,font-weight:bold,color:#000,font-size:17px;
+    classDef leaf fill:#ffffff,stroke:#555,stroke-width:1px,color:#000,font-size:14px;
 
     All["All Tasks"]:::root
     
@@ -28,28 +29,28 @@ graph TD
     All --> OG
     All --> DO
     
-    RP --> ProjScope["Project Scope"]
-    RP --> LitRev["Literature Review"]
+    RP --> ProjScope["Project Scope"]:::leaf
+    RP --> LitRev["Literature Review"]:::leaf
     
-    DP --> RawIng["Raw Data Ingestion (Group A)"]
-    DP --> DataClean["Data Cleaning"]
-    DP --> ODMatrix["O/D Matrix Construction"]
-    DP --> DemandForecast["Demand Forecasting"]
+    DP --> RawIng["Raw Data Ingestion (Group A)"]:::leaf
+    DP --> DataClean["Data Cleaning"]:::leaf
+    DP --> ODMatrix["O/D Matrix Construction"]:::leaf
+    DP --> DemandForecast["Demand Forecasting"]:::leaf
     
-    MA --> CostMod["Cost Model (Group B)"]
-    MA --> CapMod["Capacity Model"]
-    MA --> OptMod["Optimization Models"]
-    OptMod --> PM["P-Median"]
-    OptMod --> UF["UFLP"]
-    OptMod --> CF["CFLP"]
+    MA --> CostMod["Cost Model (Group B)"]:::leaf
+    MA --> CapMod["Capacity Model"]:::leaf
+    MA --> OptMod["Optimization Models"]:::main
+    OptMod --> PM["P-Median"]:::leaf
+    OptMod --> UF["UFLP"]:::leaf
+    OptMod --> CF["CFLP"]:::leaf
     
-    OG --> Synth["Synthesis (Group C)"]
-    OG --> NetDiag["Network Diagnosis"]
-    OG --> BizCase["Business Case"]
-    OG --> JsonGen["JSON Generation"]
+    OG --> Synth["Synthesis (Group C)"]:::leaf
+    OG --> NetDiag["Network Diagnosis"]:::leaf
+    OG --> BizCase["Business Case"]:::leaf
+    OG --> JsonGen["JSON Generation"]:::leaf
     
-    DO --> MdRep["Markdown Report"]
-    DO --> PresSlides["Presentation Slides"]
+    DO --> MdRep["Markdown Report"]:::leaf
+    DO --> PresSlides["Presentation Slides"]:::leaf
 ```
 
 ---

@@ -109,20 +109,20 @@ uvicorn main:app --reload
 
 ### 2. Frontend Dashboard (Next.js + React Leaflet)
 
-Open a **separate terminal window**, navigate to your project root, and start the UI development server:
+The easiest way to start the frontend is to open the terminal directly inside the folder:
+
+1. Mở thư mục **`LogiHub_Project_Archive/logihub_application_code/frontend`** bằng File Explorer.
+2. Click chuột phải vào khoảng trắng trong thư mục, chọn **"Open in Terminal"** (Mở trong Terminal).
+3. Chạy các lệnh sau:
 
 #### 💻 Windows (Command Prompt - CMD)
 ```cmd
-cd /path/to/LogiHub_Project_Archive
-cd logihub_application_code\frontend
 npm install
 npm run dev
 ```
 
 #### 🟦 Windows (PowerShell)
 ```powershell
-cd /path/to/LogiHub_Project_Archive
-cd logihub_application_code/frontend
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
 npm install
 npm run dev
@@ -130,8 +130,6 @@ npm run dev
 
 #### 🍎 macOS / Linux (Bash/Zsh)
 ```bash
-cd /path/to/LogiHub_Project_Archive
-cd logihub_application_code/frontend
 npm install
 npm run dev
 ```

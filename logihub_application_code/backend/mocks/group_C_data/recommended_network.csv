@@ -1,0 +1,5 @@
+scenario_id,hub_id,status
+S3,GG_METRO,healthy
+S3,BS_PORT,healthy
+S3,DJ_CENTRAL,healthy
+S3,IC_AIRPORT,healthy

@@ -1,0 +1,3 @@
+scenario_id,hub_id,peak_month,capacity_gap,recommended_action
+S3,GG_METRO,2023-11,2000,Add 3PL
+S3,BS_PORT,2023-11,2000,Add 3PL

@@ -1,9 +1,19 @@
 [
   {
-    "event": "Q1_Galaxy_Launch",
-    "actions": [
-      "Pre-position inventory",
-      "Reserve extra line-haul"
+    "event_id": "E1",
+    "event_name": "Q1_Galaxy_Launch",
+    "months": [
+      "2023-02"
+    ],
+    "affected_product_families": [
+      "mobile_launch"
+    ],
+    "affected_hubs": [
+      "GG_METRO"
+    ],
+    "risk": "Capacity overflow",
+    "recommended_actions": [
+      "Pre-position inventory"
     ]
   }
 ]

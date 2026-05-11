@@ -1,0 +1,7 @@
+hub_id,role
+GG_METRO,metro_fulfillment
+BS_PORT,regional_hub
+DJ_CENTRAL,regional_hub
+IC_AIRPORT,regional_hub
+GW_BULKY,regional_hub
+SJ_SECURE,regional_hub

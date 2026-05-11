@@ -1,0 +1,6 @@
+origin_region,destination_region,product_family,volume,unit,share_pct
+Seoul,Daejeon,finished_goods,1309.67,ton,4.95
+Busan,Ulsan,finished_goods,1366.23,ton,4.2
+Daegu,Sejong,finished_goods,1087.22,ton,5.79
+Incheon,Gyeonggi,finished_goods,599.93,ton,3.06
+Gwangju,Gangwon,finished_goods,1314.27,ton,4.88

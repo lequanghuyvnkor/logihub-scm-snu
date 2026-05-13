@@ -94,7 +94,7 @@ def main():
     recommended_net = [{"scenario_id": "S3", "hub_id": h, "status": "healthy"} for h in hubs[:4]]
     pd.DataFrame(recommended_net).to_csv(os.path.join(group_c_dir, "recommended_network.csv"), index=False)
 
-    rules = {"rules": [{"region": "Seoul", "family": "mobile_launch", "confidence": 0.9}]}
+    rules = {"rules": [{"region": "Seoul", "family": "mobile_launch", "confidence": 0.9}, {"region": "Busan", "family": "bulky_appliance", "confidence": 0.85}, {"region": "Daegu", "family": "finished_goods", "confidence": 0.8}, {"region": "Incheon", "family": "spare_parts", "confidence": 0.75}, {"region": "Gwangju", "family": "ecommerce_small", "confidence": 0.7}, {"region": "Daejeon", "family": "general_cargo", "confidence": 0.65}, {"region": "Ulsan", "family": "high_value_secure", "confidence": 0.6}]}
     with open(os.path.join(group_c_dir, "classifier_rules.json"), "w") as f: json.dump(rules, f, indent=2)
         
     playbook = [{"event_id": "E1", "event_name": "Q1_Galaxy_Launch", "months": ["2023-02"], "affected_product_families": ["mobile_launch"], "affected_hubs": ["GG_METRO"], "risk": "Capacity overflow", "recommended_actions": ["Pre-position inventory"]}]

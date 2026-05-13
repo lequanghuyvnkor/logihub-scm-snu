@@ -1,0 +1,51 @@
+{
+  "event_catalog": {
+    "01|ecommerce_small": ["Lunar_New_Year_Ecommerce_Push", "last_mile"],
+    "02|mobile_launch": ["Q1_Galaxy_Launch", "capacity_overflow"],
+    "03|mobile_launch": ["Q1_Galaxy_Launch_Tail", "capacity_overflow"],
+    "05|finished_goods": ["Family_Month_Promo", "general_peak"],
+    "06|bulky_appliance": ["Early_Summer_AC_Ramp", "storage_shortage"],
+    "07|bulky_appliance": ["Summer_AC_Peak", "storage_shortage"],
+    "08|bulky_appliance": ["Summer_AC_Peak", "storage_shortage"],
+    "09|general_cargo": ["Chuseok_Gifting", "last_mile"],
+    "09|ecommerce_small": ["Chuseok_Ecommerce", "last_mile"],
+    "10|mobile_launch": ["Q4_Phone_Refresh", "capacity_overflow"],
+    "11|ecommerce_small": ["Black_November_Ecommerce", "last_mile"],
+    "11|finished_goods": ["Year_End_B2B_Push", "capacity_overflow"],
+    "12|ecommerce_small": ["Year_End_Gifting", "last_mile"],
+    "12|high_value_secure": ["Year_End_Premium_Goods", "security_risk"]
+  },
+  "action_templates": {
+    "capacity_overflow": [
+      "Pre-position 30% inventory 2 weeks early",
+      "Activate flex capacity at affected hubs",
+      "Negotiate temporary 3PL overflow contracts"
+    ],
+    "last_mile": [
+      "Add temporary 3PL contracts for last-mile",
+      "Shift handling staff +20% during the event window",
+      "Stage parcels closer to demand centroids"
+    ],
+    "storage_shortage": [
+      "Lease overflow yard within 30 km of the affected hub",
+      "Cross-dock directly from port / supplier when possible",
+      "Reduce safety stock days for slow-moving SKUs"
+    ],
+    "general_peak": [
+      "Increase inbound receiving slots by 25%",
+      "Pre-build picking waves the night before"
+    ],
+    "security_risk": [
+      "Move shipments through secure_node hubs only",
+      "Increase guarded transit checkpoints",
+      "Insurance rider for the event window"
+    ]
+  },
+  "risk_descriptions": {
+    "capacity_overflow": "Capacity overflow at affected hubs",
+    "last_mile": "Last-mile delivery delays and SLA breach risk",
+    "storage_shortage": "Storage shortage for bulky inventory",
+    "general_peak": "General demand spike requiring flex operations",
+    "security_risk": "Elevated theft / loss risk on high-value goods"
+  }
+}

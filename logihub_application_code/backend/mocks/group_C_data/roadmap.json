@@ -1,0 +1,50 @@
+[
+  {
+    "phase_id": "P1",
+    "phase_name": "Stabilize & Diagnose",
+    "timeline": "Month 1-2",
+    "actions": [
+      "Lock the 6 cost components in production config",
+      "Validate proxy demand against 1 quarter of pilot enterprise data",
+      "Establish hub_role rubric with operations team"
+    ],
+    "owner": "Engineering + Ops",
+    "expected_impact": "Engine ready for pilot; no infra changes yet."
+  },
+  {
+    "phase_id": "P2",
+    "phase_name": "Activate Southern Relay",
+    "timeline": "Month 3-4",
+    "actions": [
+      "Open GW_BULKY hub (lease 60k m2 yard, 6-month contract)",
+      "Reroute Jeju and Jeonnam flows away from BS_PORT",
+      "Negotiate 3PL last-mile for Jeju"
+    ],
+    "owner": "Operations",
+    "expected_impact": "Jeju SLA violations from 42% -> 18%. BS_PORT peak utilization from 95% -> 78%."
+  },
+  {
+    "phase_id": "P3",
+    "phase_name": "Stand Up Secure & Crossdock Nodes",
+    "timeline": "Month 5-6",
+    "actions": [
+      "Activate SJ_SECURE for high_value_secure flows (Q4 prep)",
+      "Stand up US_CROSSDOCK for spare_parts handling",
+      "Migrate 30% of Gyeongbuk overflow to GB_OVERFLOW"
+    ],
+    "owner": "Operations + Security",
+    "expected_impact": "GG_METRO peak from 110% -> 85%. Mobile_launch quarterly cycle absorbed without overflow."
+  },
+  {
+    "phase_id": "P4",
+    "phase_name": "Optimize & Scale",
+    "timeline": "Month 7-12",
+    "actions": [
+      "Run engine quarterly on real shipment data",
+      "Retire legacy assumptions; transition seasonal_playbook from heuristic to STL",
+      "Plan expansion: add 1-2 candidate hubs based on demand forecast"
+    ],
+    "owner": "Engineering + Strategy",
+    "expected_impact": "Engine moves from proxy to production mode. Annual saving validated against pilot data."
+  }
+]

@@ -1,19 +1,81 @@
 [
   {
     "event_id": "E1",
-    "event_name": "Q1_Galaxy_Launch",
-    "months": [
-      "2023-02"
-    ],
-    "affected_product_families": [
-      "mobile_launch"
-    ],
-    "affected_hubs": [
-      "GG_METRO"
-    ],
-    "risk": "Capacity overflow",
+    "event_name": "Lunar_New_Year_Ecommerce_Push",
+    "months": ["2023-01"],
+    "affected_product_families": ["ecommerce_small"],
+    "affected_hubs": ["GG_METRO", "BS_PORT"],
+    "risk": "Last-mile delivery delays and SLA breach risk",
     "recommended_actions": [
-      "Pre-position inventory"
+      "Add temporary 3PL contracts for last-mile",
+      "Shift handling staff +20% during the event window",
+      "Stage parcels closer to demand centroids"
+    ]
+  },
+  {
+    "event_id": "E2",
+    "event_name": "Q1_Galaxy_Launch",
+    "months": ["2023-02", "2023-03"],
+    "affected_product_families": ["mobile_launch"],
+    "affected_hubs": ["GG_METRO", "IC_AIRPORT"],
+    "risk": "Capacity overflow at metro hubs",
+    "recommended_actions": [
+      "Pre-position 30% inventory 2 weeks early",
+      "Activate flex capacity at affected hubs",
+      "Negotiate temporary 3PL overflow contracts",
+      "Add 3PL overflow contract at GG_METRO (gap approx 2400 tons)"
+    ]
+  },
+  {
+    "event_id": "E3",
+    "event_name": "Summer_AC_Peak",
+    "months": ["2023-07", "2023-08"],
+    "affected_product_families": ["bulky_appliance"],
+    "affected_hubs": ["BS_PORT", "GW_BULKY"],
+    "risk": "Storage shortage for bulky inventory",
+    "recommended_actions": [
+      "Lease overflow yard within 30 km of BS_PORT",
+      "Cross-dock directly from port / supplier when possible",
+      "Reduce safety stock days for slow-moving SKUs"
+    ]
+  },
+  {
+    "event_id": "E4",
+    "event_name": "Chuseok_Gifting",
+    "months": ["2023-09"],
+    "affected_product_families": ["general_cargo", "ecommerce_small"],
+    "affected_hubs": ["GG_METRO", "DJ_CENTRAL"],
+    "risk": "Last-mile delivery delays and SLA breach risk",
+    "recommended_actions": [
+      "Add temporary 3PL contracts for last-mile",
+      "Shift handling staff +20% during the event window",
+      "Stage parcels closer to demand centroids"
+    ]
+  },
+  {
+    "event_id": "E5",
+    "event_name": "Black_November_Ecommerce",
+    "months": ["2023-11"],
+    "affected_product_families": ["ecommerce_small", "finished_goods"],
+    "affected_hubs": ["GG_METRO", "BS_PORT", "DJ_CENTRAL"],
+    "risk": "Capacity overflow at metro hubs",
+    "recommended_actions": [
+      "Pre-position 30% inventory 2 weeks early",
+      "Activate flex capacity at affected hubs",
+      "Negotiate temporary 3PL overflow contracts"
+    ]
+  },
+  {
+    "event_id": "E6",
+    "event_name": "Year_End_Premium_Goods",
+    "months": ["2023-12"],
+    "affected_product_families": ["high_value_secure"],
+    "affected_hubs": ["SJ_SECURE", "IC_AIRPORT"],
+    "risk": "Elevated theft / loss risk on high-value goods",
+    "recommended_actions": [
+      "Move shipments through secure_node hubs only",
+      "Increase guarded transit checkpoints",
+      "Insurance rider for the event window"
     ]
   }
 ]

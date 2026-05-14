@@ -1,3 +1,7 @@
 scenario_id,hub_id,peak_month,capacity_gap,recommended_action
-S3,GG_METRO,2023-11,2000,Add 3PL
-S3,BS_PORT,2023-11,2000,Add 3PL
+S3,GG_METRO,2023-02,2400,Add 3PL overflow contract
+S3,GG_METRO,2023-11,2000,Add 3PL overflow contract
+S3,BS_PORT,2023-07,1800,Lease overflow yard 30km radius
+S3,BS_PORT,2023-08,1900,Lease overflow yard 30km radius
+S3,IC_AIRPORT,2023-10,1200,Pre-position inventory 2 weeks early
+S3,GW_BULKY,2023-07,800,Cross-dock from port directly

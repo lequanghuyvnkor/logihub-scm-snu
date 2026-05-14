@@ -1,0 +1,4 @@
+hub_id,utilization_pct,severity,reason
+US_CROSSDOCK,38.2,Low,Underutilized — limited adoption since opening
+GB_OVERFLOW,42.5,Low,Seasonal use only; idle 8 months/year
+SJ_SECURE,55.0,Medium,High-value goods volume below forecast

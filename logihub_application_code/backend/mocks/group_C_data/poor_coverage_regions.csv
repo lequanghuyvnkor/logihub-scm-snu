@@ -1,0 +1,5 @@
+region_name,nearest_hub_id,distance_km,sla_violation_pct,risk_level
+Jeju,BS_PORT,310.0,42.5,High
+Gangwon,GG_METRO,135.7,18.3,Medium
+Jeonnam,GW_BULKY,55.0,12.8,Low
+Gyeongnam,BS_PORT,60.4,9.5,Low

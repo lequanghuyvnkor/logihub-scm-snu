@@ -66,10 +66,27 @@ raw_data/                 (Korean OD raw data)
 
 ---
 
-## 3. GROUP A — Data & Demand (5 tables)
+## 3. GROUP A — Data & Demand (6 tables)
 
 > Output of Engine A. Mandatory input for Engine B (cost) and Engine C (segmentation).
 > Mock location: `backend/mocks/group_A_data/`
+
+### A.0 `region_master.csv` — 17-region master table
+
+| Column | dtype | Required | Enum / Constraint | Description |
+|---|---|---|---|---|
+| `region_id` | string | ✓ | – | Region ID (matches `region_name`) |
+| `region_name` | string | ✓ | `regionName` | Region name |
+| `country` | string | ✓ | `KR` only (v1.0) | ISO country code |
+| `level` | string | ✓ | `si_do`, `si_gun_gu`, `custom_zone` | Administrative level |
+| `lat` | float | ✓ | -90 to 90 | Latitude (centroid) |
+| `lon` | float | ✓ | -180 to 180 | Longitude (centroid) |
+
+**Example row:** `Seoul,Seoul,KR,si_do,37.5665,126.9780`
+
+**Constraints:** exactly 17 rows for the v1.0 Korean proxy scope. Unique on `region_id`.
+
+---
 
 ### A.1 `regional_demand.csv` — Annual demand by region
 
@@ -152,10 +169,50 @@ raw_data/                 (Korean OD raw data)
 
 ---
 
-## 4. GROUP B — Cost & Optimization (11 tables)
+## 4. GROUP B — Cost & Optimization (13 tables)
 
 > Output of Engine B. Feeds the optimization solver and powers the frontend scenario comparison.
 > Mock location: `backend/mocks/group_B_data/`
+
+### B.0a `distance_matrix.csv` — 17×17 hub/region distance matrix (long format)
+
+| Column | dtype | Required | Constraint | Description |
+|---|---|---|---|---|
+| `origin` | string | ✓ | `regionName` | Origin region |
+| `destination` | string | ✓ | `regionName` | Destination region |
+| `distance_km` | float ≥ 0 | ✓ | – | Road / haversine distance |
+
+**Example row:** `Seoul,Busan,325.4`
+
+**Constraints:** unique on (`origin`, `destination`). Diagonal (same region) should be 0. Max 17 × 17 = 289 rows.
+
+**Source:** B1 deliverable (haversine on `region_master.lat/lon` for proxy mode; road API for production).
+
+---
+
+### B.0b `candidate_hubs.csv` — Candidate hub master data
+
+| Column | dtype | Required | Constraint | Description |
+|---|---|---|---|---|
+| `hub_id` | string | ✓ | regex `^[A-Z]{2}_[A-Z0-9]+$` | Hub ID |
+| `hub_name` | string | ✓ | – | Display name |
+| `region_id` | string | ✓ | – | Region ID where hub sits |
+| `region_name` | string | ✓ | `regionName` | Region name |
+| `lat` | float | ✓ | -90 to 90 | Latitude |
+| `lon` | float | ✓ | -180 to 180 | Longitude |
+| `hub_type` | string | ✓ | `metro`, `regional`, `launch`, `secure`, `service_node`, `crossdock`, `port`, `overflow` | Hub typology |
+| `area_m2` | float ≥ 0 |   | – | Floor area |
+| `base_capacity` | float ≥ 0 | ✓ | – | Nominal capacity (tons) |
+| `effective_capacity` | float ≥ 0 |   | typ. 85% of base | After scaling factor |
+| `capacity_unit` | string | ✓ | `unit` enum | Usually `ton` |
+| `fixed_cost_usd_per_year` | float ≥ 0 | ✓ | – | Annual fixed cost |
+| `eligible_product_families` | string | ✓ | pipe-separated `productFamily` values | What this hub can handle |
+
+**Example row:** `GG_METRO,Gyeonggi Metro Fulfillment,Gyeonggi,Gyeonggi,37.4138,127.5183,metro,45000,15000,12750,ton,198551.20,mobile_launch|ecommerce_small|finished_goods`
+
+**Constraints:** unique on `hub_id`. `eligible_product_families` uses `|` as separator (CSV-safe).
+
+---
 
 ### B.1 `transport_cost_by_lane.csv` — Transport cost
 
@@ -306,7 +363,7 @@ raw_data/                 (Korean OD raw data)
 
 ---
 
-## 5. GROUP C — Diagnosis & Outcome (8 tables)
+## 5. GROUP C — Diagnosis & Outcome (12 tables)
 
 > Output of Engine C. Powers outcome doc, business case, and frontend.
 > Mock location: `backend/mocks/group_C_data/`
@@ -334,6 +391,33 @@ raw_data/                 (Korean OD raw data)
 **Example row:** `Seoul-Busan,50000,Distance`
 
 **Recommended extension (v1.1):** add `origin_region`, `destination_region`, `distance_km`, `cost_share_pct`, `recommended_action` to match `highCostLane` in the contract.
+
+---
+
+### C.2b `underused_hubs.csv` — Under-utilized hubs
+
+| Column | dtype | Required | Constraint | Description |
+|---|---|---|---|---|
+| `hub_id` | string | ✓ | – | Hub ID |
+| `utilization_pct` | float ≥ 0 | ✓ | usually <60 | Utilization % |
+| `severity` | string | ✓ | `riskLevel` | Severity tag |
+| `reason` | string | ✓ | text | Why under-used (operations note) |
+
+**Example row:** `US_CROSSDOCK,38.2,Low,Underutilized — limited adoption since opening`
+
+---
+
+### C.2c `poor_coverage_regions.csv` — Regions with poor SLA coverage
+
+| Column | dtype | Required | Constraint | Description |
+|---|---|---|---|---|
+| `region_name` | string | ✓ | `regionName` | Region with coverage issue |
+| `nearest_hub_id` | string | ✓ | – | Closest serving hub |
+| `distance_km` | float ≥ 0 | ✓ | – | Distance to nearest hub |
+| `sla_violation_pct` | float | ✓ | 0–100 | SLA breach rate (%) |
+| `risk_level` | string | ✓ | `riskLevel` | Risk tag |
+
+**Example row:** `Jeju,BS_PORT,310.0,42.5,High`
 
 ---
 
@@ -416,6 +500,50 @@ raw_data/                 (Korean OD raw data)
 
 ---
 
+### C.7b `business_case.json` — Standalone business case payload
+
+Shape mirrors `engine_contract.schema.json#/definitions/businessCase`.
+
+```json
+{
+  "baseline_scenario_id": "S0",                    // scenarioId, required
+  "recommended_scenario_id": "S3",                 // scenarioId, required
+  "annual_saving": 565473.91,                      // float >= 0, optional
+  "currency": "USD",                               // currency enum
+  "saving_pct": 11.67,                             // 0-100, required
+  "additional_fixed_cost": 142000.00,              // float >= 0, optional
+  "payback_months": 3.0,                           // float >= 0, optional
+  "service_level_improvement_pct_point": -6.50,    // float (can be negative)
+  "risk_reduction_summary": "...",                 // string, required
+  "executive_summary": "..."                       // string, required
+}
+```
+
+**Constraints:** `saving_pct` ∈ [0, 100]. `service_level_improvement_pct_point` can be negative when the recommended scenario trades service for cost — the report must call this out explicitly.
+
+---
+
+### C.7c `roadmap.json` — Standalone roadmap payload
+
+Array of phases. Shape mirrors `engine_contract.schema.json#/definitions/roadmapPhase`.
+
+```json
+[
+  {
+    "phase_id": "P1",                        // string, required, unique
+    "phase_name": "Stabilize & Diagnose",    // string, required
+    "timeline": "Month 1-2",                 // string, required (free-form duration)
+    "actions": ["..."],                      // array<string>, required
+    "owner": "Engineering + Ops",            // string, required
+    "expected_impact": "..."                 // string, required
+  }
+]
+```
+
+**Constraints:** array of at least 1 phase. `phase_id` unique across the array. Order matters — phases are read sequentially.
+
+---
+
 ### C.8 `mock_engine_output_final.json` — Full engine output JSON
 
 > Aggregated file that complies with the **entire** `engine_contract.schema.json` (LogiHubEngineContract). This is the single payload that the frontend needs to call.
@@ -467,9 +595,11 @@ Suggested reference implementation: use `pandera` or `pydantic v2` to code-gen v
 ## 8. References
 
 - `engine_contract.schema.json` — canonical JSON Schema for the full payload
-- `backend/mocks/group_A_data/` — 5 Group A tables
-- `backend/mocks/group_B_data/` — 11 Group B tables
-- `backend/mocks/group_C_data/` — 7 Group C tables + 1 full JSON
+- `backend/mocks/group_A_data/` — 6 files (all CSV)
+- `backend/mocks/group_B_data/` — 13 files (all CSV)
+- `backend/mocks/group_C_data/` — 11 files (7 CSV + 4 JSON)
+- `backend/mocks/mock_engine_output_final.json` — 1 aggregated full payload
+- **Total: 31 mock files** (exceeds X3 spec of 12 sample files)
 - `docs/05_MID_ProxyEngine.md` — proxy scope definition
 - `docs/08_OUT_CostEngine6Comp.md` — 6 cost components
 - `docs/09_OUT_OutcomeAnalysisExample.md` — outcome example

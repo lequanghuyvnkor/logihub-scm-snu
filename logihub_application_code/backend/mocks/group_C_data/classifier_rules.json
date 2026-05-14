@@ -1,9 +1,53 @@
 {
   "rules": [
     {
+      "rule_id": "R1",
       "region": "Seoul",
       "family": "mobile_launch",
-      "confidence": 0.9
+      "rationale": "Seoul metro hosts major mobile R&D and launch volume",
+      "confidence": 0.90
+    },
+    {
+      "rule_id": "R2",
+      "region": "Gyeonggi",
+      "family": "ecommerce_small",
+      "rationale": "Largest ecommerce fulfillment cluster in Korea",
+      "confidence": 0.88
+    },
+    {
+      "rule_id": "R3",
+      "region": "Gwangju",
+      "family": "bulky_appliance",
+      "rationale": "Home appliance assembly hub (white goods)",
+      "confidence": 0.85
+    },
+    {
+      "rule_id": "R4",
+      "region": "Ulsan",
+      "family": "spare_parts",
+      "rationale": "Auto manufacturing belt drives spare parts flow",
+      "confidence": 0.82
+    },
+    {
+      "rule_id": "R5",
+      "region": "Busan",
+      "family": "general_cargo",
+      "rationale": "Port-driven general freight, mixed commodities",
+      "confidence": 0.78
+    },
+    {
+      "rule_id": "R6",
+      "region": "Sejong",
+      "family": "high_value_secure",
+      "rationale": "Government and finance HQ concentration",
+      "confidence": 0.80
+    },
+    {
+      "rule_id": "R7",
+      "region": "Daejeon",
+      "family": "finished_goods",
+      "rationale": "Central distribution node for nationwide finished goods",
+      "confidence": 0.83
     }
   ]
 }

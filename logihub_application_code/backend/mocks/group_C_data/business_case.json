@@ -1,0 +1,12 @@
+{
+  "baseline_scenario_id": "S0",
+  "recommended_scenario_id": "S3",
+  "annual_saving": 565473.91,
+  "currency": "USD",
+  "saving_pct": 11.67,
+  "additional_fixed_cost": 142000.00,
+  "payback_months": 3.0,
+  "service_level_improvement_pct_point": -6.50,
+  "risk_reduction_summary": "Recommended network reduces overload exposure at GG_METRO from 110% to under 85% peak utilization, and brings Jeju SLA violations from 42% down to a target 15% by activating GW_BULKY as a southern relay. Trade-off: service level drops slightly because optimization favors cost over speed in this scenario.",
+  "executive_summary": "Switching from the as-is 3-hub network (S0) to the optimized 6-hub design (S3) saves ~$565K/year, with payback in 3 months. The added GW_BULKY and SJ_SECURE hubs absorb seasonal peaks and improve high-value goods security. Proxy-mode disclaimer: numbers reflect public OD data; pilot with enterprise shipment data is required before commit to capex."
+}

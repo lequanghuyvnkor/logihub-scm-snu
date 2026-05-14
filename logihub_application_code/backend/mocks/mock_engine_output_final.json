@@ -23,8 +23,8 @@
     ],
     "geographic_scope": "South Korea (17 regions)",
     "analysis_period": "2023",
-    "target_company_context": "Samsung Electronics Logistics Proxy",
-    "disclaimer": "This analysis relies on public proxy data. Do not use for real-world CAPEX decisions without substituting enterprise data."
+    "target_company_context": "Aggregate Korean freight (industry-agnostic) — public OD data; not a representation of any single company",
+    "disclaimer": "This analysis is generated from public Korean Freight O/D aggregate data and does not represent any individual company or industry. The engine demonstrates the analysis architecture; replacing the input with enterprise shipment data is required before using any numbers for CAPEX or operational decisions."
   },
   "input_data_summary": {
     "total_rows_ingested": 1500000,
@@ -3088,19 +3088,84 @@
   "seasonal_playbook": [
     {
       "event_id": "E1",
-      "event_name": "Q1_Galaxy_Launch",
-      "months": [
-        "2023-02"
-      ],
-      "affected_product_families": [
-        "mobile_launch"
-      ],
-      "affected_hubs": [
-        "GG_METRO"
-      ],
-      "risk": "Capacity overflow",
+      "event_name": "M01_ecommerce_small_peak_window",
+      "months": ["2023-01"],
+      "affected_product_families": ["ecommerce_small"],
+      "affected_hubs": ["GG_METRO", "BS_PORT"],
+      "risk": "Last-mile delivery delays and SLA breach risk during M01 parcel-volume surge",
       "recommended_actions": [
-        "Pre-position inventory"
+        "Add temporary 3PL contracts for last-mile delivery",
+        "Shift handling staff +20% during the event window",
+        "Stage parcels closer to demand centroids",
+        "Scale last-mile rider/courier pools for the window"
+      ]
+    },
+    {
+      "event_id": "E2",
+      "event_name": "M02-M03_mobile_launch_peak_window",
+      "months": ["2023-02", "2023-03"],
+      "affected_product_families": ["mobile_launch"],
+      "affected_hubs": ["GG_METRO", "IC_AIRPORT"],
+      "risk": "Capacity overflow at affected hubs during M02-M03 high-velocity launch wave",
+      "recommended_actions": [
+        "Pre-position 30% inventory 2 weeks early",
+        "Activate flex capacity at affected hubs",
+        "Negotiate temporary 3PL overflow contracts",
+        "Coordinate inbound with manufacturer release calendar",
+        "Add 3PL overflow contract at GG_METRO (gap ≈ 2400 tons)"
+      ]
+    },
+    {
+      "event_id": "E3",
+      "event_name": "M07-M08_bulky_appliance_peak_window",
+      "months": ["2023-07", "2023-08"],
+      "affected_product_families": ["bulky_appliance"],
+      "affected_hubs": ["BS_PORT", "GW_BULKY"],
+      "risk": "Storage shortage for bulky inventory during M07-M08 bulky storage-intensive flow",
+      "recommended_actions": [
+        "Lease overflow yard within 30 km of the affected hub",
+        "Cross-dock directly from port / supplier when possible",
+        "Reduce safety stock days for slow-moving SKUs",
+        "Pre-clear floor space at receiving hubs 2 weeks ahead"
+      ]
+    },
+    {
+      "event_id": "E4",
+      "event_name": "M09_general_cargo_peak_window",
+      "months": ["2023-09"],
+      "affected_product_families": ["general_cargo"],
+      "affected_hubs": ["GG_METRO", "DJ_CENTRAL"],
+      "risk": "General demand spike requiring flex operations during M09 mixed cargo seasonal swing",
+      "recommended_actions": [
+        "Increase inbound receiving slot capacity by 25%",
+        "Pre-build picking waves the night before"
+      ]
+    },
+    {
+      "event_id": "E5",
+      "event_name": "M11_finished_goods_peak_window",
+      "months": ["2023-11"],
+      "affected_product_families": ["finished_goods"],
+      "affected_hubs": ["GG_METRO", "BS_PORT", "DJ_CENTRAL"],
+      "risk": "General demand spike requiring flex operations during M11 finished-goods replenishment cycle",
+      "recommended_actions": [
+        "Increase inbound receiving slot capacity by 25%",
+        "Pre-build picking waves the night before",
+        "Sync inbound receiving slots with downstream PO calendar"
+      ]
+    },
+    {
+      "event_id": "E6",
+      "event_name": "M12_high_value_secure_peak_window",
+      "months": ["2023-12"],
+      "affected_product_families": ["high_value_secure"],
+      "affected_hubs": ["SJ_SECURE", "IC_AIRPORT"],
+      "risk": "Elevated theft / loss risk on high-value goods during M12 high-value secure shipment surge",
+      "recommended_actions": [
+        "Route shipments through secure_node hubs only",
+        "Increase guarded transit checkpoints",
+        "Add insurance rider for the event window",
+        "Audit chain of custody through secure_node hubs"
       ]
     }
   ],

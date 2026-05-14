@@ -1,19 +1,53 @@
 {
-  "event_catalog": {
-    "01|ecommerce_small": ["Lunar_New_Year_Ecommerce_Push", "last_mile"],
-    "02|mobile_launch": ["Q1_Galaxy_Launch", "capacity_overflow"],
-    "03|mobile_launch": ["Q1_Galaxy_Launch_Tail", "capacity_overflow"],
-    "05|finished_goods": ["Family_Month_Promo", "general_peak"],
-    "06|bulky_appliance": ["Early_Summer_AC_Ramp", "storage_shortage"],
-    "07|bulky_appliance": ["Summer_AC_Peak", "storage_shortage"],
-    "08|bulky_appliance": ["Summer_AC_Peak", "storage_shortage"],
-    "09|general_cargo": ["Chuseok_Gifting", "last_mile"],
-    "09|ecommerce_small": ["Chuseok_Ecommerce", "last_mile"],
-    "10|mobile_launch": ["Q4_Phone_Refresh", "capacity_overflow"],
-    "11|ecommerce_small": ["Black_November_Ecommerce", "last_mile"],
-    "11|finished_goods": ["Year_End_B2B_Push", "capacity_overflow"],
-    "12|ecommerce_small": ["Year_End_Gifting", "last_mile"],
-    "12|high_value_secure": ["Year_End_Premium_Goods", "security_risk"]
+  "_comment": "External override for seasonal_playbook_generator.py (industry-agnostic v2). Keyed on the contract productFamily enum, NOT on industry events. Defaults from PRODUCT_FAMILY_PROFILES_DEFAULT in the generator apply if this file is missing or malformed.",
+  "product_family_profiles": {
+    "mobile_launch": {
+      "risk_type": "capacity_overflow",
+      "label": "high-velocity launch wave",
+      "extra_actions": [
+        "Coordinate inbound with manufacturer release calendar"
+      ]
+    },
+    "bulky_appliance": {
+      "risk_type": "storage_shortage",
+      "label": "bulky storage-intensive flow",
+      "extra_actions": [
+        "Pre-clear floor space at receiving hubs 2 weeks ahead"
+      ]
+    },
+    "high_value_secure": {
+      "risk_type": "security_risk",
+      "label": "high-value secure shipment surge",
+      "extra_actions": [
+        "Audit chain of custody through secure_node hubs"
+      ]
+    },
+    "finished_goods": {
+      "risk_type": "general_peak",
+      "label": "finished-goods replenishment cycle",
+      "extra_actions": [
+        "Sync inbound receiving slots with downstream PO calendar"
+      ]
+    },
+    "spare_parts": {
+      "risk_type": "general_peak",
+      "label": "reactive spare-parts demand",
+      "extra_actions": [
+        "Hold safety stock at regional service nodes"
+      ]
+    },
+    "ecommerce_small": {
+      "risk_type": "last_mile",
+      "label": "parcel-volume surge",
+      "extra_actions": [
+        "Scale last-mile rider/courier pools for the window"
+      ]
+    },
+    "general_cargo": {
+      "risk_type": "general_peak",
+      "label": "mixed cargo seasonal swing",
+      "extra_actions": []
+    }
   },
   "action_templates": {
     "capacity_overflow": [
@@ -22,7 +56,7 @@
       "Negotiate temporary 3PL overflow contracts"
     ],
     "last_mile": [
-      "Add temporary 3PL contracts for last-mile",
+      "Add temporary 3PL contracts for last-mile delivery",
       "Shift handling staff +20% during the event window",
       "Stage parcels closer to demand centroids"
     ],
@@ -32,20 +66,20 @@
       "Reduce safety stock days for slow-moving SKUs"
     ],
     "general_peak": [
-      "Increase inbound receiving slots by 25%",
+      "Increase inbound receiving slot capacity by 25%",
       "Pre-build picking waves the night before"
     ],
     "security_risk": [
-      "Move shipments through secure_node hubs only",
+      "Route shipments through secure_node hubs only",
       "Increase guarded transit checkpoints",
-      "Insurance rider for the event window"
+      "Add insurance rider for the event window"
     ]
   },
   "risk_descriptions": {
     "capacity_overflow": "Capacity overflow at affected hubs",
-    "last_mile": "Last-mile delivery delays and SLA breach risk",
-    "storage_shortage": "Storage shortage for bulky inventory",
-    "general_peak": "General demand spike requiring flex operations",
-    "security_risk": "Elevated theft / loss risk on high-value goods"
+    "last_mile":         "Last-mile delivery delays and SLA breach risk",
+    "storage_shortage":  "Storage shortage for bulky inventory",
+    "general_peak":      "General demand spike requiring flex operations",
+    "security_risk":     "Elevated theft / loss risk on high-value goods"
   }
 }

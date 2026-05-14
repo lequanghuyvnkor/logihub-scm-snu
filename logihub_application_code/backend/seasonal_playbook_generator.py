@@ -4,38 +4,57 @@ seasonal_playbook_generator.py
 
 Proxy-mode generator for `seasonal_playbook.json` (Engine C, Phase 10 deliverable).
 
-This module takes the heuristic seasonal index produced by Engine A
-(monthly_demand_by_region_product.csv) and — optionally — diagnosis tables
-from Engine B (overloaded_hubs.csv, capacity_gap_by_peak_period.csv) and
-produces a seasonal playbook that conforms to the schema in
-`data_schemas.md` §C.7 and `engine_contract.schema.json` (#/definitions/seasonalEvent).
+Design principle — INDUSTRY-AGNOSTIC
+------------------------------------
+This generator deliberately does NOT hard-code any branded, calendar-specific,
+or industry-specific event labels. In proxy mode the engine is demonstrating
+architecture on PUBLIC aggregate freight data — it cannot tell whether the
+underlying enterprise is consumer electronics, FMCG, pharma, automotive, or
+a 3PL.  All event labels are *derived from the data observation itself*:
+the peak-month window + the `product_family` enum value (from the contract).
+
+If a pilot customer wants pretty labels (e.g., "Q1_<Brand>_Launch" instead
+of "M02-M03_mobile_launch_peak_window"), they layer that on top in production
+mode by joining with their internal SKU launch calendar — that join is NOT
+part of the proxy generator and should never be hard-coded here.
 
 Three layers of logic
 ---------------------
 1) **Peak detection.**  Group rows by (month, product_family) and flag groups
    whose mean seasonal_index ≥ PEAK_THRESHOLD (default 1.20).
-2) **Event labelling.**  Look up each (month, product_family) peak in
-   `KOREAN_EVENT_CATALOG` — a static table of well-known Korean industry
-   seasonal events.  Falls back to a generic "<Month>_<Family>_Peak" label.
-3) **Action templating.**  Pick an action list from `ACTION_TEMPLATES` keyed
-   on the *risk type* derived from each peak (capacity overflow, last-mile,
-   storage shortage, …).  Augment with hub-specific actions if Engine B
-   diagnosis tables are provided.
+2) **Window grouping.**  Consecutive months of the same product_family that
+   both pass the threshold are merged into a single 'peak window' event.
+3) **Risk & action mapping.**  Use `PRODUCT_FAMILY_PROFILES` (keyed on the
+   7 product_family enum values) to derive risk_type from *physical /
+   logistical* characteristics of the family — bulky → storage shortage,
+   high-value → security risk, small parcel → last-mile bottleneck, etc.
+   Then pull the corresponding action template.  Add hub-specific actions
+   when Engine B diagnosis tables are provided.
+
+Why product_family → risk mapping is NOT industry bias
+-------------------------------------------------------
+Mapping bulky_appliance → storage_shortage reflects a *physical fact* about
+the cargo (large objects need more floor space).  Mapping high_value_secure
+→ security_risk reflects a *physical fact* about value density.  These hold
+regardless of the customer's industry — consumer electronics, FMCG, pharma,
+automotive, 3PL — because the mapping is on cargo physics, not on industry.
+The mapping is on the contract enum, not on industry names — so it stays
+agnostic.  Customers can override these defaults via `event_catalog.json`.
 
 Production mode replaces step 1 with STL/Prophet decomposition over real
-shipment data, step 2 with a SKU launch calendar join, and step 3 with the
-enterprise's actual 3PL contract catalogue.  This module is intentionally
-isolated so swapping it for the production version is a one-line import
-change in the Engine C orchestrator.
+shipment data, optionally enriches step 2 names by joining with the
+enterprise SKU launch calendar, and optionally swaps step 3 templates with
+the enterprise's 3PL contract catalogue.  This module is isolated so
+swapping it for the production version is a one-line import change in the
+Engine C orchestrator.
 
 Usage
 -----
     from seasonal_playbook_generator import build_seasonal_playbook
-
     events = build_seasonal_playbook(
         demand_csv="mocks/group_A_data/monthly_demand_by_region_product.csv",
-        overloaded_hubs_csv="mocks/group_C_data/overloaded_hubs.csv",   # optional
-        capacity_gap_csv="mocks/group_B_data/capacity_gap_by_peak_period.csv",  # optional
+        overloaded_hubs_csv="mocks/group_C_data/overloaded_hubs.csv",
+        capacity_gap_csv="mocks/group_B_data/capacity_gap_by_peak_period.csv",
         output_path="mocks/group_C_data/seasonal_playbook.json",
         peak_threshold=1.20,
     )
@@ -47,41 +66,78 @@ CLI
         --output mocks/group_C_data/seasonal_playbook.json
 
 Author: LogiHub team (Engine C — Person C)
-Mode:   proxy (midterm)
+Mode:   proxy (data-driven, industry-agnostic)
 """
 from __future__ import annotations
 
 import argparse
 import json
 import sys
-from dataclasses import dataclass, asdict, field
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 
+
 # ---------------------------------------------------------------------------
-# Static catalogs — these encode the *heuristic / industry knowledge* layer
-# that distinguishes proxy mode from production mode.  Production mode
-# replaces these with SKU launch calendars and enterprise contract data.
+# Product-family-driven profiles.
+# Keyed on the productFamily enum from engine_contract.schema.json.
+# Each profile encodes the *physical/logistical* risk character of the family,
+# NOT any industry or company assumption.
+#
+# To tune for a pilot customer: provide an `event_catalog.json` file in the
+# script directory or via --config flag.  See _load_external_config docstring.
 # ---------------------------------------------------------------------------
 
-# Default static fallbacks
-KOREAN_EVENT_CATALOG_DEFAULT: Dict[Tuple[str, str], Tuple[str, str]] = {
-    ("01", "ecommerce_small"):    ("Lunar_New_Year_Ecommerce_Push", "last_mile"),
-    ("02", "mobile_launch"):      ("Q1_Galaxy_Launch",              "capacity_overflow"),
-    ("03", "mobile_launch"):      ("Q1_Galaxy_Launch_Tail",         "capacity_overflow"),
-    ("05", "finished_goods"):     ("Family_Month_Promo",            "general_peak"),
-    ("06", "bulky_appliance"):    ("Early_Summer_AC_Ramp",          "storage_shortage"),
-    ("07", "bulky_appliance"):    ("Summer_AC_Peak",                "storage_shortage"),
-    ("08", "bulky_appliance"):    ("Summer_AC_Peak",                "storage_shortage"),
-    ("09", "general_cargo"):      ("Chuseok_Gifting",               "last_mile"),
-    ("09", "ecommerce_small"):    ("Chuseok_Ecommerce",             "last_mile"),
-    ("10", "mobile_launch"):      ("Q4_Phone_Refresh",              "capacity_overflow"),
-    ("11", "ecommerce_small"):    ("Black_November_Ecommerce",      "last_mile"),
-    ("11", "finished_goods"):     ("Year_End_B2B_Push",             "capacity_overflow"),
-    ("12", "ecommerce_small"):    ("Year_End_Gifting",              "last_mile"),
-    ("12", "high_value_secure"):  ("Year_End_Premium_Goods",        "security_risk"),
+PRODUCT_FAMILY_PROFILES_DEFAULT: Dict[str, Dict[str, object]] = {
+    "mobile_launch": {
+        "risk_type": "capacity_overflow",
+        "label": "high-velocity launch wave",
+        "extra_actions": [
+            "Coordinate inbound with manufacturer release calendar",
+        ],
+    },
+    "bulky_appliance": {
+        "risk_type": "storage_shortage",
+        "label": "bulky storage-intensive flow",
+        "extra_actions": [
+            "Pre-clear floor space at receiving hubs 2 weeks ahead",
+        ],
+    },
+    "high_value_secure": {
+        "risk_type": "security_risk",
+        "label": "high-value secure shipment surge",
+        "extra_actions": [
+            "Audit chain of custody through secure_node hubs",
+        ],
+    },
+    "finished_goods": {
+        "risk_type": "general_peak",
+        "label": "finished-goods replenishment cycle",
+        "extra_actions": [
+            "Sync inbound receiving slots with downstream PO calendar",
+        ],
+    },
+    "spare_parts": {
+        "risk_type": "general_peak",
+        "label": "reactive spare-parts demand",
+        "extra_actions": [
+            "Hold safety stock at regional service nodes",
+        ],
+    },
+    "ecommerce_small": {
+        "risk_type": "last_mile",
+        "label": "parcel-volume surge",
+        "extra_actions": [
+            "Scale last-mile rider/courier pools for the window",
+        ],
+    },
+    "general_cargo": {
+        "risk_type": "general_peak",
+        "label": "mixed cargo seasonal swing",
+        "extra_actions": [],
+    },
 }
 
 ACTION_TEMPLATES_DEFAULT: Dict[str, List[str]] = {
@@ -91,7 +147,7 @@ ACTION_TEMPLATES_DEFAULT: Dict[str, List[str]] = {
         "Negotiate temporary 3PL overflow contracts",
     ],
     "last_mile": [
-        "Add temporary 3PL contracts for last-mile",
+        "Add temporary 3PL contracts for last-mile delivery",
         "Shift handling staff +20% during the event window",
         "Stage parcels closer to demand centroids",
     ],
@@ -101,13 +157,13 @@ ACTION_TEMPLATES_DEFAULT: Dict[str, List[str]] = {
         "Reduce safety stock days for slow-moving SKUs",
     ],
     "general_peak": [
-        "Increase inbound receiving slots by 25%",
+        "Increase inbound receiving slot capacity by 25%",
         "Pre-build picking waves the night before",
     ],
     "security_risk": [
-        "Move shipments through secure_node hubs only",
+        "Route shipments through secure_node hubs only",
         "Increase guarded transit checkpoints",
-        "Insurance rider for the event window",
+        "Add insurance rider for the event window",
     ],
 }
 
@@ -119,46 +175,60 @@ RISK_DESCRIPTIONS_DEFAULT: Dict[str, str] = {
     "security_risk":     "Elevated theft / loss risk on high-value goods",
 }
 
-def load_external_catalog(json_path: Optional[str | Path] = None) -> Tuple[Dict[Tuple[str, str], Tuple[str, str]], Dict[str, List[str]], Dict[str, str]]:
-    """Load catalog, action templates, and risk descriptions from a JSON config file."""
+
+def _load_external_config(
+    json_path: Optional[str | Path] = None,
+) -> Tuple[Dict[str, Dict[str, object]], Dict[str, List[str]], Dict[str, str]]:
+    """Load product_family_profiles / action_templates / risk_descriptions
+    from an external JSON config.  Defaults returned if file is missing or
+    malformed.
+
+    Expected JSON schema (all keys optional — anything missing falls back
+    to the default):
+
+        {
+          "product_family_profiles": {
+              "<family>": {
+                  "risk_type": "<one_of_known_risk_types>",
+                  "label": "<short label>",
+                  "extra_actions": ["..."]
+              }, ...
+          },
+          "action_templates":  {"<risk_type>": ["..."]},
+          "risk_descriptions": {"<risk_type>": "..."}
+        }
+    """
     if json_path is None:
         json_path = Path(__file__).parent / "event_catalog.json"
-    
     path = Path(json_path)
     if not path.exists():
-        return KOREAN_EVENT_CATALOG_DEFAULT, ACTION_TEMPLATES_DEFAULT, RISK_DESCRIPTIONS_DEFAULT
-
+        return (PRODUCT_FAMILY_PROFILES_DEFAULT,
+                ACTION_TEMPLATES_DEFAULT,
+                RISK_DESCRIPTIONS_DEFAULT)
     try:
         with open(path, "r", encoding="utf-8") as f:
-            config = json.load(f)
-        
-        # Convert string keys like "MM|family" back to tuple keys (MM, family)
-        raw_catalog = config.get("event_catalog", {})
-        catalog = {}
-        for k, v in raw_catalog.items():
-            if "|" in k:
-                parts = tuple(k.split("|"))
-                if len(parts) == 2:
-                    catalog[parts] = tuple(v)
-            else:
-                catalog[k] = tuple(v)
-        
-        action_templates = config.get("action_templates", ACTION_TEMPLATES_DEFAULT)
-        risk_descriptions = config.get("risk_descriptions", RISK_DESCRIPTIONS_DEFAULT)
-        
-        return catalog, action_templates, risk_descriptions
+            cfg = json.load(f)
+        profiles  = cfg.get("product_family_profiles", PRODUCT_FAMILY_PROFILES_DEFAULT)
+        actions   = cfg.get("action_templates",        ACTION_TEMPLATES_DEFAULT)
+        risk_desc = cfg.get("risk_descriptions",       RISK_DESCRIPTIONS_DEFAULT)
+        return profiles, actions, risk_desc
     except Exception as e:
-        print(f"Warning: Failed to load external config {json_path}: {e}. Falling back to default catalogs.", file=sys.stderr)
-        return KOREAN_EVENT_CATALOG_DEFAULT, ACTION_TEMPLATES_DEFAULT, RISK_DESCRIPTIONS_DEFAULT
+        print(
+            f"Warning: failed to load {json_path}: {e}. Falling back to defaults.",
+            file=sys.stderr,
+        )
+        return (PRODUCT_FAMILY_PROFILES_DEFAULT,
+                ACTION_TEMPLATES_DEFAULT,
+                RISK_DESCRIPTIONS_DEFAULT)
 
-# Load catalogs dynamically (default to loading from event_catalog.json in script dir)
-KOREAN_EVENT_CATALOG, ACTION_TEMPLATES, RISK_DESCRIPTIONS = load_external_catalog()
 
+# Load once on import; build_seasonal_playbook may reload via config_json arg.
+PRODUCT_FAMILY_PROFILES, ACTION_TEMPLATES, RISK_DESCRIPTIONS = _load_external_config()
 DEFAULT_PEAK_THRESHOLD = 1.20  # seasonal_index threshold for proxy mode
 
 
 # ---------------------------------------------------------------------------
-# Data class mirroring the seasonalEvent contract definition
+# Dataclass — mirrors engine_contract.schema.json #/definitions/seasonalEvent
 # ---------------------------------------------------------------------------
 
 @dataclass
@@ -170,12 +240,11 @@ class SeasonalEvent:
     affected_hubs: List[str]
     risk: str
     recommended_actions: List[str]
-    # Optional fields kept out of contract but useful for traceability:
-    confidence: float = field(default=0.7)  # proxy mode default
-    source: str = field(default="proxy_heuristic_v1")
+    # Optional / traceability — not in contract:
+    confidence: float = field(default=0.7)
+    source: str = field(default="proxy_data_driven_v2")
 
     def to_contract_dict(self) -> dict:
-        """Return only fields defined by `seasonalEvent` in the contract."""
         return {
             "event_id": self.event_id,
             "event_name": self.event_name,
@@ -191,23 +260,15 @@ class SeasonalEvent:
 # Core pipeline
 # ---------------------------------------------------------------------------
 
-def _detect_peaks(
-    demand_df: pd.DataFrame,
-    threshold: float,
-) -> pd.DataFrame:
-    """Return a DataFrame of (month, product_family, regions, mean_index)
-    rows where mean seasonal_index ≥ threshold.
-
-    Expected demand_df schema (per data_schemas.md §A.3):
-        region_id, region_name, product_family, month, volume, unit, seasonal_index
-    """
+def _detect_peaks(demand_df: pd.DataFrame, threshold: float) -> pd.DataFrame:
+    """Return rows of (month, product_family, regions, mean_index) where the
+    mean seasonal_index across regions ≥ threshold."""
     required = {"region_name", "product_family", "month", "seasonal_index"}
     missing = required - set(demand_df.columns)
     if missing:
         raise ValueError(
-            f"demand_df missing required columns for peak detection: {sorted(missing)}"
+            f"demand_df missing required columns: {sorted(missing)}"
         )
-
     grouped = (
         demand_df
         .groupby(["month", "product_family"], as_index=False)
@@ -219,44 +280,85 @@ def _detect_peaks(
     return grouped[grouped["mean_index"] >= threshold].reset_index(drop=True)
 
 
-def _label_event(month: str, product_family: str) -> Tuple[str, str]:
-    """Lookup (event_name, risk_type) from KOREAN_EVENT_CATALOG.
-    Falls back to generic label if the (month, family) combo is unknown."""
-    mm = month.split("-")[-1] if "-" in month else month
-    if (mm, product_family) in KOREAN_EVENT_CATALOG:
-        return KOREAN_EVENT_CATALOG[(mm, product_family)]
-    return (f"M{mm}_{product_family}_Peak", "general_peak")
+def _group_into_windows(peaks: pd.DataFrame) -> List[Dict[str, object]]:
+    """Merge consecutive months of the *same* product_family into a single
+    'peak window'.  If a family peaks in Feb AND Mar, they merge into one
+    window [2023-02, 2023-03].  If it peaks in Feb AND Aug (non-consecutive),
+    those are TWO separate windows.
+    """
+    if peaks.empty:
+        return []
+
+    sorted_peaks = peaks.sort_values(["product_family", "month"]).reset_index(drop=True)
+    windows: List[Dict[str, object]] = []
+
+    cur_family: Optional[str] = None
+    cur_months: List[str] = []
+    cur_regions: set = set()
+    cur_idx: List[float] = []
+    prev_month_int: Optional[int] = None
+
+    def _flush() -> None:
+        if cur_family and cur_months:
+            windows.append({
+                "product_family": cur_family,
+                "months": list(cur_months),
+                "regions": sorted(cur_regions),
+                "mean_index": sum(cur_idx) / len(cur_idx),
+            })
+
+    for _, row in sorted_peaks.iterrows():
+        fam = row["product_family"]
+        month = row["month"]
+        month_int = int(month.split("-")[1])
+        is_consecutive = (
+            cur_family == fam
+            and prev_month_int is not None
+            and month_int == prev_month_int + 1
+        )
+        if cur_family != fam or not is_consecutive:
+            _flush()
+            cur_family = fam
+            cur_months = [month]
+            cur_regions = set(row["regions"])
+            cur_idx = [row["mean_index"]]
+        else:
+            cur_months.append(month)
+            cur_regions.update(row["regions"])
+            cur_idx.append(row["mean_index"])
+        prev_month_int = month_int
+    _flush()
+    return windows
+
+
+def _generate_event_name(months: List[str], product_family: str) -> str:
+    """Industry-agnostic event name derived purely from observation."""
+    nums = sorted({m.split("-")[1] for m in months})
+    span = f"M{nums[0]}" if len(nums) == 1 else f"M{nums[0]}-M{nums[-1]}"
+    return f"{span}_{product_family}_peak_window"
 
 
 def _hubs_for_event(
     months: List[str],
-    overloaded_hubs_df: Optional[pd.DataFrame],
-    capacity_gap_df: Optional[pd.DataFrame],
+    overloaded_df: Optional[pd.DataFrame],
+    gap_df: Optional[pd.DataFrame],
 ) -> List[str]:
-    """Return the set of hub_ids flagged as overloaded or capacity-gapped
-    during the given months.  Returns [] if neither table is provided."""
     hubs: set[str] = set()
-
-    if overloaded_hubs_df is not None and not overloaded_hubs_df.empty:
-        # overloaded_hubs.csv (per §C.3) has no month column in the proxy mock,
-        # so we treat all listed hubs as candidates for any peak event.
-        hubs.update(overloaded_hubs_df["hub_id"].astype(str).tolist())
-
-    if capacity_gap_df is not None and not capacity_gap_df.empty:
-        if "peak_month" in capacity_gap_df.columns:
-            mask = capacity_gap_df["peak_month"].isin(months)
-            hubs.update(capacity_gap_df.loc[mask, "hub_id"].astype(str).tolist())
-
+    if overloaded_df is not None and not overloaded_df.empty:
+        # overloaded_hubs.csv has no month column (per data_schemas.md §C.3)
+        # → treat all listed hubs as candidates for any peak event.
+        hubs.update(overloaded_df["hub_id"].astype(str).tolist())
+    if gap_df is not None and not gap_df.empty and "peak_month" in gap_df.columns:
+        mask = gap_df["peak_month"].isin(months)
+        hubs.update(gap_df.loc[mask, "hub_id"].astype(str).tolist())
     return sorted(hubs)
 
 
 def _augment_actions(
     base_actions: List[str],
-    affected_hubs: List[str],
     capacity_gap_df: Optional[pd.DataFrame],
     months: List[str],
 ) -> List[str]:
-    """Add hub-specific actions when capacity_gap data is available."""
     actions = list(base_actions)
     if capacity_gap_df is None or capacity_gap_df.empty:
         return actions
@@ -281,42 +383,30 @@ def build_seasonal_playbook(
     min_events: int = 4,
     config_json: Optional[str | Path] = None,
 ) -> List[dict]:
-    """Generate the seasonal playbook and optionally write it to disk.
+    """Generate the industry-agnostic seasonal playbook.
 
-    Parameters
-    ----------
-    demand_csv          : path to monthly_demand_by_region_product.csv (required)
-    overloaded_hubs_csv : path to overloaded_hubs.csv (optional, Engine C / B)
-    capacity_gap_csv    : path to capacity_gap_by_peak_period.csv (optional, Engine B)
-    output_path         : if given, JSON is written here
-    peak_threshold      : seasonal_index threshold (default 1.20)
-    min_events          : if fewer events are detected, threshold is relaxed
-                          progressively until at least this many events emerge
-                          (proxy mode requirement: ≥ 4 events for midterm pass).
-    config_json         : path to external JSON configuration file (optional)
-
-    Returns
-    -------
-    List[dict] : playbook events as contract-compliant dicts.
+    Returns a list of contract-compliant event dicts.  If `output_path` is
+    given, the same list is written to disk as JSON.
     """
-    global KOREAN_EVENT_CATALOG, ACTION_TEMPLATES, RISK_DESCRIPTIONS
-    KOREAN_EVENT_CATALOG, ACTION_TEMPLATES, RISK_DESCRIPTIONS = load_external_catalog(config_json)
+    global PRODUCT_FAMILY_PROFILES, ACTION_TEMPLATES, RISK_DESCRIPTIONS
+    PRODUCT_FAMILY_PROFILES, ACTION_TEMPLATES, RISK_DESCRIPTIONS = \
+        _load_external_config(config_json)
 
     demand_df = pd.read_csv(demand_csv)
-    overloaded_df = (
-        pd.read_csv(overloaded_hubs_csv) if overloaded_hubs_csv else None
-    )
+    overloaded_df = pd.read_csv(overloaded_hubs_csv) if overloaded_hubs_csv else None
     gap_df = pd.read_csv(capacity_gap_csv) if capacity_gap_csv else None
 
-    # Progressive threshold relaxation to ensure min_events is met.
+    # Progressive threshold relaxation to meet min_events.
     threshold = peak_threshold
     peaks = _detect_peaks(demand_df, threshold)
-    while len(peaks) < min_events and threshold > 1.0:
+    windows = _group_into_windows(peaks)
+    while len(windows) < min_events and threshold > 1.0:
         threshold = round(threshold - 0.05, 2)
         peaks = _detect_peaks(demand_df, threshold)
-    if len(peaks) < min_events:
-        # Fall back: take the top-N by mean_index regardless of threshold.
-        all_peaks = (
+        windows = _group_into_windows(peaks)
+    if len(windows) < min_events:
+        # Fallback: take the top-N (month, family) groups by mean_index.
+        fallback = (
             demand_df.groupby(["month", "product_family"], as_index=False)
             .agg(
                 mean_index=("seasonal_index", "mean"),
@@ -324,59 +414,61 @@ def build_seasonal_playbook(
             )
             .sort_values("mean_index", ascending=False)
             .head(min_events)
+            .reset_index(drop=True)
         )
-        peaks = all_peaks.reset_index(drop=True)
+        windows = _group_into_windows(fallback)
 
-    # Merge consecutive months of the same labelled event.
-    events_by_name: Dict[str, SeasonalEvent] = {}
-    for i, row in peaks.iterrows():
-        event_name, risk_type = _label_event(row["month"], row["product_family"])
-        affected_hubs = _hubs_for_event([row["month"]], overloaded_df, gap_df)
-        base_actions = ACTION_TEMPLATES.get(risk_type, ACTION_TEMPLATES["general_peak"])
-        actions = _augment_actions(base_actions, affected_hubs, gap_df, [row["month"]])
-        risk_text = RISK_DESCRIPTIONS.get(risk_type, "Demand-side seasonal risk")
+    # Build SeasonalEvent objects.
+    events: List[SeasonalEvent] = []
+    for w in windows:
+        family = w["product_family"]
+        months = w["months"]
+        profile = PRODUCT_FAMILY_PROFILES.get(family, {
+            "risk_type": "general_peak",
+            "label": "seasonal demand swing",
+            "extra_actions": [],
+        })
+        risk_type    = profile.get("risk_type", "general_peak")
+        family_label = profile.get("label", family)
+        extra        = profile.get("extra_actions", []) or []
 
-        if event_name in events_by_name:
-            ev = events_by_name[event_name]
-            ev.months = sorted(set(ev.months + [row["month"]]))
-            ev.affected_product_families = sorted(
-                set(ev.affected_product_families + [row["product_family"]])
-            )
-            ev.affected_hubs = sorted(set(ev.affected_hubs + affected_hubs))
-            for a in actions:
-                if a not in ev.recommended_actions:
-                    ev.recommended_actions.append(a)
-        else:
-            events_by_name[event_name] = SeasonalEvent(
-                event_id=f"E{len(events_by_name) + 1}",
-                event_name=event_name,
-                months=[row["month"]],
-                affected_product_families=[row["product_family"]],
-                affected_hubs=affected_hubs,
-                risk=risk_text,
-                recommended_actions=actions,
-            )
+        affected_hubs = _hubs_for_event(months, overloaded_df, gap_df)
+        base = ACTION_TEMPLATES.get(risk_type, ACTION_TEMPLATES["general_peak"])
+        actions = list(base) + list(extra)
+        actions = _augment_actions(actions, gap_df, months)
 
-    # Re-number event_ids deterministically by earliest month.
-    ordered = sorted(
-        events_by_name.values(),
-        key=lambda e: (min(e.months), e.event_name),
-    )
-    for idx, ev in enumerate(ordered, start=1):
+        nums = sorted({m.split("-")[1] for m in months})
+        span = f"M{nums[0]}" if len(nums) == 1 else f"M{nums[0]}-M{nums[-1]}"
+        risk_text = (
+            f"{RISK_DESCRIPTIONS.get(risk_type, 'Demand-side seasonal risk')} "
+            f"during {span} {family_label}"
+        )
+
+        events.append(SeasonalEvent(
+            event_id="E?",
+            event_name=_generate_event_name(months, family),
+            months=months,
+            affected_product_families=[family],
+            affected_hubs=affected_hubs,
+            risk=risk_text,
+            recommended_actions=actions,
+        ))
+
+    # Deterministic ordering & numbering.
+    events.sort(key=lambda e: (min(e.months), e.event_name))
+    for idx, ev in enumerate(events, start=1):
         ev.event_id = f"E{idx}"
 
-    payload = [ev.to_contract_dict() for ev in ordered]
-
+    payload = [ev.to_contract_dict() for ev in events]
     if output_path:
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, indent=2, ensure_ascii=False)
-
     return payload
 
 
 # ---------------------------------------------------------------------------
-# Validation — light schema check (does not pull jsonschema as a hard dep)
+# Validation (lightweight; does not require jsonschema)
 # ---------------------------------------------------------------------------
 
 REQUIRED_EVENT_KEYS = {
@@ -387,7 +479,7 @@ REQUIRED_EVENT_KEYS = {
 
 
 def validate_playbook(events: List[dict]) -> List[str]:
-    """Return a list of human-readable issues; empty list = valid."""
+    """Return a list of human-readable validation issues; empty = valid."""
     issues: List[str] = []
     if not isinstance(events, list):
         return ["payload is not a JSON array"]
@@ -417,36 +509,22 @@ def validate_playbook(events: List[dict]) -> List[str]:
 
 def _cli() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate seasonal_playbook.json (proxy mode)."
+        description="Generate seasonal_playbook.json (proxy, industry-agnostic).",
     )
-    parser.add_argument(
-        "--demand", required=True,
-        help="Path to monthly_demand_by_region_product.csv (Engine A output).",
-    )
-    parser.add_argument(
-        "--overloaded", default=None,
-        help="Path to overloaded_hubs.csv (Engine C / B, optional).",
-    )
-    parser.add_argument(
-        "--gap", default=None,
-        help="Path to capacity_gap_by_peak_period.csv (Engine B, optional).",
-    )
-    parser.add_argument(
-        "--output", required=True,
-        help="Where to write seasonal_playbook.json.",
-    )
-    parser.add_argument(
-        "--threshold", type=float, default=DEFAULT_PEAK_THRESHOLD,
-        help=f"Seasonal index threshold (default {DEFAULT_PEAK_THRESHOLD}).",
-    )
-    parser.add_argument(
-        "--min-events", type=int, default=4,
-        help="Minimum events to emit (relaxes threshold if needed). Default 4.",
-    )
-    parser.add_argument(
-        "--config", default=None,
-        help="Path to event_catalog.json config file (optional).",
-    )
+    parser.add_argument("--demand", required=True,
+                        help="Path to monthly_demand_by_region_product.csv")
+    parser.add_argument("--overloaded", default=None,
+                        help="Path to overloaded_hubs.csv (optional)")
+    parser.add_argument("--gap", default=None,
+                        help="Path to capacity_gap_by_peak_period.csv (optional)")
+    parser.add_argument("--output", required=True,
+                        help="Where to write seasonal_playbook.json")
+    parser.add_argument("--threshold", type=float, default=DEFAULT_PEAK_THRESHOLD,
+                        help=f"Seasonal index threshold (default {DEFAULT_PEAK_THRESHOLD})")
+    parser.add_argument("--min-events", type=int, default=4,
+                        help="Minimum events to emit; relaxes threshold if needed")
+    parser.add_argument("--config", default=None,
+                        help="Path to event_catalog.json override (optional)")
     args = parser.parse_args()
 
     payload = build_seasonal_playbook(

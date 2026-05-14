@@ -486,15 +486,20 @@ raw_data/                 (Korean OD raw data)
 [
   {
     "event_id": "E1",                                 // string, required, regex ^E[0-9]+$
-    "event_name": "Q1_Galaxy_Launch",                 // string, required
-    "months": ["2023-02"],                            // array<string YYYY-MM>, required
+    "event_name": "M02-M03_mobile_launch_peak_window",// string, required, data-driven (NO brand/industry tokens)
+    "months": ["2023-02", "2023-03"],                 // array<string YYYY-MM>, required
     "affected_product_families": ["mobile_launch"],   // array<productFamily>, required
-    "affected_hubs": ["GG_METRO"],                    // array<hub_id>, required
-    "risk": "Capacity overflow",                      // string, required
-    "recommended_actions": ["Pre-position inventory"] // array<string>, required
+    "affected_hubs": ["GG_METRO", "IC_AIRPORT"],      // array<hub_id>, required
+    "risk": "Capacity overflow at affected hubs during M02-M03 high-velocity launch wave",
+    "recommended_actions": [                          // array<string>, required
+      "Pre-position 30% inventory 2 weeks early",
+      "Activate flex capacity at affected hubs"
+    ]
   }
 ]
 ```
+
+**Event-name rule (industry-agnostic):** the generator MUST emit names of the form `M<NN>[-M<NN>]_<product_family>_peak_window`. Branded labels like `Q1_Galaxy_Launch` or industry-specific names (`Black_November`, `Lunar_New_Year_*`) are **forbidden in proxy mode**. They may only appear in production mode via a post-processing alias layer that joins to the enterprise's SKU launch calendar.
 
 **Constraints:** array of at least 1 event. `event_id` is unique. Every `affected_*` value must exist in the master data (regions / hubs / product families).
 

@@ -7,9 +7,9 @@
 
 ## 1. OVERVIEW / 개요
 
-When the LogiHub engine calculates the total cost of a logistics network, it aggregates **6 distinct cost components**. Each component has a specific mathematical formulation and requires one or more **coefficients** (rates, percentages, or fixed values). Since actual proprietary freight contracts (such as Samsung's internal contracts) are unavailable, these coefficients are derived from **industry-average benchmarks in logistics** — referred to as "industry benchmark coefficients."
+When the LogiHub engine calculates the total cost of a logistics network, it aggregates **6 distinct cost components**. Each component has a specific mathematical formulation and requires one or more **coefficients** (rates, percentages, or fixed values). Since actual proprietary freight contracts of any specific enterprise are unavailable, these coefficients are derived from **industry-average benchmarks in logistics** — referred to as "industry benchmark coefficients."
 
-*LogiHub 엔진이 물류 네트워크의 총비용을 계산할 때, **6가지 개별 비용 구성 요소**를 합산한다. 각 구성 요소는 고유한 공식을 가지며, 하나 이상의 **계수**(요율, 비율, 고정값)를 필요로 한다. 실제 물류 계약 데이터(예: 삼성 내부 계약)를 사용할 수 없으므로, 이러한 계수들은 **물류 산업 평균 벤치마크**("산업 벤치마크 계수")에서 도출되었다.*
+*LogiHub 엔진이 물류 네트워크의 총비용을 계산할 때, **6가지 개별 비용 구성 요소**를 합산한다. 각 구성 요소는 고유한 공식을 가지며, 하나 이상의 **계수**(요율, 비율, 고정값)를 필요로 한다. 특정 기업의 실제 물류 계약 데이터를 사용할 수 없으므로, 이러한 계수들은 **물류 산업 평균 벤치마크**("산업 벤치마크 계수")에서 도출되었다.*
 
 ---
 
@@ -169,8 +169,8 @@ $$200 \text{ tons} \times 50,000 \text{ USD/ton} \times 0.025 = 250,000 \text{ U
 
 ### 3.5 Seasonal Flex Cost / 성수기 유연성 비용 (Seasonal Flex Cost)
 
-**Definition:** Extra costs incurred when shipment demand exceeds the standard capacity of a warehouse (e.g., during Galaxy flagship launches). The facility must pay staff overtime wages or leverage third-party logistics (3PL) spillover spaces.
-*정의: 출고 수요가 창고의 표준 수용량을 초과할 때(예: 갤럭시 플래그십 출시월) 발생하는 추가 비용. 초과 근무 수당을 지불하거나 3자 물류(3PL) 외부 창고 공간을 확보해야 함.*
+**Definition:** Extra costs incurred when shipment demand exceeds the standard capacity of a warehouse (e.g., during flagship product launch windows). The facility must pay staff overtime wages or leverage third-party logistics (3PL) spillover spaces.
+*정의: 출고 수요가 창고의 표준 수용량을 초과할 때(예: 플래그십 신제품 출시월) 발생하는 추가 비용. 초과 근무 수당을 지불하거나 3자 물류(3PL) 외부 창고 공간을 확보해야 함.*
 
 **Mathematical Formulation:**
 *공식:*
@@ -230,8 +230,8 @@ $$\text{SLA Penalty}_{i,j,p} = \begin{cases} \text{Demand}_{i,p} \times \text{Pe
 | Spare parts / 예비 부품 | 200 | 250 |
 | E-commerce small / 이커머스 소형 | 100 | 100 |
 
-**Operational Rationale:** Retail customers buying flagship mobile phones expect same-day or next-day delivery (narrow 200 km radius, high penalty). Bulky appliances can tolerate 2-3 day deliveries (broad 400 km radius, low penalty). Semiconductor chips delivered to B2B manufacturing plants (LG, Apple) carry extremely severe penalties of 800 USD/ton because delivery delays can cause factory line-stops.
-*작업적 차이 사유: 신형 플래그십 폰을 구매하는 일반 소비자는 당일 혹은 익일 배송을 원하므로 서비스 반경이 200 km로 좁고 패널티가 높음. 대형 가전은 2-3일의 배송 여유가 있어 반경이 400 km로 넓고 패널티가 낮음. 반도체 칩은 B2B 제조업체(LG, 애플 등) 공장으로 배송되어 지연 시 라인 가동 중단(Line-stop)을 야기하므로 톤당 800 USD의 매우 엄격한 패널티가 부과됨.*
+**Operational Rationale:** Retail customers buying flagship mobile phones expect same-day or next-day delivery (narrow 200 km radius, high penalty). Bulky appliances can tolerate 2-3 day deliveries (broad 400 km radius, low penalty). Semiconductor chips delivered to B2B manufacturing plants carry extremely severe penalties of 800 USD/ton because delivery delays can cause factory line-stops.
+*작업적 차이 사유: 신형 플래그십 폰을 구매하는 일반 소비자는 당일 혹은 익일 배송을 원하므로 서비스 반경이 200 km로 좁고 패널티가 높음. 대형 가전은 2-3일의 배송 여유가 있어 반경이 400 km로 넓고 패널티가 낮음. 반도체 칩은 B2B 제조업체 공장으로 배송되어 지연 시 라인 가동 중단(Line-stop)을 야기하므로 톤당 800 USD의 매우 엄격한 패널티가 부과됨.*
 
 ---
 
@@ -349,11 +349,11 @@ There are **approximately 50 distinct parameters** managed in the configuration 
 | **Actual Contract Cost / 실거래 계약 비용** | Proprietary carrier and labor agreements / 기업 내부 실제 물류 계약 | absolute / 매우 높음 | Production system deployment / 프로덕션 엔진 (파일럿 이후) |
 
 ### 5.2 Deciphering the Benchmark Concept / 벤치마크의 개념 and Significance
-In logistics engineering, a "benchmark" represents the **industry-average reference value**. For example, South Korean domestic trucking rates average 0.10 to 0.18 USD/ton-km depending on cargo type. Actual freight costs for a specific enterprise (such as Samsung) can deviate from these benchmarks due to several key factors:
-*물류 엔지니어링에서 "벤치마크"는 **산업 평균 기준치**를 뜻한다. 예를 들어, 한국 내수 트럭 운송 요율은 품목에 따라 톤-km당 평균 0.10~0.18 USD 범위 내에 있다. 삼성과 같은 특정 대기업의 실제 비용은 다음과 같은 요소들로 인해 벤치마크와 상이할 수 있다:*
+In logistics engineering, a "benchmark" represents the **industry-average reference value**. For example, South Korean domestic trucking rates average 0.10 to 0.18 USD/ton-km depending on cargo type. Actual freight costs for a specific enterprise can deviate from these benchmarks due to several key factors:
+*물류 엔지니어링에서 "벤치마크"는 **산업 평균 기준치**를 뜻한다. 예를 들어, 한국 내수 트럭 운송 요율은 품목에 따라 톤-km당 평균 0.10~0.18 USD 범위 내에 있다. 특정 기업의 실제 비용은 다음과 같은 요소들로 인해 벤치마크와 상이할 수 있다:*
 
-- **Scale of Operations / 규모의 경제:** Mega-volume shippers like Samsung can negotiate freight contracts with carriers that are 15-30% lower than market averages.
-  *대형 고객사 요율: 삼성과 같은 초대형 화주는 운송사와 시장 평균보다 15~30% 저렴한 전용 계약 요율을 협상할 수 있음.*
+- **Scale of Operations / 규모의 경제:** Mega-volume shippers can negotiate freight contracts with carriers that are 15-30% lower than market averages.
+  *대형 고객사 요율: 초대형 화주는 운송사와 시장 평균보다 15~30% 저렴한 전용 계약 요율을 협상할 수 있음.*
 - **Long-term Agreements / 장기 계약:** Standard 3-5 year contracts stabilize rates, protecting the shipper from high spot-market freight rate spikes.
   *장기 계약 안정성: 3~5년 단위의 장기 계약은 요율을 고정하여 현물 시장(Spot)의 가격 급등 위험을 헤지함.*
 - **Geographic Proximity / 지리적 근접성:** Facilities positioned near international gateways like Busan Port incur substantially lower export drayage than inland facilities in Daegu.
@@ -407,8 +407,8 @@ Following computation, the distribution ratios of the 6 cost components must ali
 | Seasonal Flex / 성수기 유연 | 5-12% | > 20% → Underdesigned capacity, open more hubs / 용량 부족, 허브 추가 |
 | SLA Penalty / SLA 패널티 | 3-10% | > 15% → Suboptimal network service radius / 커버리지 부족, 입지 재선정 |
 
-**Case Study: Samsung Mobile Outcome Reference:**
-*삼성 모바일 아웃컴 적용 예시:*
+**Reference Validation: Aggregate Korean Freight (industry-agnostic proxy):**
+*집계 한국 화물 데이터 기준 검증 예시 (특정 기업 아님):*
 
 | Component / 비용 요소 | Monthly Cost (USD) / 월간 비용 | % of Total / 구성 비중 | Validation Status / 타당성 검증 |
 | --- | ---: | ---: | :---: |

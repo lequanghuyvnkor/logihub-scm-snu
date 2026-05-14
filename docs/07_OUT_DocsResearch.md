@@ -71,7 +71,7 @@ This study builds an analytical and optimization engine for logistics hub networ
 
 ### 1.1 Research Topic / 연구 주제
 
-This study focuses on the **optimal logistics hub network design problem for large enterprises in South Korea**, a core problem in modern supply chain management. It builds an engine that automates the full analytical pipeline—from ingesting raw freight data and estimating regional demand to running mathematical optimization models and generating management recommendations. Geographic scope: 17 administrative regions. Time frame: Freight O/D 2022 (main survey) and 2024 (update). Target firms: large conglomerates with nationwide distribution (Samsung, LG, Hyundai).
+This study focuses on the **optimal logistics hub network design problem for large enterprises in South Korea**, a core problem in modern supply chain management. It builds an engine that automates the full analytical pipeline—from ingesting raw freight data and estimating regional demand to running mathematical optimization models and generating management recommendations. Geographic scope: 17 administrative regions. Time frame: Freight O/D 2022 (main survey) and 2024 (update). Target firms: large nationwide enterprises with nationwide distribution networks.
 
 *본 연구는 한국 대기업을 위한 **최적 물류 허브 네트워크 설계 문제**에 집중한다. 원시 화물 데이터 수집, 지역 수요 추정, 수학적 최적화 모델 실행, 경영 권고안 생성까지 전체 분석 파이프라인을 자동화하는 엔진을 구축한다. 지리적 범위: 한국 17개 행정 구역. 대상 기업: 전국 유통망 보유 대기업.*
 
@@ -797,17 +797,17 @@ Total allocated = 72,370 k tons = total 17-region demand (verification pass).
 
 ### 11.1 Managerial Implications / 경영적 시사점
 
-For large nationwide enterprises (such as Samsung, LG, Hyundai), this study suggests that a **5-hub logistics network is the optimal strategic layout**. Hubs should be positioned in: metropolitan (Gyeonggi), central (Daejeon), southeast (Daegu), southwest (Gwangju), and south (Busan).
+For large nationwide enterprises, this study suggests that a **5-hub logistics network is the optimal strategic layout**. Hubs should be positioned in: metropolitan (Gyeonggi), central (Daejeon), southeast (Daegu), southwest (Gwangju), and south (Busan).
 
-*전국 규모로 제품 및 자재를 유통하는 한국의 대형 제조/소매 대기업(삼성전자, LG전자, 현대자동차, CJ그룹 등)의 경우, 본 실증 연구는 **5대 거점 하이브리드 물류 네트워크 아키텍처**가 전국 배송 원가 통제와 SLA 확보를 달성하는 최첨단 표준 정답임을 명확히 시사한다. 최적 거점 좌표는 수도권(경기), 중부권(대전), 남동부(대구), 남서부(광주), 남부권(부산)에 배치되어야 한다.*
+*전국 규모로 제품 및 자재를 유통하는 한국의 대형 제조/소매 대기업의 경우, 본 실증 연구는 **5대 거점 하이브리드 물류 네트워크 아키텍처**가 전국 배송 원가 통제와 SLA 확보를 달성하는 최첨단 표준 정답임을 명확히 시사한다. 최적 거점 좌표는 수도권(경기), 중부권(대전), 남동부(대구), 남서부(광주), 남부권(부산)에 배치되어야 한다.*
 
 Firms running standard 3-hub networks suffer from severe congestion in Gyeonggi and high long-haul transport times to Gwangju and Busan.
 
 *기존 3개 물류 센터 거점망(수원-구미-부산 DC)으로 회수 지연 보급 체제를 유지하는 대기업들은 수도권 수원 센터의 138~157%에 달하는 만성 과부하 정체와 호남/남서부 대리점들로 배송하는 데 따르는 고비용 장거리 퀵 배송, 연쇄 정시 배송 SLA 규약 위반으로 인한 브랜드 가치 훼손 및 막대한 위약 벌금 지출의 악순환에 빠져있다.*
 
-For firms with product-specific logistics (such as high value, sensitive SLA, security for chips/mobile, electronics, parts), consider adding 1 secure node for high-value items, creating a **6-node hybrid** instead of a pure 5-node layout (see Outcome_Sample_Samsung_Mobile_10Models.md for a 5-node lifecycle-split case study).
+For firms with product-specific logistics (such as high value, sensitive SLA, security for chips/mobile, electronics, parts), consider adding 1 secure node for high-value items, creating a **6-node hybrid** instead of a pure 5-node layout (see outcome_sample_full.md for a 5-node lifecycle-split case study).
 
-*특히 초고가 플래그십, 도난 분실 위험 극대, 조립 긴급도가 높거나 SCM 정밀 제어가 요구되는 핵심 전자 부품/모바일 기기를 취급하는 엔터프라이즈의 경우에는 단순한 지리적 권역 분할을 넘어, 구미 공장 직결 출시 전용 패키징-검수 허브를 추가 가동하거나 광주에 AS 부품 분할 저장 노드를 두는 등 **제품 수명 주기 기반의 5개 노드 하이브리드 세그먼트 배송망**으로의 대전환을 강구해야 한다(상세한 삼성 모바일 10개 스마트폰 수명 주기 거점 매핑 12페이지 특화 리포트는 `Outcome_Sample_Samsung_Mobile_10Models.md` 참조).*
+*특히 초고가 플래그십, 도난 분실 위험 극대, 조립 긴급도가 높거나 SCM 정밀 제어가 요구되는 핵심 전자 부품/모바일 기기를 취급하는 엔터프라이즈의 경우에는 단순한 지리적 권역 분할을 넘어, 공장 직결 출시 전용 패키징-검수 허브를 추가 가동하거나 광주에 AS 부품 분할 저장 노드를 두는 등 **제품 수명 주기 기반의 5개 노드 하이브리드 세그먼트 배송망**으로의 대전환을 강구해야 한다(상세한 10개 SKU 수명 주기 거점 매핑 특화 리포트는 `outcome_sample_full.md` 참조).*
 
 ### 11.2 Policy Implications / 정책적 시사점
 
@@ -831,7 +831,7 @@ Third, update national Freight O/D surveys more frequently to capture rapid e-co
 
 **Limitation 1 — Public O/D Proxy:** Public freight surveys do not segment flows by individual firms. Production deployment requires actual company shipment data.
 
-***한계점 1 — 공공 O/D 프록시 의존성:** 국토교통부의 공공 화물 기종점 조사는 전국 수송 흐름의 거시적 윤곽만을 추적할 뿐, 삼성전자 등 개별 기업의 품목별 실제 출고 물량 데이터가 분리 표기되어 있지 않다. 따라서 기업 내부 실제 배송 최적화를 파일럿 실행하기 위해선, 본 프록시 데이터를 실제 기업 SCM 시스템 내의 1년간 ERP shipment 출고 내역 파일로 완전히 치환 가동하여 정합성을 맞춰야 한다.*
+***한계점 1 — 공공 O/D 프록시 의존성:** 국토교통부의 공공 화물 기종점 조사는 전국 수송 흐름의 거시적 윤곽만을 추적할 뿐, 개별 기업의 품목별 실제 출고 물량 데이터가 분리 표기되어 있지 않다. 따라서 기업 내부 실제 배송 최적화를 파일럿 실행하기 위해선, 본 프록시 데이터를 실제 기업 SCM 시스템 내의 1년간 ERP shipment 출고 내역 파일로 완전히 치환 가동하여 정합성을 맞춰야 한다.*
 
 **Limitation 2 — Benchmark Rates:** Transport rate (0.10 USD/ton-km) and lease rates are estimated via literature benchmarks.
 

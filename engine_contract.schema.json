@@ -207,13 +207,11 @@
     "productFamily": {
       "type": "string",
       "enum": [
-        "mobile_launch",
-        "bulky_appliance",
-        "high_value_secure",
-        "finished_goods",
-        "spare_parts",
-        "ecommerce_small",
-        "general_cargo"
+        "Fresh_Food",
+        "FMCG_Packaged",
+        "Industrial_Materials",
+        "Durables_Electronics",
+        "Ecommerce_Misc"
       ]
     },
     "riskLevel": {

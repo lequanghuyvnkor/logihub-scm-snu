@@ -1,52 +1,43 @@
 {
   "_comment": "External override for seasonal_playbook_generator.py (industry-agnostic v2). Keyed on the contract productFamily enum, NOT on industry events. Defaults from PRODUCT_FAMILY_PROFILES_DEFAULT in the generator apply if this file is missing or malformed.",
   "product_family_profiles": {
-    "mobile_launch": {
+    "Durables_Electronics": {
       "risk_type": "capacity_overflow",
-      "label": "high-velocity launch wave",
+      "label": "high-velocity durable goods and electronics launch wave",
       "extra_actions": [
-        "Coordinate inbound with manufacturer release calendar"
-      ]
-    },
-    "bulky_appliance": {
-      "risk_type": "storage_shortage",
-      "label": "bulky storage-intensive flow",
-      "extra_actions": [
-        "Pre-clear floor space at receiving hubs 2 weeks ahead"
-      ]
-    },
-    "high_value_secure": {
-      "risk_type": "security_risk",
-      "label": "high-value secure shipment surge",
-      "extra_actions": [
+        "Coordinate inbound with manufacturer release calendar",
         "Audit chain of custody through secure_node hubs"
       ]
     },
-    "finished_goods": {
+    "Industrial_Materials": {
+      "risk_type": "storage_shortage",
+      "label": "bulky industrial materials and spare-parts flow",
+      "extra_actions": [
+        "Pre-clear floor space at receiving hubs 2 weeks ahead",
+        "Hold safety stock at regional service nodes"
+      ]
+    },
+    "FMCG_Packaged": {
       "risk_type": "general_peak",
-      "label": "finished-goods replenishment cycle",
+      "label": "finished goods and packaged FMCG replenishment cycle",
       "extra_actions": [
         "Sync inbound receiving slots with downstream PO calendar"
       ]
     },
-    "spare_parts": {
-      "risk_type": "general_peak",
-      "label": "reactive spare-parts demand",
-      "extra_actions": [
-        "Hold safety stock at regional service nodes"
-      ]
-    },
-    "ecommerce_small": {
+    "Ecommerce_Misc": {
       "risk_type": "last_mile",
       "label": "parcel-volume surge",
       "extra_actions": [
         "Scale last-mile rider/courier pools for the window"
       ]
     },
-    "general_cargo": {
+    "Fresh_Food": {
       "risk_type": "general_peak",
-      "label": "mixed cargo seasonal swing",
-      "extra_actions": []
+      "label": "fresh food seasonal demand swing",
+      "extra_actions": [
+        "Ensure cold-chain capacity is pre-booked",
+        "Monitor temperature compliance during peak window"
+      ]
     }
   },
   "action_templates": {

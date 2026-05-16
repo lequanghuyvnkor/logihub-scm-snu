@@ -29,7 +29,7 @@
 | Enum | Allowed values |
 |---|---|
 | `regionName` (17) | `Seoul`, `Busan`, `Daegu`, `Incheon`, `Gwangju`, `Daejeon`, `Ulsan`, `Sejong`, `Gyeonggi`, `Gangwon`, `Chungbuk`, `Chungnam`, `Jeonbuk`, `Jeonnam`, `Gyeongbuk`, `Gyeongnam`, `Jeju` (+ `Unknown`) |
-| `productFamily` (7) | `mobile_launch`, `bulky_appliance`, `high_value_secure`, `finished_goods`, `spare_parts`, `ecommerce_small`, `general_cargo` |
+| `productFamily` (5) | `Fresh_Food`, `FMCG_Packaged`, `Industrial_Materials`, `Durables_Electronics`, `Ecommerce_Misc` |
 | `unit` | `ton`, `kg`, `pallet`, `unit`, `shipment`, `carton`, `cbm`, `index` |
 | `currency` | `USD`, `KRW`, `VND`, `EUR`, `JPY` |
 | `riskLevel` | `Low`, `Medium`, `High`, `Critical` |
@@ -92,15 +92,19 @@ raw_data/                 (Korean OD raw data)
 
 | Column | dtype | Required | Enum / Constraint | Description |
 |---|---|---|---|---|
-| `region_id` | string | ✓ | – | Region ID (currently mirrors `region_name`) |
-| `region_name` | string | ✓ | `regionName` | Region name (17 regions + Unknown) |
-| `volume` | float ≥ 0 | ✓ | – | Total annual volume |
-| `unit` | string | ✓ | `unit` enum | Unit, default `ton` |
-| `share_pct` | float | ✓ | 0–100 | Share %, total across 17 regions ≈ 100 |
+| `region_code` | string | ✓ | – | Region code (integer as string, 1–17) |
+| `region` | string | ✓ | `regionName` | Region name (Korean, 17 regions) |
+| `inbound_ton` | float ≥ 0 | ✓ | – | Annual inbound volume (tons) |
+| `outbound_ton` | float ≥ 0 | ✓ | – | Annual outbound volume (tons) |
+| `total_flow_ton` | float ≥ 0 | ✓ | – | Total flow = inbound + outbound (tons) |
+| `demand_weight_ton` | float ≥ 0 | ✓ | – | Demand-weighted volume (tons) |
+| `demand_share` | float | ✓ | 0–1 | Demand share as fraction (sum ≈ 1.0) |
+| `total_area_m2` | float ≥ 0 |   | – | Total warehouse area (m²), optional |
+| `warehouse_count` | int ≥ 0 |   | – | Number of warehouses, optional |
 
-**Example row:** `Seoul,Seoul,2185.43,ton,4.96`
+**Example row:** `1,서울특별시,1200.5,985.0,2185.5,2185.43,0.0496,45000,12`
 
-**Constraints:** unique on `region_id`. Sum of `share_pct` must lie in [99.5, 100.5].
+**Constraints:** unique on `region_code`. Sum of `demand_share` must lie in [0.995, 1.005].
 
 ---
 
@@ -108,15 +112,15 @@ raw_data/                 (Korean OD raw data)
 
 | Column | dtype | Required | Enum / Constraint | Description |
 |---|---|---|---|---|
-| `region_id` | string | ✓ | – | Region ID |
-| `region_name` | string | ✓ | `regionName` | Region name |
-| `month` | string | ✓ | regex `^[0-9]{4}-[0-9]{2}$` | Month `YYYY-MM` |
-| `volume` | float ≥ 0 | ✓ | – | Monthly volume |
-| `unit` | string | ✓ | `unit` enum | Default `ton` |
+| `region_code` | string | ✓ | – | Region code (integer as string, 1–17) |
+| `region` | string | ✓ | `regionName` | Region name (Korean) |
+| `month` | int | ✓ | 1–12 | Month number |
+| `seasonal_index` | float ≥ 0 | ✓ | – | Seasonality index (≈1.0 mean) |
+| `monthly_demand_ton` | float ≥ 0 | ✓ | – | Monthly demand volume (tons) |
 
-**Example row:** `Seoul,Seoul,2023-01,286.14,ton`
+**Example row:** `1,서울특별시,1,1.10,182.12`
 
-**Constraints:** unique on (`region_id`, `month`). 17 regions × 12 months = max 204 rows/year.
+**Constraints:** unique on (`region_code`, `month`). 17 regions × 12 months = max 204 rows/year.
 
 ---
 
@@ -124,17 +128,17 @@ raw_data/                 (Korean OD raw data)
 
 | Column | dtype | Required | Enum / Constraint | Description |
 |---|---|---|---|---|
-| `region_id` | string | ✓ | – | Region ID |
-| `region_name` | string | ✓ | `regionName` | Region name |
-| `product_family` | string | ✓ | `productFamily` | One of 7 product families |
-| `month` | string | ✓ | `YYYY-MM` | Month |
-| `volume` | float ≥ 0 | ✓ | – | Volume |
-| `unit` | string | ✓ | `unit` enum | Default `ton` |
-| `seasonal_index` | float ≥ 0 | ✓ | typically 0–2 | Seasonality index (1.0 = average) |
+| `region_code` | string | ✓ | – | Region code (integer as string, 1–17) |
+| `region` | string | ✓ | `regionName` | Region name (Korean) |
+| `product_family` | string | ✓ | `productFamily` | One of 5 product families |
+| `month` | int | ✓ | 1–12 | Month number |
+| `seasonal_index` | float ≥ 0 | ✓ | ≈1.0 mean | Seasonality index (1.0 = average) |
+| `monthly_demand_ton` | float ≥ 0 | ✓ | – | Monthly demand volume (tons) |
+| `annual_demand_ton` | float ≥ 0 | ✓ | – | Annual demand volume (tons) |
 
-**Example row:** `Seoul,Seoul,mobile_launch,2023-01,58.83,ton,1.16`
+**Example row:** `1,서울특별시,Durables_Electronics,1,1.16,58.83,705.96`
 
-**Constraints:** unique on (`region_id`, `product_family`, `month`).
+**Constraints:** unique on (`region_code`, `product_family`, `month`).
 
 ---
 
@@ -142,16 +146,16 @@ raw_data/                 (Korean OD raw data)
 
 | Column | dtype | Required | Enum / Constraint | Description |
 |---|---|---|---|---|
+| `rank` | int | ✓ | – | Rank (1 = highest volume) |
 | `origin_region` | string | ✓ | `regionName` | Origin region |
 | `destination_region` | string | ✓ | `regionName` | Destination region |
-| `product_family` | string |   | `productFamily` | May be null if aggregated |
-| `volume` | float ≥ 0 | ✓ | – | Annual volume |
-| `unit` | string | ✓ | `unit` enum | Default `ton` |
-| `share_pct` | float | ✓ | 0–100 | Share %, sorted descending |
+| `volume_ton` | float ≥ 0 | ✓ | – | Annual volume (tons) |
+| `lane_type` | string | ✓ | `intra-region` or `inter-region` | Lane type |
+| `share_of_total` | float | ✓ | 0–1 | Share as fraction |
 
-**Example row:** `Seoul,Daejeon,finished_goods,1309.67,ton,4.95`
+**Example row:** `1,Seoul,Daejeon,1309.67,inter-region,0.0495`
 
-**Constraints:** sorted by `volume` descending. Recommended to keep top 20–50 lanes.
+**Constraints:** sorted by `volume_ton` descending. `rank` starts at 1. Recommended to keep top 20–50 lanes.
 
 ---
 
@@ -166,6 +170,24 @@ raw_data/                 (Korean OD raw data)
 **Example row:** `Seoul,Busan,366.17`
 
 **Constraints:** unique on (`origin`, `destination`). Max 17 × 17 = 289 rows (zeros allowed).
+
+---
+
+### A.6 `seasonal_index.csv` — Seasonal index by month and product family
+
+| Column | dtype | Required | Enum / Constraint | Description |
+|---|---|---|---|---|
+| `month` | int | ✓ | 1–12 | Month number |
+| `overall_index` | float | ✓ | – | Overall seasonal index across all families |
+| `Fresh_Food` | float | ✓ | – | Seasonal index for Fresh_Food |
+| `FMCG_Packaged` | float | ✓ | – | Seasonal index for FMCG_Packaged |
+| `Industrial_Materials` | float | ✓ | – | Seasonal index for Industrial_Materials |
+| `Durables_Electronics` | float | ✓ | – | Seasonal index for Durables_Electronics |
+| `Ecommerce_Misc` | float | ✓ | – | Seasonal index for Ecommerce_Misc |
+
+**Example row:** `1,1.1,1.12,1.08,0.92,0.96,1.05`
+
+**Constraints:** exactly 12 rows (one per month). Mean of `overall_index` ≈ 1.0.
 
 ---
 
@@ -208,7 +230,7 @@ raw_data/                 (Korean OD raw data)
 | `fixed_cost_usd_per_year` | float ≥ 0 | ✓ | – | Annual fixed cost |
 | `eligible_product_families` | string | ✓ | pipe-separated `productFamily` values | What this hub can handle |
 
-**Example row:** `GG_METRO,Gyeonggi Metro Fulfillment,Gyeonggi,Gyeonggi,37.4138,127.5183,metro,45000,15000,12750,ton,198551.20,mobile_launch|ecommerce_small|finished_goods`
+**Example row:** `GG_METRO,Gyeonggi Metro Fulfillment,Gyeonggi,Gyeonggi,37.4138,127.5183,metro,45000,15000,12750,ton,198551.20,Durables_Electronics|Ecommerce_Misc|FMCG_Packaged`
 
 **Constraints:** unique on `hub_id`. `eligible_product_families` uses `|` as separator (CSV-safe).
 
@@ -248,7 +270,7 @@ raw_data/                 (Korean OD raw data)
 | `product_family` | string | ✓ | `productFamily` | Product family |
 | `cost_per_ton` | float ≥ 0 | ✓ | – | Handling cost (USD/ton) |
 
-**Example row:** `GG_METRO,mobile_launch,9.08`
+**Example row:** `GG_METRO,Durables_Electronics,9.08`
 
 ---
 
@@ -260,7 +282,7 @@ raw_data/                 (Korean OD raw data)
 | `product_family` | string | ✓ | `productFamily` | Product family |
 | `holding_cost` | float ≥ 0 | ✓ | – | USD per ton per month |
 
-**Example row:** `2023-01,mobile_launch,48.26`
+**Example row:** `2023-01,Durables_Electronics,48.26`
 
 ---
 
@@ -357,7 +379,7 @@ raw_data/                 (Korean OD raw data)
 | `unit` | string | ✓ | `unit` enum | Default `ton` |
 | `allocation_share_pct` | float | ✓ | 0–100 | Allocation share % |
 
-**Example row:** `S3,Seoul,GW_BULKY,mobile_launch,100,ton,100.0`
+**Example row:** `S3,Seoul,GW_BULKY,Durables_Electronics,100,ton,100.0`
 
 **Constraints:** for the same (`scenario_id`, `region_name`, `product_family`), the sum of `allocation_share_pct` ≈ 100.
 
@@ -466,7 +488,7 @@ raw_data/                 (Korean OD raw data)
   "rules": [
     {
       "region": "Seoul",            // string, optional, regionName enum
-      "family": "mobile_launch",    // string, required, productFamily enum
+      "family": "Durables_Electronics",    // string, required, productFamily enum
       "confidence": 0.9             // float, required, range 0-1
     }
   ]
@@ -486,9 +508,9 @@ raw_data/                 (Korean OD raw data)
 [
   {
     "event_id": "E1",                                 // string, required, regex ^E[0-9]+$
-    "event_name": "M02-M03_mobile_launch_peak_window",// string, required, data-driven (NO brand/industry tokens)
+    "event_name": "M02-M03_Durables_Electronics_peak_window",// string, required, data-driven (NO brand/industry tokens)
     "months": ["2023-02", "2023-03"],                 // array<string YYYY-MM>, required
-    "affected_product_families": ["mobile_launch"],   // array<productFamily>, required
+    "affected_product_families": ["Durables_Electronics"],   // array<productFamily>, required
     "affected_hubs": ["GG_METRO", "IC_AIRPORT"],      // array<hub_id>, required
     "risk": "Capacity overflow at affected hubs during M02-M03 high-velocity launch wave",
     "recommended_actions": [                          // array<string>, required

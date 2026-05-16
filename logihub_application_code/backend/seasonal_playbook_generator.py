@@ -14,7 +14,7 @@ a 3PL.  All event labels are *derived from the data observation itself*:
 the peak-month window + the `product_family` enum value (from the contract).
 
 If a pilot customer wants pretty labels (e.g., "Q1_<Brand>_Launch" instead
-of "M02-M03_mobile_launch_peak_window"), they layer that on top in production
+of "M02-M03_Durables_Electronics_peak_window"), they layer that on top in production
 mode by joining with their internal SKU launch calendar — that join is NOT
 part of the proxy generator and should never be hard-coded here.
 
@@ -25,7 +25,7 @@ Three layers of logic
 2) **Window grouping.**  Consecutive months of the same product_family that
    both pass the threshold are merged into a single 'peak window' event.
 3) **Risk & action mapping.**  Use `PRODUCT_FAMILY_PROFILES` (keyed on the
-   7 product_family enum values) to derive risk_type from *physical /
+   5 product_family enum values) to derive risk_type from *physical /
    logistical* characteristics of the family — bulky → storage shortage,
    high-value → security risk, small parcel → last-mile bottleneck, etc.
    Then pull the corresponding action template.  Add hub-specific actions
@@ -33,8 +33,8 @@ Three layers of logic
 
 Why product_family → risk mapping is NOT industry bias
 -------------------------------------------------------
-Mapping bulky_appliance → storage_shortage reflects a *physical fact* about
-the cargo (large objects need more floor space).  Mapping high_value_secure
+Mapping Industrial_Materials → storage_shortage reflects a *physical fact* about
+the cargo (large objects need more floor space).  Mapping Durables_Electronics
 → security_risk reflects a *physical fact* about value density.  These hold
 regardless of the customer's industry — consumer electronics, FMCG, pharma,
 automotive, 3PL — because the mapping is on cargo physics, not on industry.
@@ -85,58 +85,51 @@ import pandas as pd
 # Keyed on the productFamily enum from engine_contract.schema.json.
 # Each profile encodes the *physical/logistical* risk character of the family,
 # NOT any industry or company assumption.
+# 5 families: Fresh_Food, FMCG_Packaged, Industrial_Materials,
+#             Durables_Electronics, Ecommerce_Misc
 #
 # To tune for a pilot customer: provide an `event_catalog.json` file in the
 # script directory or via --config flag.  See _load_external_config docstring.
 # ---------------------------------------------------------------------------
 
 PRODUCT_FAMILY_PROFILES_DEFAULT: Dict[str, Dict[str, object]] = {
-    "mobile_launch": {
+    "Durables_Electronics": {
         "risk_type": "capacity_overflow",
-        "label": "high-velocity launch wave",
+        "label": "high-velocity durable goods and electronics launch wave",
         "extra_actions": [
             "Coordinate inbound with manufacturer release calendar",
-        ],
-    },
-    "bulky_appliance": {
-        "risk_type": "storage_shortage",
-        "label": "bulky storage-intensive flow",
-        "extra_actions": [
-            "Pre-clear floor space at receiving hubs 2 weeks ahead",
-        ],
-    },
-    "high_value_secure": {
-        "risk_type": "security_risk",
-        "label": "high-value secure shipment surge",
-        "extra_actions": [
             "Audit chain of custody through secure_node hubs",
         ],
     },
-    "finished_goods": {
+    "Industrial_Materials": {
+        "risk_type": "storage_shortage",
+        "label": "bulky industrial materials and spare-parts flow",
+        "extra_actions": [
+            "Pre-clear floor space at receiving hubs 2 weeks ahead",
+            "Hold safety stock at regional service nodes",
+        ],
+    },
+    "FMCG_Packaged": {
         "risk_type": "general_peak",
-        "label": "finished-goods replenishment cycle",
+        "label": "finished goods and packaged FMCG replenishment cycle",
         "extra_actions": [
             "Sync inbound receiving slots with downstream PO calendar",
         ],
     },
-    "spare_parts": {
-        "risk_type": "general_peak",
-        "label": "reactive spare-parts demand",
-        "extra_actions": [
-            "Hold safety stock at regional service nodes",
-        ],
-    },
-    "ecommerce_small": {
+    "Ecommerce_Misc": {
         "risk_type": "last_mile",
         "label": "parcel-volume surge",
         "extra_actions": [
             "Scale last-mile rider/courier pools for the window",
         ],
     },
-    "general_cargo": {
+    "Fresh_Food": {
         "risk_type": "general_peak",
-        "label": "mixed cargo seasonal swing",
-        "extra_actions": [],
+        "label": "fresh food seasonal demand swing",
+        "extra_actions": [
+            "Ensure cold-chain capacity is pre-booked",
+            "Monitor temperature compliance during peak window",
+        ],
     },
 }
 
@@ -263,7 +256,9 @@ class SeasonalEvent:
 def _detect_peaks(demand_df: pd.DataFrame, threshold: float) -> pd.DataFrame:
     """Return rows of (month, product_family, regions, mean_index) where the
     mean seasonal_index across regions ≥ threshold."""
-    required = {"region_name", "product_family", "month", "seasonal_index"}
+    # Support both old column name (region_name) and new Group A column name (region)
+    region_col = "region" if "region" in demand_df.columns else "region_name"
+    required = {region_col, "product_family", "month", "seasonal_index"}
     missing = required - set(demand_df.columns)
     if missing:
         raise ValueError(
@@ -274,7 +269,7 @@ def _detect_peaks(demand_df: pd.DataFrame, threshold: float) -> pd.DataFrame:
         .groupby(["month", "product_family"], as_index=False)
         .agg(
             mean_index=("seasonal_index", "mean"),
-            regions=("region_name", lambda s: sorted(set(s))),
+            regions=(region_col, lambda s: sorted(set(s))),
         )
     )
     return grouped[grouped["mean_index"] >= threshold].reset_index(drop=True)
@@ -406,11 +401,12 @@ def build_seasonal_playbook(
         windows = _group_into_windows(peaks)
     if len(windows) < min_events:
         # Fallback: take the top-N (month, family) groups by mean_index.
+        _region_col = "region" if "region" in demand_df.columns else "region_name"
         fallback = (
             demand_df.groupby(["month", "product_family"], as_index=False)
             .agg(
                 mean_index=("seasonal_index", "mean"),
-                regions=("region_name", lambda s: sorted(set(s))),
+                regions=(_region_col, lambda s: sorted(set(s))),
             )
             .sort_values("mean_index", ascending=False)
             .head(min_events)

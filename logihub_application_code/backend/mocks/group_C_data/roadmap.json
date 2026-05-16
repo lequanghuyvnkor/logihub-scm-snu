@@ -28,12 +28,12 @@
     "phase_name": "Stand Up Secure & Crossdock Nodes",
     "timeline": "Month 5-6",
     "actions": [
-      "Activate SJ_SECURE for high_value_secure flows (Q4 prep)",
-      "Stand up US_CROSSDOCK for spare_parts handling",
+      "Activate SJ_SECURE for Durables_Electronics flows (Q4 prep)",
+      "Stand up US_CROSSDOCK for Industrial_Materials handling",
       "Migrate 30% of Gyeongbuk overflow to GB_OVERFLOW"
     ],
     "owner": "Operations + Security",
-    "expected_impact": "GG_METRO peak from 110% -> 85%. Mobile_launch quarterly cycle absorbed without overflow."
+    "expected_impact": "GG_METRO peak from 110% -> 85%. Durables_Electronics quarterly cycle absorbed without overflow."
   },
   {
     "phase_id": "P4",

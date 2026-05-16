@@ -1,4 +1,4 @@
-{
+﻿{
   "contract_version": "v1.0-locked",
   "run_info": {
     "scenario_run_id": "run_fb8e2fde",
@@ -207,21 +207,21 @@
     ],
     "product_families": [
       {
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "product_family_name": "Mobile Launch",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "product_family_name": "Bulky Appliance",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "product_family_name": "Finished Goods",
         "description": "Mocked",
         "default_sla_radius_km": 150,
@@ -235,21 +235,21 @@
         "default_unit": "ton"
       },
       {
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "product_family_name": "Spare Parts",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "product_family_name": "Ecommerce Small",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "product_family_name": "General Cargo",
         "description": "Mocked",
         "default_sla_radius_km": 150,
@@ -271,13 +271,13 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "mobile_launch",
-          "bulky_appliance",
-          "finished_goods",
+          "Durables_Electronics",
+          "Industrial_Materials",
+          "FMCG_Packaged",
           "secure_node",
-          "spare_parts",
-          "ecommerce_small",
-          "general_cargo"
+          "Industrial_Materials",
+          "Ecommerce_Misc",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -294,13 +294,13 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "mobile_launch",
-          "bulky_appliance",
-          "finished_goods",
+          "Durables_Electronics",
+          "Industrial_Materials",
+          "FMCG_Packaged",
           "secure_node",
-          "spare_parts",
-          "ecommerce_small",
-          "general_cargo"
+          "Industrial_Materials",
+          "Ecommerce_Misc",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -317,13 +317,13 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "mobile_launch",
-          "bulky_appliance",
-          "finished_goods",
+          "Durables_Electronics",
+          "Industrial_Materials",
+          "FMCG_Packaged",
           "secure_node",
-          "spare_parts",
-          "ecommerce_small",
-          "general_cargo"
+          "Industrial_Materials",
+          "Ecommerce_Misc",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -340,13 +340,13 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "mobile_launch",
-          "bulky_appliance",
-          "finished_goods",
+          "Durables_Electronics",
+          "Industrial_Materials",
+          "FMCG_Packaged",
           "secure_node",
-          "spare_parts",
-          "ecommerce_small",
-          "general_cargo"
+          "Industrial_Materials",
+          "Ecommerce_Misc",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -363,13 +363,13 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "mobile_launch",
-          "bulky_appliance",
-          "finished_goods",
+          "Durables_Electronics",
+          "Industrial_Materials",
+          "FMCG_Packaged",
           "secure_node",
-          "spare_parts",
-          "ecommerce_small",
-          "general_cargo"
+          "Industrial_Materials",
+          "Ecommerce_Misc",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -386,13 +386,13 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "mobile_launch",
-          "bulky_appliance",
-          "finished_goods",
+          "Durables_Electronics",
+          "Industrial_Materials",
+          "FMCG_Packaged",
           "secure_node",
-          "spare_parts",
-          "ecommerce_small",
-          "general_cargo"
+          "Industrial_Materials",
+          "Ecommerce_Misc",
+          "FMCG_Packaged"
         ]
       }
     ]
@@ -525,7 +525,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-01",
         "volume": 58.83,
         "unit": "ton",
@@ -534,7 +534,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-02",
         "volume": 33.87,
         "unit": "ton",
@@ -543,7 +543,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-03",
         "volume": 98.1,
         "unit": "ton",
@@ -552,7 +552,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 49.1,
         "unit": "ton",
@@ -561,7 +561,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-05",
         "volume": 61.92,
         "unit": "ton",
@@ -570,7 +570,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-06",
         "volume": 30.72,
         "unit": "ton",
@@ -588,7 +588,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-08",
         "volume": 99.51,
         "unit": "ton",
@@ -597,7 +597,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-09",
         "volume": 92.34,
         "unit": "ton",
@@ -606,7 +606,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-10",
         "volume": 95.78,
         "unit": "ton",
@@ -615,7 +615,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-11",
         "volume": 97.0,
         "unit": "ton",
@@ -624,7 +624,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-12",
         "volume": 16.78,
         "unit": "ton",
@@ -633,7 +633,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 34.16,
         "unit": "ton",
@@ -642,7 +642,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-02",
         "volume": 60.11,
         "unit": "ton",
@@ -651,7 +651,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-03",
         "volume": 93.7,
         "unit": "ton",
@@ -660,7 +660,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 65.35,
         "unit": "ton",
@@ -669,7 +669,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-05",
         "volume": 32.87,
         "unit": "ton",
@@ -678,7 +678,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-06",
         "volume": 76.67,
         "unit": "ton",
@@ -687,7 +687,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 73.8,
         "unit": "ton",
@@ -696,7 +696,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-08",
         "volume": 82.84,
         "unit": "ton",
@@ -705,7 +705,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-09",
         "volume": 65.04,
         "unit": "ton",
@@ -714,7 +714,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 55.14,
         "unit": "ton",
@@ -723,7 +723,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-11",
         "volume": 16.38,
         "unit": "ton",
@@ -732,7 +732,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-12",
         "volume": 90.1,
         "unit": "ton",
@@ -750,7 +750,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 13.23,
         "unit": "ton",
@@ -759,7 +759,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 98.37,
         "unit": "ton",
@@ -768,7 +768,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 12.75,
         "unit": "ton",
@@ -777,7 +777,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-05",
         "volume": 37.29,
         "unit": "ton",
@@ -786,7 +786,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-06",
         "volume": 57.0,
         "unit": "ton",
@@ -804,7 +804,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-08",
         "volume": 14.65,
         "unit": "ton",
@@ -813,7 +813,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 72.96,
         "unit": "ton",
@@ -822,7 +822,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-10",
         "volume": 97.26,
         "unit": "ton",
@@ -831,7 +831,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 81.57,
         "unit": "ton",
@@ -849,7 +849,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-01",
         "volume": 96.64,
         "unit": "ton",
@@ -858,7 +858,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-02",
         "volume": 71.96,
         "unit": "ton",
@@ -867,7 +867,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-03",
         "volume": 24.08,
         "unit": "ton",
@@ -876,7 +876,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-04",
         "volume": 18.45,
         "unit": "ton",
@@ -885,7 +885,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-05",
         "volume": 35.19,
         "unit": "ton",
@@ -894,7 +894,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 69.14,
         "unit": "ton",
@@ -903,7 +903,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-07",
         "volume": 47.76,
         "unit": "ton",
@@ -912,7 +912,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 78.21,
         "unit": "ton",
@@ -921,7 +921,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-09",
         "volume": 18.26,
         "unit": "ton",
@@ -930,7 +930,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-10",
         "volume": 86.99,
         "unit": "ton",
@@ -948,7 +948,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-12",
         "volume": 52.61,
         "unit": "ton",
@@ -957,7 +957,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-01",
         "volume": 68.48,
         "unit": "ton",
@@ -966,7 +966,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-02",
         "volume": 67.16,
         "unit": "ton",
@@ -975,7 +975,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 11.38,
         "unit": "ton",
@@ -984,7 +984,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-04",
         "volume": 58.54,
         "unit": "ton",
@@ -993,7 +993,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 94.98,
         "unit": "ton",
@@ -1002,7 +1002,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 82.09,
         "unit": "ton",
@@ -1011,7 +1011,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 67.9,
         "unit": "ton",
@@ -1020,7 +1020,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 83.86,
         "unit": "ton",
@@ -1029,7 +1029,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-09",
         "volume": 96.51,
         "unit": "ton",
@@ -1047,7 +1047,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-11",
         "volume": 11.64,
         "unit": "ton",
@@ -1056,7 +1056,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 40.29,
         "unit": "ton",
@@ -1065,7 +1065,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-01",
         "volume": 86.04,
         "unit": "ton",
@@ -1074,7 +1074,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-02",
         "volume": 33.46,
         "unit": "ton",
@@ -1083,7 +1083,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-03",
         "volume": 72.71,
         "unit": "ton",
@@ -1092,7 +1092,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 13.53,
         "unit": "ton",
@@ -1101,7 +1101,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-05",
         "volume": 35.38,
         "unit": "ton",
@@ -1110,7 +1110,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-06",
         "volume": 61.17,
         "unit": "ton",
@@ -1119,7 +1119,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 47.14,
         "unit": "ton",
@@ -1128,7 +1128,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 62.25,
         "unit": "ton",
@@ -1137,7 +1137,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-09",
         "volume": 31.47,
         "unit": "ton",
@@ -1146,7 +1146,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 77.91,
         "unit": "ton",
@@ -1155,7 +1155,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-11",
         "volume": 58.09,
         "unit": "ton",
@@ -1164,7 +1164,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-12",
         "volume": 38.8,
         "unit": "ton",
@@ -1173,7 +1173,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-01",
         "volume": 14.81,
         "unit": "ton",
@@ -1182,7 +1182,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 18.22,
         "unit": "ton",
@@ -1191,7 +1191,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-03",
         "volume": 70.91,
         "unit": "ton",
@@ -1200,7 +1200,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 66.87,
         "unit": "ton",
@@ -1209,7 +1209,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 64.22,
         "unit": "ton",
@@ -1218,7 +1218,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-06",
         "volume": 77.71,
         "unit": "ton",
@@ -1227,7 +1227,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-07",
         "volume": 20.21,
         "unit": "ton",
@@ -1236,7 +1236,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-08",
         "volume": 15.18,
         "unit": "ton",
@@ -1245,7 +1245,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-09",
         "volume": 76.33,
         "unit": "ton",
@@ -1254,7 +1254,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 20.54,
         "unit": "ton",
@@ -1263,7 +1263,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-11",
         "volume": 85.33,
         "unit": "ton",
@@ -1272,7 +1272,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-12",
         "volume": 17.57,
         "unit": "ton",
@@ -1281,7 +1281,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-01",
         "volume": 45.7,
         "unit": "ton",
@@ -1290,7 +1290,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-02",
         "volume": 17.32,
         "unit": "ton",
@@ -1299,7 +1299,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 62.32,
         "unit": "ton",
@@ -1308,7 +1308,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-04",
         "volume": 83.15,
         "unit": "ton",
@@ -1317,7 +1317,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-05",
         "volume": 63.27,
         "unit": "ton",
@@ -1335,7 +1335,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-07",
         "volume": 73.46,
         "unit": "ton",
@@ -1344,7 +1344,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 20.01,
         "unit": "ton",
@@ -1353,7 +1353,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-09",
         "volume": 46.47,
         "unit": "ton",
@@ -1371,7 +1371,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-11",
         "volume": 76.98,
         "unit": "ton",
@@ -1389,7 +1389,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-01",
         "volume": 17.46,
         "unit": "ton",
@@ -1398,7 +1398,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-02",
         "volume": 96.69,
         "unit": "ton",
@@ -1407,7 +1407,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-03",
         "volume": 13.88,
         "unit": "ton",
@@ -1416,7 +1416,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-04",
         "volume": 93.22,
         "unit": "ton",
@@ -1434,7 +1434,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-06",
         "volume": 24.96,
         "unit": "ton",
@@ -1443,7 +1443,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 50.91,
         "unit": "ton",
@@ -1452,7 +1452,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-08",
         "volume": 44.58,
         "unit": "ton",
@@ -1461,7 +1461,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 35.29,
         "unit": "ton",
@@ -1470,7 +1470,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-10",
         "volume": 51.01,
         "unit": "ton",
@@ -1479,7 +1479,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-11",
         "volume": 26.93,
         "unit": "ton",
@@ -1488,7 +1488,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-12",
         "volume": 30.65,
         "unit": "ton",
@@ -1497,7 +1497,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-01",
         "volume": 97.7,
         "unit": "ton",
@@ -1506,7 +1506,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-02",
         "volume": 12.91,
         "unit": "ton",
@@ -1515,7 +1515,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-03",
         "volume": 83.24,
         "unit": "ton",
@@ -1524,7 +1524,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 21.99,
         "unit": "ton",
@@ -1533,7 +1533,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-05",
         "volume": 95.48,
         "unit": "ton",
@@ -1542,7 +1542,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 92.73,
         "unit": "ton",
@@ -1551,7 +1551,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-07",
         "volume": 87.95,
         "unit": "ton",
@@ -1560,7 +1560,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 47.01,
         "unit": "ton",
@@ -1569,7 +1569,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-09",
         "volume": 98.85,
         "unit": "ton",
@@ -1578,7 +1578,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-10",
         "volume": 77.46,
         "unit": "ton",
@@ -1587,7 +1587,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 85.79,
         "unit": "ton",
@@ -1596,7 +1596,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-12",
         "volume": 13.31,
         "unit": "ton",
@@ -1605,7 +1605,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-01",
         "volume": 15.07,
         "unit": "ton",
@@ -1614,7 +1614,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-02",
         "volume": 58.09,
         "unit": "ton",
@@ -1623,7 +1623,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 59.99,
         "unit": "ton",
@@ -1632,7 +1632,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 78.14,
         "unit": "ton",
@@ -1641,7 +1641,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-05",
         "volume": 50.55,
         "unit": "ton",
@@ -1650,7 +1650,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 34.73,
         "unit": "ton",
@@ -1659,7 +1659,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-07",
         "volume": 70.45,
         "unit": "ton",
@@ -1677,7 +1677,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-09",
         "volume": 56.83,
         "unit": "ton",
@@ -1686,7 +1686,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 37.7,
         "unit": "ton",
@@ -1704,7 +1704,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-12",
         "volume": 63.1,
         "unit": "ton",
@@ -1713,7 +1713,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 77.96,
         "unit": "ton",
@@ -1722,7 +1722,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-02",
         "volume": 82.45,
         "unit": "ton",
@@ -1740,7 +1740,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 45.3,
         "unit": "ton",
@@ -1749,7 +1749,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 75.38,
         "unit": "ton",
@@ -1758,7 +1758,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-06",
         "volume": 80.53,
         "unit": "ton",
@@ -1767,7 +1767,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 57.12,
         "unit": "ton",
@@ -1776,7 +1776,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-08",
         "volume": 23.24,
         "unit": "ton",
@@ -1785,7 +1785,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-09",
         "volume": 79.2,
         "unit": "ton",
@@ -1794,7 +1794,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-10",
         "volume": 98.2,
         "unit": "ton",
@@ -1803,7 +1803,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-11",
         "volume": 28.82,
         "unit": "ton",
@@ -1812,7 +1812,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 16.83,
         "unit": "ton",
@@ -1821,7 +1821,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 62.63,
         "unit": "ton",
@@ -1839,7 +1839,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 88.69,
         "unit": "ton",
@@ -1848,7 +1848,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 64.17,
         "unit": "ton",
@@ -1857,7 +1857,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-05",
         "volume": 25.2,
         "unit": "ton",
@@ -1866,7 +1866,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-06",
         "volume": 12.86,
         "unit": "ton",
@@ -1875,7 +1875,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-07",
         "volume": 51.47,
         "unit": "ton",
@@ -1884,7 +1884,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-08",
         "volume": 21.59,
         "unit": "ton",
@@ -1893,7 +1893,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 13.54,
         "unit": "ton",
@@ -1902,7 +1902,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-10",
         "volume": 71.9,
         "unit": "ton",
@@ -1911,7 +1911,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 92.88,
         "unit": "ton",
@@ -1920,7 +1920,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-12",
         "volume": 88.15,
         "unit": "ton",
@@ -1929,7 +1929,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 26.61,
         "unit": "ton",
@@ -1938,7 +1938,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 93.16,
         "unit": "ton",
@@ -1956,7 +1956,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 15.61,
         "unit": "ton",
@@ -1965,7 +1965,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 74.2,
         "unit": "ton",
@@ -1974,7 +1974,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-06",
         "volume": 77.47,
         "unit": "ton",
@@ -1983,7 +1983,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-07",
         "volume": 50.27,
         "unit": "ton",
@@ -1992,7 +1992,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 19.44,
         "unit": "ton",
@@ -2010,7 +2010,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 18.03,
         "unit": "ton",
@@ -2019,7 +2019,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-11",
         "volume": 90.15,
         "unit": "ton",
@@ -2037,7 +2037,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-01",
         "volume": 17.82,
         "unit": "ton",
@@ -2046,7 +2046,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-02",
         "volume": 60.2,
         "unit": "ton",
@@ -2064,7 +2064,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-04",
         "volume": 90.97,
         "unit": "ton",
@@ -2073,7 +2073,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 42.05,
         "unit": "ton",
@@ -2082,7 +2082,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-06",
         "volume": 94.03,
         "unit": "ton",
@@ -2091,7 +2091,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-07",
         "volume": 23.76,
         "unit": "ton",
@@ -2109,7 +2109,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-09",
         "volume": 25.6,
         "unit": "ton",
@@ -2118,7 +2118,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 14.65,
         "unit": "ton",
@@ -2127,7 +2127,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-11",
         "volume": 98.41,
         "unit": "ton",
@@ -2136,7 +2136,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-12",
         "volume": 61.84,
         "unit": "ton",
@@ -2145,7 +2145,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 83.54,
         "unit": "ton",
@@ -2154,7 +2154,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-02",
         "volume": 70.18,
         "unit": "ton",
@@ -2163,7 +2163,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 58.15,
         "unit": "ton",
@@ -2172,7 +2172,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-04",
         "volume": 79.25,
         "unit": "ton",
@@ -2181,7 +2181,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-05",
         "volume": 73.99,
         "unit": "ton",
@@ -2199,7 +2199,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-07",
         "volume": 79.1,
         "unit": "ton",
@@ -2208,7 +2208,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-08",
         "volume": 23.89,
         "unit": "ton",
@@ -2217,7 +2217,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 63.45,
         "unit": "ton",
@@ -2226,7 +2226,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-10",
         "volume": 59.37,
         "unit": "ton",
@@ -2235,7 +2235,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-11",
         "volume": 39.01,
         "unit": "ton",
@@ -2244,7 +2244,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-12",
         "volume": 22.49,
         "unit": "ton",
@@ -2253,7 +2253,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "month": "2023-01",
         "volume": 63.61,
         "unit": "ton",
@@ -2262,7 +2262,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 81.49,
         "unit": "ton",
@@ -2271,7 +2271,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "month": "2023-03",
         "volume": 84.76,
         "unit": "ton",
@@ -2280,7 +2280,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-04",
         "volume": 93.96,
         "unit": "ton",
@@ -2289,7 +2289,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-05",
         "volume": 26.31,
         "unit": "ton",
@@ -2298,7 +2298,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-06",
         "volume": 14.33,
         "unit": "ton",
@@ -2307,7 +2307,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 81.57,
         "unit": "ton",
@@ -2316,7 +2316,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-08",
         "volume": 84.26,
         "unit": "ton",
@@ -2325,7 +2325,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 69.87,
         "unit": "ton",
@@ -2343,7 +2343,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "month": "2023-11",
         "volume": 83.49,
         "unit": "ton",
@@ -2352,7 +2352,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "month": "2023-12",
         "volume": 90.97,
         "unit": "ton",
@@ -2363,7 +2363,7 @@
       {
         "origin_region": "Seoul",
         "destination_region": "Daejeon",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "volume": 1309.67,
         "unit": "ton",
         "share_pct": 4.95
@@ -2371,7 +2371,7 @@
       {
         "origin_region": "Busan",
         "destination_region": "Ulsan",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "volume": 1366.23,
         "unit": "ton",
         "share_pct": 4.2
@@ -2379,7 +2379,7 @@
       {
         "origin_region": "Daegu",
         "destination_region": "Sejong",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "volume": 1087.22,
         "unit": "ton",
         "share_pct": 5.79
@@ -2387,7 +2387,7 @@
       {
         "origin_region": "Incheon",
         "destination_region": "Gyeonggi",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "volume": 599.93,
         "unit": "ton",
         "share_pct": 3.06
@@ -2395,7 +2395,7 @@
       {
         "origin_region": "Gwangju",
         "destination_region": "Gangwon",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "volume": 1314.27,
         "unit": "ton",
         "share_pct": 4.88
@@ -2408,19 +2408,19 @@
     "rules_applied": 7,
     "distribution": [
       {
-        "product_family": "mobile_launch",
+        "product_family": "Durables_Electronics",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 14.2
       },
       {
-        "product_family": "bulky_appliance",
+        "product_family": "Industrial_Materials",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 14.2
       },
       {
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 14.2
@@ -2432,19 +2432,19 @@
         "share_pct": 14.2
       },
       {
-        "product_family": "spare_parts",
+        "product_family": "Industrial_Materials",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 14.2
       },
       {
-        "product_family": "ecommerce_small",
+        "product_family": "Ecommerce_Misc",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 14.2
       },
       {
-        "product_family": "general_cargo",
+        "product_family": "FMCG_Packaged",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 14.2
@@ -2650,7 +2650,7 @@
         "lane_id": "Seoul-Busan",
         "origin_region": "Seoul",
         "destination_region": "Busan",
-        "product_family": "finished_goods",
+        "product_family": "FMCG_Packaged",
         "monthly_volume": 1000,
         "unit": "ton",
         "distance_km": 320,
@@ -2751,7 +2751,7 @@
           "scenario_id": "S3",
           "region_name": "Seoul",
           "hub_id": "GW_BULKY",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2760,7 +2760,7 @@
           "scenario_id": "S3",
           "region_name": "Busan",
           "hub_id": "DJ_CENTRAL",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2769,7 +2769,7 @@
           "scenario_id": "S3",
           "region_name": "Daegu",
           "hub_id": "SJ_SECURE",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2778,7 +2778,7 @@
           "scenario_id": "S3",
           "region_name": "Incheon",
           "hub_id": "DJ_CENTRAL",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2787,7 +2787,7 @@
           "scenario_id": "S3",
           "region_name": "Gwangju",
           "hub_id": "SJ_SECURE",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2796,7 +2796,7 @@
           "scenario_id": "S3",
           "region_name": "Daejeon",
           "hub_id": "BS_PORT",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2805,7 +2805,7 @@
           "scenario_id": "S3",
           "region_name": "Ulsan",
           "hub_id": "GG_METRO",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2814,7 +2814,7 @@
           "scenario_id": "S3",
           "region_name": "Sejong",
           "hub_id": "BS_PORT",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2823,7 +2823,7 @@
           "scenario_id": "S3",
           "region_name": "Gyeonggi",
           "hub_id": "IC_AIRPORT",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2832,7 +2832,7 @@
           "scenario_id": "S3",
           "region_name": "Gangwon",
           "hub_id": "IC_AIRPORT",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2841,7 +2841,7 @@
           "scenario_id": "S3",
           "region_name": "Chungbuk",
           "hub_id": "SJ_SECURE",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2850,7 +2850,7 @@
           "scenario_id": "S3",
           "region_name": "Chungnam",
           "hub_id": "GW_BULKY",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2859,7 +2859,7 @@
           "scenario_id": "S3",
           "region_name": "Jeonbuk",
           "hub_id": "GW_BULKY",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2868,7 +2868,7 @@
           "scenario_id": "S3",
           "region_name": "Jeonnam",
           "hub_id": "SJ_SECURE",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2877,7 +2877,7 @@
           "scenario_id": "S3",
           "region_name": "Gyeongbuk",
           "hub_id": "IC_AIRPORT",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2886,7 +2886,7 @@
           "scenario_id": "S3",
           "region_name": "Gyeongnam",
           "hub_id": "IC_AIRPORT",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2895,7 +2895,7 @@
           "scenario_id": "S3",
           "region_name": "Jeju",
           "hub_id": "IC_AIRPORT",
-          "product_family": "mobile_launch",
+          "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
           "allocation_share_pct": 100.0
@@ -2919,7 +2919,7 @@
           "Gyeonggi"
         ],
         "served_product_families": [
-          "mobile_launch"
+          "Durables_Electronics"
         ],
         "reason_selected": "High demand density"
       }
@@ -2935,7 +2935,7 @@
       "scenario_id": "S3",
       "region_name": "Seoul",
       "hub_id": "GW_BULKY",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -2944,7 +2944,7 @@
       "scenario_id": "S3",
       "region_name": "Busan",
       "hub_id": "DJ_CENTRAL",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -2953,7 +2953,7 @@
       "scenario_id": "S3",
       "region_name": "Daegu",
       "hub_id": "SJ_SECURE",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -2962,7 +2962,7 @@
       "scenario_id": "S3",
       "region_name": "Incheon",
       "hub_id": "DJ_CENTRAL",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -2971,7 +2971,7 @@
       "scenario_id": "S3",
       "region_name": "Gwangju",
       "hub_id": "SJ_SECURE",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -2980,7 +2980,7 @@
       "scenario_id": "S3",
       "region_name": "Daejeon",
       "hub_id": "BS_PORT",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -2989,7 +2989,7 @@
       "scenario_id": "S3",
       "region_name": "Ulsan",
       "hub_id": "GG_METRO",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -2998,7 +2998,7 @@
       "scenario_id": "S3",
       "region_name": "Sejong",
       "hub_id": "BS_PORT",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3007,7 +3007,7 @@
       "scenario_id": "S3",
       "region_name": "Gyeonggi",
       "hub_id": "IC_AIRPORT",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3016,7 +3016,7 @@
       "scenario_id": "S3",
       "region_name": "Gangwon",
       "hub_id": "IC_AIRPORT",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3025,7 +3025,7 @@
       "scenario_id": "S3",
       "region_name": "Chungbuk",
       "hub_id": "SJ_SECURE",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3034,7 +3034,7 @@
       "scenario_id": "S3",
       "region_name": "Chungnam",
       "hub_id": "GW_BULKY",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3043,7 +3043,7 @@
       "scenario_id": "S3",
       "region_name": "Jeonbuk",
       "hub_id": "GW_BULKY",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3052,7 +3052,7 @@
       "scenario_id": "S3",
       "region_name": "Jeonnam",
       "hub_id": "SJ_SECURE",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3061,7 +3061,7 @@
       "scenario_id": "S3",
       "region_name": "Gyeongbuk",
       "hub_id": "IC_AIRPORT",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3070,7 +3070,7 @@
       "scenario_id": "S3",
       "region_name": "Gyeongnam",
       "hub_id": "IC_AIRPORT",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3079,7 +3079,7 @@
       "scenario_id": "S3",
       "region_name": "Jeju",
       "hub_id": "IC_AIRPORT",
-      "product_family": "mobile_launch",
+      "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
       "allocation_share_pct": 100.0
@@ -3088,9 +3088,9 @@
   "seasonal_playbook": [
     {
       "event_id": "E1",
-      "event_name": "M01_ecommerce_small_peak_window",
+      "event_name": "M01_Ecommerce_Misc_peak_window",
       "months": ["2023-01"],
-      "affected_product_families": ["ecommerce_small"],
+      "affected_product_families": ["Ecommerce_Misc"],
       "affected_hubs": ["GG_METRO", "BS_PORT"],
       "risk": "Last-mile delivery delays and SLA breach risk during M01 parcel-volume surge",
       "recommended_actions": [
@@ -3102,9 +3102,9 @@
     },
     {
       "event_id": "E2",
-      "event_name": "M02-M03_mobile_launch_peak_window",
+      "event_name": "M02-M03_Durables_Electronics_peak_window",
       "months": ["2023-02", "2023-03"],
-      "affected_product_families": ["mobile_launch"],
+      "affected_product_families": ["Durables_Electronics"],
       "affected_hubs": ["GG_METRO", "IC_AIRPORT"],
       "risk": "Capacity overflow at affected hubs during M02-M03 high-velocity launch wave",
       "recommended_actions": [
@@ -3117,9 +3117,9 @@
     },
     {
       "event_id": "E3",
-      "event_name": "M07-M08_bulky_appliance_peak_window",
+      "event_name": "M07-M08_Industrial_Materials_peak_window",
       "months": ["2023-07", "2023-08"],
-      "affected_product_families": ["bulky_appliance"],
+      "affected_product_families": ["Industrial_Materials"],
       "affected_hubs": ["BS_PORT", "GW_BULKY"],
       "risk": "Storage shortage for bulky inventory during M07-M08 bulky storage-intensive flow",
       "recommended_actions": [
@@ -3131,9 +3131,9 @@
     },
     {
       "event_id": "E4",
-      "event_name": "M09_general_cargo_peak_window",
+      "event_name": "M09_FMCG_Packaged_peak_window",
       "months": ["2023-09"],
-      "affected_product_families": ["general_cargo"],
+      "affected_product_families": ["FMCG_Packaged"],
       "affected_hubs": ["GG_METRO", "DJ_CENTRAL"],
       "risk": "General demand spike requiring flex operations during M09 mixed cargo seasonal swing",
       "recommended_actions": [
@@ -3143,9 +3143,9 @@
     },
     {
       "event_id": "E5",
-      "event_name": "M11_finished_goods_peak_window",
+      "event_name": "M11_FMCG_Packaged_peak_window",
       "months": ["2023-11"],
-      "affected_product_families": ["finished_goods"],
+      "affected_product_families": ["FMCG_Packaged"],
       "affected_hubs": ["GG_METRO", "BS_PORT", "DJ_CENTRAL"],
       "risk": "General demand spike requiring flex operations during M11 finished-goods replenishment cycle",
       "recommended_actions": [
@@ -3156,9 +3156,9 @@
     },
     {
       "event_id": "E6",
-      "event_name": "M12_high_value_secure_peak_window",
+      "event_name": "M12_Durables_Electronics_peak_window",
       "months": ["2023-12"],
-      "affected_product_families": ["high_value_secure"],
+      "affected_product_families": ["Durables_Electronics"],
       "affected_hubs": ["SJ_SECURE", "IC_AIRPORT"],
       "risk": "Elevated theft / loss risk on high-value goods during M12 high-value secure shipment surge",
       "recommended_actions": [

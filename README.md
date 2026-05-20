@@ -33,6 +33,8 @@ LogiHub_Project_Archive/
 │   ├── 📄 02_IN_Package_for_Group_B.md        # Group B: Cost Modeling & Solver Specifications [IN]
 │   ├── 📄 03_IN_Package_for_Group_C.md        # Group C: Heuristics, Synthesis & Copywriting Specs [IN]
 │   ├── 📄 04_IN_Async_MockData_Workflow.md    # Async Mock-Driven Pipeline & Team Onboarding Workflow [IN]
+│   ├── 📄 04a_IN_How_to_Understand_this_Project_EN.md  # E2E Product Flow & System Architecture — English Version [IN]
+│   ├── 📄 04b_IN_How_to_Understand_this_Project_KO.md  # E2E Product Flow & System Architecture — Korean Version [IN]
 │   ├── 📄 05_MID_ProxyEngine.md               # Midterm Proxy Engine Architecture & Solver Specifications [MID]
 │   ├── 📄 06_MID_Proxy_to_Production_Engine.md # Bilingual Transition Paper: Proxy O/D to Production Engine [MID]
 │   ├── 📄 07_OUT_DocsResearch.md              # E2E Master Research Report (Bilingual English-Korean 🇰🇷🇺🇸) [OUT]

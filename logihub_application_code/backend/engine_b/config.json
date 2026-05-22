@@ -1,0 +1,8 @@
+{
+    "unit_transport_cost": 500,
+    "seasonal_peak_multiplier": 1.4,
+    "coverage_radius_s6": 50,
+    "coverage_radius_s7": 100,
+    "p_median_s2_count": 5,
+    "p_median_s3_count": 7
+}

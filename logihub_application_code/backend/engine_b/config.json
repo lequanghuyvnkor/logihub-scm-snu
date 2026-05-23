@@ -1,8 +1,25 @@
 {
-    "unit_transport_cost": 500,
+    "transport_rate_usd_per_ton_km": 0.15,
     "seasonal_peak_multiplier": 1.4,
-    "coverage_radius_s6": 50,
-    "coverage_radius_s7": 100,
+    "coverage_radius_s6_km": 50,
+    "coverage_radius_s7_km": 100,
     "p_median_s2_count": 5,
-    "p_median_s3_count": 7
+    "p_median_s3_count": 7,
+    
+    "inventory_benchmarks": {
+        "holding_cost_pct_per_year": 0.20,
+        "product_values_usd_per_ton": {
+            "Durables_Electronics": 5000,
+            "Industrial_Materials": 2000,
+            "FMCG_Packaged": 1000,
+            "Ecommerce_Misc": 3000,
+            "secure_node": 10000
+        }
+    },
+    
+    "penalty_benchmarks": {
+        "flex_overtime_cost_usd_per_ton": 50,
+        "flex_3pl_overflow_cost_usd_per_ton": 120,
+        "sla_breach_penalty_usd_per_ton": 500
+    }
 }

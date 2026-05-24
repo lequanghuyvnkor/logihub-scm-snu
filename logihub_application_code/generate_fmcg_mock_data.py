@@ -48,7 +48,17 @@ regions = {
     "Jeju": {"lat": 33.4890, "lon": 126.4983, "demand_factor": 0.2},
 }
 
-fmcg_commodities = ["Fresh_Food", "Beverages", "Packaged_Food", "Personal_Care"]
+fmcg_commodities = ["Fresh_Food", "FMCG_Packaged", "Pharmaceuticals", "Industrial_Materials", "Durables_Electronics", "Ecommerce_Misc"]
+
+# Volume multipliers per category (tons)
+_vol = {
+    "Fresh_Food": 200,
+    "FMCG_Packaged": 800,
+    "Pharmaceuticals": 150,
+    "Industrial_Materials": 1200,
+    "Durables_Electronics": 300,
+    "Ecommerce_Misc": 600,
+}
 
 region_names = list(regions.keys())
 od_data = []
@@ -57,17 +67,10 @@ for origin in region_names:
     for dest in region_names:
         if origin == dest:
             continue
-        
+
         for commodity in fmcg_commodities:
-            # Fresh food has lower volume but higher frequency, Beverages high volume
             base = regions[origin]["demand_factor"] * regions[dest]["demand_factor"]
-            
-            if commodity == "Fresh_Food":
-                base_demand = base * 200
-            elif commodity == "Beverages":
-                base_demand = base * 800
-            else:
-                base_demand = base * 400
+            base_demand = base * _vol.get(commodity, 400)
                 
             tons = round(base_demand + np.random.normal(0, 50), 2)
             if tons < 0: tons = 5.0

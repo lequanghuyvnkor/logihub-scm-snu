@@ -1,4 +1,4 @@
-{
+﻿{
   "contract_version": "v1.0-locked",
   "run_info": {
     "scenario_run_id": "run_59455172",
@@ -214,21 +214,21 @@
         "default_unit": "ton"
       },
       {
-        "product_family": "Beverages",
-        "product_family_name": "Beverages",
+        "product_family": "FMCG_Packaged",
+        "product_family_name": "FMCG_Packaged",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "product_family_name": "Packaged Food",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "product_family_name": "Personal Care",
         "description": "Mocked",
         "default_sla_radius_km": 150,
@@ -251,9 +251,9 @@
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
           "Fresh_Food",
-          "Beverages",
-          "Packaged_Food",
-          "Personal_Care"
+          "FMCG_Packaged",
+          "FMCG_Packaged",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -271,9 +271,9 @@
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
           "Fresh_Food",
-          "Beverages",
-          "Packaged_Food",
-          "Personal_Care"
+          "FMCG_Packaged",
+          "FMCG_Packaged",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -291,9 +291,9 @@
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
           "Fresh_Food",
-          "Beverages",
-          "Packaged_Food",
-          "Personal_Care"
+          "FMCG_Packaged",
+          "FMCG_Packaged",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -311,9 +311,9 @@
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
           "Fresh_Food",
-          "Beverages",
-          "Packaged_Food",
-          "Personal_Care"
+          "FMCG_Packaged",
+          "FMCG_Packaged",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -331,9 +331,9 @@
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
           "Fresh_Food",
-          "Beverages",
-          "Packaged_Food",
-          "Personal_Care"
+          "FMCG_Packaged",
+          "FMCG_Packaged",
+          "FMCG_Packaged"
         ]
       },
       {
@@ -351,9 +351,9 @@
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
           "Fresh_Food",
-          "Beverages",
-          "Packaged_Food",
-          "Personal_Care"
+          "FMCG_Packaged",
+          "FMCG_Packaged",
+          "FMCG_Packaged"
         ]
       }
     ]
@@ -495,7 +495,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 33.87,
         "unit": "ton",
@@ -504,7 +504,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 98.1,
         "unit": "ton",
@@ -513,7 +513,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 66.8,
         "unit": "ton",
@@ -522,7 +522,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 68.06,
         "unit": "ton",
@@ -540,7 +540,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 61.48,
         "unit": "ton",
@@ -549,7 +549,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 25.94,
         "unit": "ton",
@@ -567,7 +567,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 11.39,
         "unit": "ton",
@@ -585,7 +585,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 86.77,
         "unit": "ton",
@@ -603,7 +603,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 25.25,
         "unit": "ton",
@@ -612,7 +612,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 85.98,
         "unit": "ton",
@@ -621,7 +621,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 18.75,
         "unit": "ton",
@@ -630,7 +630,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 42.28,
         "unit": "ton",
@@ -639,7 +639,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 88.96,
         "unit": "ton",
@@ -657,7 +657,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 36.42,
         "unit": "ton",
@@ -666,7 +666,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 33.06,
         "unit": "ton",
@@ -675,7 +675,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 56.02,
         "unit": "ton",
@@ -693,7 +693,7 @@
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 81.62,
         "unit": "ton",
@@ -702,7 +702,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 12.49,
         "unit": "ton",
@@ -711,7 +711,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 62.05,
         "unit": "ton",
@@ -729,7 +729,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 63.17,
         "unit": "ton",
@@ -738,7 +738,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 13.5,
         "unit": "ton",
@@ -747,7 +747,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 21.44,
         "unit": "ton",
@@ -765,7 +765,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 17.68,
         "unit": "ton",
@@ -774,7 +774,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 47.02,
         "unit": "ton",
@@ -783,7 +783,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 75.35,
         "unit": "ton",
@@ -792,7 +792,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 74.31,
         "unit": "ton",
@@ -801,7 +801,7 @@
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 34.37,
         "unit": "ton",
@@ -810,7 +810,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 32.58,
         "unit": "ton",
@@ -819,7 +819,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 85.24,
         "unit": "ton",
@@ -837,7 +837,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 32.52,
         "unit": "ton",
@@ -846,7 +846,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 26.46,
         "unit": "ton",
@@ -864,7 +864,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 49.21,
         "unit": "ton",
@@ -873,7 +873,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 32.3,
         "unit": "ton",
@@ -891,7 +891,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 14.14,
         "unit": "ton",
@@ -900,7 +900,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 98.16,
         "unit": "ton",
@@ -909,7 +909,7 @@
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 18.81,
         "unit": "ton",
@@ -918,7 +918,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 41.17,
         "unit": "ton",
@@ -945,7 +945,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 66.33,
         "unit": "ton",
@@ -963,7 +963,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 16.35,
         "unit": "ton",
@@ -981,7 +981,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 61.79,
         "unit": "ton",
@@ -990,7 +990,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 21.57,
         "unit": "ton",
@@ -999,7 +999,7 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 94.73,
         "unit": "ton",
@@ -1026,7 +1026,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 13.51,
         "unit": "ton",
@@ -1035,7 +1035,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 16.41,
         "unit": "ton",
@@ -1044,7 +1044,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 71.35,
         "unit": "ton",
@@ -1053,7 +1053,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 35.37,
         "unit": "ton",
@@ -1071,7 +1071,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 76.16,
         "unit": "ton",
@@ -1089,7 +1089,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 82.62,
         "unit": "ton",
@@ -1098,7 +1098,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 21.49,
         "unit": "ton",
@@ -1107,7 +1107,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 40.67,
         "unit": "ton",
@@ -1125,7 +1125,7 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 77.91,
         "unit": "ton",
@@ -1161,7 +1161,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 18.22,
         "unit": "ton",
@@ -1170,7 +1170,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 70.91,
         "unit": "ton",
@@ -1179,7 +1179,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 66.87,
         "unit": "ton",
@@ -1188,7 +1188,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 64.22,
         "unit": "ton",
@@ -1215,7 +1215,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 15.18,
         "unit": "ton",
@@ -1233,7 +1233,7 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 20.54,
         "unit": "ton",
@@ -1242,7 +1242,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 85.33,
         "unit": "ton",
@@ -1251,7 +1251,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 17.57,
         "unit": "ton",
@@ -1260,7 +1260,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 45.7,
         "unit": "ton",
@@ -1269,7 +1269,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 17.32,
         "unit": "ton",
@@ -1278,7 +1278,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 62.32,
         "unit": "ton",
@@ -1287,7 +1287,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 83.15,
         "unit": "ton",
@@ -1305,7 +1305,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 17.52,
         "unit": "ton",
@@ -1314,7 +1314,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 73.46,
         "unit": "ton",
@@ -1323,7 +1323,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 20.01,
         "unit": "ton",
@@ -1341,7 +1341,7 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 20.69,
         "unit": "ton",
@@ -1359,7 +1359,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 96.6,
         "unit": "ton",
@@ -1386,7 +1386,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 60.04,
         "unit": "ton",
@@ -1395,7 +1395,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 57.49,
         "unit": "ton",
@@ -1422,7 +1422,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 36.5,
         "unit": "ton",
@@ -1431,7 +1431,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 62.59,
         "unit": "ton",
@@ -1449,7 +1449,7 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 90.12,
         "unit": "ton",
@@ -1458,7 +1458,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 40.21,
         "unit": "ton",
@@ -1467,7 +1467,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 51.73,
         "unit": "ton",
@@ -1476,7 +1476,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 33.93,
         "unit": "ton",
@@ -1485,7 +1485,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 98.76,
         "unit": "ton",
@@ -1512,7 +1512,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 16.86,
         "unit": "ton",
@@ -1521,7 +1521,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 75.31,
         "unit": "ton",
@@ -1530,7 +1530,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 17.45,
         "unit": "ton",
@@ -1539,7 +1539,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 14.07,
         "unit": "ton",
@@ -1557,7 +1557,7 @@
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 23.54,
         "unit": "ton",
@@ -1566,7 +1566,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 45.37,
         "unit": "ton",
@@ -1584,7 +1584,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 22.05,
         "unit": "ton",
@@ -1593,7 +1593,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 87.83,
         "unit": "ton",
@@ -1602,7 +1602,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 77.49,
         "unit": "ton",
@@ -1611,7 +1611,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 79.21,
         "unit": "ton",
@@ -1620,7 +1620,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 44.01,
         "unit": "ton",
@@ -1647,7 +1647,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 65.63,
         "unit": "ton",
@@ -1656,7 +1656,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 12.0,
         "unit": "ton",
@@ -1665,7 +1665,7 @@
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 79.51,
         "unit": "ton",
@@ -1674,7 +1674,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 83.47,
         "unit": "ton",
@@ -1683,7 +1683,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 88.9,
         "unit": "ton",
@@ -1692,7 +1692,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 53.2,
         "unit": "ton",
@@ -1710,7 +1710,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 91.28,
         "unit": "ton",
@@ -1719,7 +1719,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 41.55,
         "unit": "ton",
@@ -1728,7 +1728,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 59.93,
         "unit": "ton",
@@ -1737,7 +1737,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 41.34,
         "unit": "ton",
@@ -1746,7 +1746,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 91.94,
         "unit": "ton",
@@ -1755,7 +1755,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 87.61,
         "unit": "ton",
@@ -1764,7 +1764,7 @@
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 51.34,
         "unit": "ton",
@@ -1782,7 +1782,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 65.87,
         "unit": "ton",
@@ -1791,7 +1791,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 67.01,
         "unit": "ton",
@@ -1800,7 +1800,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 58.35,
         "unit": "ton",
@@ -1809,7 +1809,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 23.67,
         "unit": "ton",
@@ -1818,7 +1818,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 26.21,
         "unit": "ton",
@@ -1845,7 +1845,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 13.68,
         "unit": "ton",
@@ -1854,7 +1854,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 41.29,
         "unit": "ton",
@@ -1863,7 +1863,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 20.86,
         "unit": "ton",
@@ -1872,7 +1872,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 90.48,
         "unit": "ton",
@@ -1881,7 +1881,7 @@
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 72.14,
         "unit": "ton",
@@ -1899,7 +1899,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 88.62,
         "unit": "ton",
@@ -1917,7 +1917,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 77.34,
         "unit": "ton",
@@ -1926,7 +1926,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 58.29,
         "unit": "ton",
@@ -1935,7 +1935,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 65.64,
         "unit": "ton",
@@ -1944,7 +1944,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 74.85,
         "unit": "ton",
@@ -1953,7 +1953,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 32.72,
         "unit": "ton",
@@ -1962,7 +1962,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 86.0,
         "unit": "ton",
@@ -1971,7 +1971,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 19.65,
         "unit": "ton",
@@ -1980,7 +1980,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 45.74,
         "unit": "ton",
@@ -1989,7 +1989,7 @@
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 43.96,
         "unit": "ton",
@@ -2007,7 +2007,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 20.78,
         "unit": "ton",
@@ -2016,7 +2016,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 52.66,
         "unit": "ton",
@@ -2034,7 +2034,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 76.31,
         "unit": "ton",
@@ -2043,7 +2043,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 48.85,
         "unit": "ton",
@@ -2061,7 +2061,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-08",
         "volume": 61.37,
         "unit": "ton",
@@ -2088,7 +2088,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 53.9,
         "unit": "ton",
@@ -2097,7 +2097,7 @@
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 35.66,
         "unit": "ton",
@@ -2106,7 +2106,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-01",
         "volume": 85.81,
         "unit": "ton",
@@ -2115,7 +2115,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-02",
         "volume": 46.94,
         "unit": "ton",
@@ -2124,7 +2124,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-03",
         "volume": 90.69,
         "unit": "ton",
@@ -2133,7 +2133,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 87.9,
         "unit": "ton",
@@ -2151,7 +2151,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 93.64,
         "unit": "ton",
@@ -2160,7 +2160,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 52.9,
         "unit": "ton",
@@ -2178,7 +2178,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 27.96,
         "unit": "ton",
@@ -2187,7 +2187,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 20.34,
         "unit": "ton",
@@ -2196,7 +2196,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 17.86,
         "unit": "ton",
@@ -2205,7 +2205,7 @@
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 53.3,
         "unit": "ton",
@@ -2241,7 +2241,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-04",
         "volume": 71.34,
         "unit": "ton",
@@ -2250,7 +2250,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-05",
         "volume": 52.58,
         "unit": "ton",
@@ -2259,7 +2259,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "month": "2023-06",
         "volume": 41.4,
         "unit": "ton",
@@ -2268,7 +2268,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "month": "2023-07",
         "volume": 77.14,
         "unit": "ton",
@@ -2286,7 +2286,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-09",
         "volume": 44.13,
         "unit": "ton",
@@ -2295,7 +2295,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-10",
         "volume": 61.7,
         "unit": "ton",
@@ -2304,7 +2304,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-11",
         "volume": 84.51,
         "unit": "ton",
@@ -2313,7 +2313,7 @@
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "month": "2023-12",
         "volume": 24.73,
         "unit": "ton",
@@ -2375,19 +2375,19 @@
         "share_pct": 20.0
       },
       {
-        "product_family": "Beverages",
+        "product_family": "FMCG_Packaged",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 20.0
       },
       {
-        "product_family": "Packaged_Food",
+        "product_family": "FMCG_Packaged",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 20.0
       },
       {
-        "product_family": "Personal_Care",
+        "product_family": "FMCG_Packaged",
         "volume": 10000,
         "unit": "ton",
         "share_pct": 20.0

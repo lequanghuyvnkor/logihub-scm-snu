@@ -150,12 +150,6 @@ export default function DashboardView({ baseline, optimized }: DashboardViewProp
               </tbody>
             </table>
           </div>
-          {(optimized && !optimized.error && bMetrics && oMetrics) && (
-            <div className="p-4 bg-logihub-900 text-white text-sm">
-              <span className="font-bold uppercase tracking-wider text-logihub-neon block mb-1 text-[10px]">Decision Support</span>
-              By redesigning the network to the <span className="font-bold">{optimized.name}</span> scenario, total transport costs are reduced by <span className="font-bold text-logihub-neon">{getChange(bMetrics.total_cost_usd, oMetrics.total_cost_usd)?.value.toFixed(1)}%</span>.
-            </div>
-          )}
           {optimized?.error && (
             <div className="p-4 bg-rose-50 text-rose-700 border border-rose-200 text-sm">
               <span className="font-bold uppercase tracking-wider block mb-1 text-[10px]">Optimization Failed</span>

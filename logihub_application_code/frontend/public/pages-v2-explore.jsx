@@ -1,5 +1,5 @@
 // LogiHub v2 — Tier C · Explore pages
-// 07 Forecast, 08 Events, 09 Scenarios, 10 Playbook, 11 Business Case, 12 Roadmap, 13 Export
+// 07 Forecast, 08 Seasonal+Playbook, 09 Scenarios, 10 Business Case, 11 Roadmap+Export
 const { useState: useStateExp } = React;
 
 // ─── Helper: wraps a v1 page with a v2 StepFooter ──────────────────────────
@@ -21,9 +21,27 @@ function withV2FooterC(V1Page, stepId, num, name) {
 window.PageForecast2 = withV2FooterC(window.PageForecast, "forecast", "07", "Demand Forecast");
 
 // ════════════════════════════════════════════════════════════
-// 08 — SEASONAL EVENTS (wraps v1 PageEvents)
+// 08 — SEASONAL EVENTS & PLAYBOOK (merged: was 08 + 10)
 // ════════════════════════════════════════════════════════════
-window.PageEvents2 = withV2FooterC(window.PageEvents, "events", "08", "Seasonal Events");
+function PageSeasonal2({ navigate, flow, setFlow }) {
+  const [tab, setTab] = useStateExp("events");
+  return (
+    <div className="page">
+      <window.StepHeader tier="C" num="08" name="Seasonal Events & Playbook"
+        sub="Seasonal demand events and the per-event response playbook — combined into one step." />
+      <window.Seg
+        options={[
+          { value: "events",   label: "Seasonal Events · demand multipliers" },
+          { value: "playbook", label: "Event Playbook · response plans" },
+        ]}
+        value={tab} onChange={setTab}/>
+      {tab === "events"   && <window.PageEvents   />}
+      {tab === "playbook" && <window.PagePlaybook />}
+      <window.StepFooter stepId="seasonal" onNavigate={navigate} flow={flow} />
+    </div>
+  );
+}
+window.PageSeasonal2 = PageSeasonal2;
 
 // ════════════════════════════════════════════════════════════
 // 09 — SCENARIOS (9-scenario comparison matrix)
@@ -145,21 +163,29 @@ function PageScenarios({ navigate, flow, setFlow }) {
 window.PageScenarios = PageScenarios;
 
 // ════════════════════════════════════════════════════════════
-// 10 — EVENT PLAYBOOK (wraps v1 PagePlaybook)
+// 10 — BUSINESS CASE (wraps v1 PageBusinessCase, was step 11)
 // ════════════════════════════════════════════════════════════
-window.PagePlaybook2 = withV2FooterC(window.PagePlaybook, "playbook", "10", "Event Playbook");
+window.PageBusinessCase2 = withV2FooterC(window.PageBusinessCase, "case", "10", "Business Case");
 
 // ════════════════════════════════════════════════════════════
-// 11 — BUSINESS CASE (wraps v1 PageBusinessCase)
+// 11 — ROADMAP & EXPORT (merged: was steps 12 + 13)
 // ════════════════════════════════════════════════════════════
-window.PageBusinessCase2 = withV2FooterC(window.PageBusinessCase, "case", "11", "Business Case");
-
-// ════════════════════════════════════════════════════════════
-// 12 — ROADMAP (wraps v1 PageRoadmap)
-// ════════════════════════════════════════════════════════════
-window.PageRoadmap2 = withV2FooterC(window.PageRoadmap, "roadmap", "12", "Roadmap");
-
-// ════════════════════════════════════════════════════════════
-// 13 — EXPORT (wraps v1 PageExport)
-// ════════════════════════════════════════════════════════════
-window.PageExport2 = withV2FooterC(window.PageExport, "export", "13", "Export");
+function PageExportAll({ navigate, flow, setFlow }) {
+  const [tab, setTab] = useStateExp("roadmap");
+  return (
+    <div className="page">
+      <window.StepHeader tier="C" num="11" name="Roadmap & Export"
+        sub="Implementation timeline and report packaging — combined into the final step." />
+      <window.Seg
+        options={[
+          { value: "roadmap", label: "Implementation Roadmap · 18-month plan" },
+          { value: "export",  label: "Package & Export · PDF · CSV · slides" },
+        ]}
+        value={tab} onChange={setTab}/>
+      {tab === "roadmap" && <window.PageRoadmap />}
+      {tab === "export"  && <window.PageExport  />}
+      <window.StepFooter stepId="export" onNavigate={navigate} flow={flow} />
+    </div>
+  );
+}
+window.PageExportAll = PageExportAll;

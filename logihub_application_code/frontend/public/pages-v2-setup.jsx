@@ -21,7 +21,7 @@ function PageOverview2({ navigate, flow }) {
         <div className="page-eyebrow">00 · Overview</div>
         <h1 className="page-title">Network Control Tower</h1>
         <div className="page-sub">
-          Gated linear flow · 3 tiers · 13 steps. Setup → Decision → Explore — each step unlocks only when the prior gate is satisfied.
+          Gated linear flow · 3 tiers · 11 steps. Setup → Decision → Explore — each step unlocks only when the prior gate is satisfied.
           Output: warehouse network allocation across 9 optimization scenarios + implementation playbook and roadmap.
         </div>
       </div>

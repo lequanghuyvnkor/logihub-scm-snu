@@ -18,13 +18,12 @@ export default function OptimizerWizard({ isEnabled, onOptimizationComplete }: O
 
   const STORAGE_TYPES = [
     "All",
-    "Cold Storage",
-    "Electronics",
-    "Food & Beverage",
-    "Fashion & Cosmetics",
-    "Medical",
-    "Industrial",
-    "General Merchandise"
+    "Fresh_Food",
+    "FMCG_Packaged",
+    "Pharmaceuticals",
+    "Industrial_Materials",
+    "Durables_Electronics",
+    "Ecommerce_Misc",
   ];
 
   const handleOptimize = async () => {

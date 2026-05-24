@@ -52,20 +52,18 @@ const NAV_V2 = [
   },
   { tier: "C", label: "Explore", subtitle: "Drill-down · scenarios",
     items: [
-      { id: "forecast", num: "07", name: "Demand Forecast",    icon: "chart",       tabpill: true },
-      { id: "events",   num: "08", name: "Seasonal Events",    icon: "calendar",    tabpill: true },
-      { id: "scenarios",num: "09", name: "Scenarios",          icon: "tune",        tabpill: true },
-      { id: "playbook", num: "10", name: "Event Playbook",     icon: "spark",       tabpill: true },
-      { id: "case",     num: "11", name: "Business Case",      icon: "money",       tabpill: true },
-      { id: "roadmap",  num: "12", name: "Roadmap",            icon: "arrow-right", tabpill: true },
-      { id: "export",   num: "13", name: "Export",             icon: "download",    tabpill: true },
+      { id: "forecast", num: "07", name: "Demand Forecast",      icon: "chart",    tabpill: true },
+      { id: "seasonal", num: "08", name: "Seasonal & Playbook",  icon: "calendar", tabpill: true },
+      { id: "scenarios",num: "09", name: "Scenarios",            icon: "tune",     tabpill: true },
+      { id: "case",     num: "10", name: "Business Case",        icon: "money",    tabpill: true },
+      { id: "export",   num: "11", name: "Roadmap & Export",     icon: "download", tabpill: true },
     ]
   },
 ];
 window.NAV_V2 = NAV_V2;
 
 // Order map used by StepFooter to find prev/next
-const STEP_ORDER = ["overview","profile","upload","owned","optimize","map","roles","forecast","events","scenarios","playbook","case","roadmap","export"];
+const STEP_ORDER = ["overview","profile","upload","owned","optimize","map","roles","forecast","seasonal","scenarios","case","export"];
 window.STEP_ORDER = STEP_ORDER;
 
 // Tier-A and tier-B require gating; tier-C uses a softer "available" state.
@@ -93,7 +91,7 @@ function getStepStatus(stepId, flow) {
     return visited.has(stepId) ? "done" : "available";
   }
   // Tier C — soft, forecast/events viewable any time, others need optimisation
-  if (["forecast","events"].includes(stepId)) return visited.has(stepId) ? "done" : "available";
+  if (["forecast","seasonal"].includes(stepId)) return visited.has(stepId) ? "done" : "available";
   if (flow.optimizationStatus !== "done") return "locked";
   return visited.has(stepId) ? "done" : "available";
 }
@@ -225,7 +223,7 @@ function TopBarV2({ stepId, dataMode = "proxy", flow, onResume }) {
         )}
         {!info.tier && <span className="stage-pill">Overview</span>}
         <span className="sep">/</span>
-        {stepIdx >= 0 && <span className="crumb-count">Step {stepIdx} of 13</span>}
+        {stepIdx >= 0 && <span className="crumb-count">Step {stepIdx} of 11</span>}
         <span className="crumb-step">{info.name}</span>
       </div>
       <div className="topbar-right">
@@ -259,7 +257,7 @@ function PipelineV2({ stepId, flow }) {
     if (["profile","upload","owned"].includes(id)) return 0;
     if (id === "optimize") return 1;
     if (["map","roles"].includes(id)) return 2;
-    if (["forecast","events","scenarios","playbook","case","roadmap"].includes(id)) return 3;
+    if (["forecast","seasonal","scenarios","case"].includes(id)) return 3;
     if (id === "export") return 4;
     return -1;
   };
@@ -328,7 +326,7 @@ function StepFooter({ stepId, flow, onNavigate, gate, customNext, customBack }) 
       </div>
       <div className="step-footer-center">
         <div className="step-progress">
-          <span>Step {idx} of 13</span>
+          <span>Step {idx} of 11</span>
           <div className="dots">
             {STEP_ORDER.slice(1).map((s, i) => {
               const st = getStepStatus(s, flow);
@@ -371,7 +369,7 @@ function StepHeader({ tier, num, name, sub, badges }) {
           </span>
         )}
         <div className="page-eyebrow" style={{ margin: 0 }}>
-          Step {num} of 13 · {name}
+          Step {num} of 11 · {name}
         </div>
         {badges}
       </div>

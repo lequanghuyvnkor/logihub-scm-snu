@@ -45,13 +45,11 @@ function AppV2() {
     case "optimize":  page = <window.PageOptimize2 {...pageProps}/>; break;
     case "map":       page = <window.PageWarehouseMap {...pageProps}/>; break;
     case "roles":     page = <window.PageRoles2    {...pageProps}/>; break;
-    case "forecast":  page = <window.PageForecast2 {...pageProps}/>; break;
-    case "events":    page = <window.PageEvents2   {...pageProps}/>; break;
-    case "scenarios": page = <window.PageScenarios {...pageProps}/>; break;
-    case "playbook":  page = <window.PagePlaybook2 {...pageProps}/>; break;
+    case "forecast":  page = <window.PageForecast2     {...pageProps}/>; break;
+    case "seasonal":  page = <window.PageSeasonal2     {...pageProps}/>; break;
+    case "scenarios": page = <window.PageScenarios     {...pageProps}/>; break;
     case "case":      page = <window.PageBusinessCase2 {...pageProps}/>; break;
-    case "roadmap":   page = <window.PageRoadmap2  {...pageProps}/>; break;
-    case "export":    page = <window.PageExport2   {...pageProps}/>; break;
+    case "export":    page = <window.PageExportAll     {...pageProps}/>; break;
     default:          page = <window.PageOverview2 {...pageProps}/>;
   }
 

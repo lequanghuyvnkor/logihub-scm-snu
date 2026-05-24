@@ -31,5 +31,29 @@
 <script type="text/babel" src="pages-v2-decision.jsx?v=20260525"></script>
 <script type="text/babel" src="pages-v2-explore.jsx?v=20260525"></script>
 <script type="text/babel" src="app-v2.jsx?v=20260525"></script>
+
+<!-- ── Dev live-reload ────────────────────────────────────────────────────
+     Polls /api/version every 2 s. When any watched file is edited, the
+     hash changes and the browser reloads automatically — no manual refresh.
+     Has zero effect in production (endpoint simply won't exist).
+──────────────────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  var last = null;
+  function poll() {
+    fetch('/api/version?_=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (last !== null && d.version !== last) {
+          location.reload();
+        }
+        last = d.version;
+      })
+      .catch(function () { /* server not up yet — ignore */ });
+    setTimeout(poll, 2000);
+  }
+  poll();
+})();
+</script>
 </body>
 </html>

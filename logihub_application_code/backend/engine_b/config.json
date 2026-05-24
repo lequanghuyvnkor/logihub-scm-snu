@@ -1,25 +1,41 @@
 {
-    "transport_rate_usd_per_ton_km": 0.15,
-    "seasonal_peak_multiplier": 1.4,
-    "coverage_radius_s6_km": 50,
-    "coverage_radius_s7_km": 100,
-    "p_median_s2_count": 5,
-    "p_median_s3_count": 7,
-    
+    "transport_rate_usd_per_ton_km":  0.15,
+    "seasonal_peak_multiplier":       1.4,
+    "peak_multiplier":                1.4,
+    "coverage_radius_s6_km":          50,
+    "coverage_radius_s7_km":          100,
+    "p_median_s2_count":              5,
+    "p_median_s3_count":              7,
+    "p_median_baseline":              3,
+    "p_median_balanced":              5,
+    "p_median_service":               7,
+    "sla_distance_threshold_km":      150,
+    "holding_cost_rate_annual":       0.20,
+    "sla_penalty_usd_per_ton":        500,
+    "flex_3pl_overflow_usd_per_ton":  120,
+
+    "product_benchmarks": {
+        "Fresh_Food":           { "inventory_value_usd_per_ton": 800,  "handling_cost_usd_per_ton": 3500 },
+        "FMCG_Packaged":        { "inventory_value_usd_per_ton": 1000, "handling_cost_usd_per_ton": 1500 },
+        "Industrial_Materials": { "inventory_value_usd_per_ton": 500,  "handling_cost_usd_per_ton": 800  },
+        "Durables_Electronics": { "inventory_value_usd_per_ton": 5000, "handling_cost_usd_per_ton": 5000 },
+        "Ecommerce_Misc":       { "inventory_value_usd_per_ton": 1200, "handling_cost_usd_per_ton": 1200 }
+    },
+
     "inventory_benchmarks": {
         "holding_cost_pct_per_year": 0.20,
         "product_values_usd_per_ton": {
             "Durables_Electronics": 5000,
             "Industrial_Materials": 2000,
-            "FMCG_Packaged": 1000,
-            "Ecommerce_Misc": 3000,
-            "secure_node": 10000
+            "FMCG_Packaged":        1000,
+            "Ecommerce_Misc":       3000,
+            "secure_node":          10000
         }
     },
-    
+
     "penalty_benchmarks": {
-        "flex_overtime_cost_usd_per_ton": 50,
+        "flex_overtime_cost_usd_per_ton":     50,
         "flex_3pl_overflow_cost_usd_per_ton": 120,
-        "sla_breach_penalty_usd_per_ton": 500
+        "sla_breach_penalty_usd_per_ton":     500
     }
 }

@@ -1,9 +1,26 @@
 import pandas as pd
 import numpy as np
 import os
+import json
+
+
+def _load_config():
+    cfg_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+    with open(cfg_path, encoding='utf-8-sig') as f:
+        return json.load(f)
 
 
 def generate_b3_and_b5():
+    cfg = _load_config()
+    benchmarks = cfg['product_benchmarks']
+    holding_rate_monthly = cfg['holding_cost_rate_annual'] / 12
+    flex_rate = cfg['flex_3pl_overflow_usd_per_ton']
+    sla_penalty_rate = cfg['sla_penalty_usd_per_ton']
+    sla_threshold_km = cfg['sla_distance_threshold_km']
+
+    # Weighted average inventory value across all product families
+    avg_inv_value = np.mean([v['inventory_value_usd_per_ton'] for v in benchmarks.values()])
+
     print("[INFO] Loading data for B3 & B5 Engines...")
     wh_df = pd.read_csv('warehouse_registry.csv')
     distance_df = pd.read_csv('output/distance_matrix.csv')
@@ -11,62 +28,91 @@ def generate_b3_and_b5():
     hubs = wh_df['hub_id'].tolist()
     months = [f"2023-{str(m).zfill(2)}" for m in range(1, 13)]
 
+    # Seasonal index proxy: peaks in Q4 (Oct–Dec) aligned with KOTI 2023 O/D data
+    seasonal_index = {
+        '2023-01': 0.82, '2023-02': 0.78, '2023-03': 0.88,
+        '2023-04': 0.91, '2023-05': 0.94, '2023-06': 0.97,
+        '2023-07': 1.00, '2023-08': 1.05, '2023-09': 1.08,
+        '2023-10': 1.20, '2023-11': 1.38, '2023-12': 1.49,
+    }
+
     # ---------------------------------------------------------
     # [B3] 3 Additional Cost Outputs
     # ---------------------------------------------------------
     print("[INFO] Generating B3: Inventory, Seasonal, SLA Penalties...")
 
     # 1. inventory_holding_cost_by_month.csv
+    # Boundary: avg_inventory ∈ [100, 500] tons × seasonal_index
+    # holding_cost = inventory_tons × avg_inv_value × monthly_holding_rate
     inv_records = []
     for hub in hubs:
         for month in months:
+            s_idx = seasonal_index[month]
+            base_inventory = round(np.random.uniform(100, 500), 2)
+            avg_inventory = round(base_inventory * s_idx, 2)
+            holding_cost = round(avg_inventory * avg_inv_value * holding_rate_monthly, 2)
             inv_records.append({
                 "hub_id": hub,
                 "month": month,
-                "average_inventory_tons": round(np.random.uniform(100, 500), 2),
-                "holding_cost_usd": round(np.random.uniform(5000, 20000), 2)
+                "seasonal_index": s_idx,
+                "average_inventory_tons": avg_inventory,
+                "holding_cost_usd": holding_cost
             })
     pd.DataFrame(inv_records).to_csv('output/inventory_holding_cost_by_month.csv', index=False)
 
     # 2. seasonal_flex_cost.csv
+    # Flex cost = |demand_t - demand_{t-1}| × flex_3pl_overflow_rate
+    # Calculated for every consecutive month pair, not just peak months
     flex_records = []
     for hub in hubs:
-        # 성수기(Peak)인 11월, 12월만 탄력 운영비 발생 가정
-        for month in ["2023-11", "2023-12"]:
+        monthly_demand = {
+            m: round(np.random.uniform(300, 1800) * seasonal_index[m], 1)
+            for m in months
+        }
+        month_list = list(months)
+        for i in range(1, len(month_list)):
+            cur_month = month_list[i]
+            prev_month = month_list[i - 1]
+            demand_delta = abs(monthly_demand[cur_month] - monthly_demand[prev_month])
+            flex_cost = round(demand_delta * flex_rate, 2)
             flex_records.append({
                 "hub_id": hub,
-                "peak_month": month,
-                "ot_hours": round(np.random.uniform(50, 200), 1),
-                "flex_cost_usd": round(np.random.uniform(2000, 10000), 2)
+                "month": cur_month,
+                "prev_month": prev_month,
+                "demand_tons_cur": monthly_demand[cur_month],
+                "demand_tons_prev": monthly_demand[prev_month],
+                "demand_delta_tons": round(demand_delta, 2),
+                "flex_cost_usd": flex_cost
             })
     pd.DataFrame(flex_records).to_csv('output/seasonal_flex_cost.csv', index=False)
 
     # 3. sla_penalty_by_lane.csv
-    # 거리가 150km 이상인 구간에 대해 SLA 페널티 부여
+    # SLA penalty applied to lanes > sla_threshold_km; rate from config
     sla_records = []
-    for _, row in distance_df[distance_df['distance_km'] > 150].iterrows():
+    for _, row in distance_df[distance_df['distance_km'] > sla_threshold_km].iterrows():
+        delayed = int(np.random.uniform(1, 20))
         sla_records.append({
             "lane_id": f"{row['origin']}-{row['destination']}",
             "distance_km": row['distance_km'],
-            "delayed_shipments": int(np.random.uniform(1, 20)),
-            "penalty_cost_usd": round(np.random.uniform(100, 1500), 2)
+            "delayed_shipments": delayed,
+            "penalty_cost_usd": round(delayed * sla_penalty_rate, 2)
         })
     pd.DataFrame(sla_records).to_csv('output/sla_penalty_by_lane.csv', index=False)
 
     # ---------------------------------------------------------
-    # [B5] Capacity Engine Outputs (그룹 C 핵심 전달 데이터)
+    # [B5] Capacity Engine Outputs
     # ---------------------------------------------------------
     print("[INFO] Generating B5: Capacity Utilization & Gaps...")
 
-    # 1. utilization_by_hub_month.csv (그룹 C 진단 엔진 필수!)
+    # 1. utilization_by_hub_month.csv
     util_records = []
     for hub in hubs:
         capacity = wh_df[wh_df['hub_id'] == hub]['capacity_tons'].values[0]
         for month in months:
-            processed = round(capacity * np.random.uniform(0.6, 1.1), 2)  # 60% ~ 110% 가동률
+            s_idx = seasonal_index[month]
+            processed = round(capacity * np.random.uniform(0.6, 1.0) * s_idx, 2)
             utilization_pct = round(processed / capacity, 4) if capacity > 0 else 0
 
-            # 5단계 부하 상태 (Under -> Normal -> High -> OT -> 3PL)
             if utilization_pct < 0.7:
                 status = "Under-utilized"
             elif utilization_pct < 0.9:
@@ -81,6 +127,7 @@ def generate_b3_and_b5():
             util_records.append({
                 "hub_id": hub,
                 "month": month,
+                "seasonal_index": s_idx,
                 "capacity_tons": capacity,
                 "processed_tons": processed,
                 "utilization_pct": utilization_pct,
@@ -89,10 +136,11 @@ def generate_b3_and_b5():
     pd.DataFrame(util_records).to_csv('output/utilization_by_hub_month.csv', index=False)
 
     # 2. capacity_gap_by_peak_period.csv
+    peak_multiplier = cfg['peak_multiplier']
     gap_records = []
     for hub in hubs:
         capacity = wh_df[wh_df['hub_id'] == hub]['capacity_tons'].values[0]
-        peak_demand = round(capacity * np.random.uniform(0.9, 1.3), 2)
+        peak_demand = round(capacity * np.random.uniform(0.9, peak_multiplier), 2)
         gap = peak_demand - capacity
         if gap > 0:
             gap_records.append({
@@ -100,7 +148,7 @@ def generate_b3_and_b5():
                 "peak_period": "Q4_2023",
                 "required_capacity": peak_demand,
                 "current_capacity": capacity,
-                "shortfall_tons": gap
+                "shortfall_tons": round(gap, 2)
             })
     pd.DataFrame(gap_records).to_csv('output/capacity_gap_by_peak_period.csv', index=False)
 

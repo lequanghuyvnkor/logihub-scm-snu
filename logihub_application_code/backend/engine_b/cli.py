@@ -134,7 +134,7 @@ def run_scenarios(args):
 
     df_results = pd.DataFrame(summary_data)
     out_file = os.path.join(args.output, 'scenario_comparison.csv')
-    df_results.to_csv(out_file, index=False)
+    df_results.to_csv(out_file, index=False, encoding='utf-8-sig')
 
     print(f"\n[SUCCESS] All scenarios computed successfully! Results saved to '{out_file}'.")
 

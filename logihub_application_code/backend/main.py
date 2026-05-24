@@ -287,8 +287,16 @@ async def optimize_all_scenarios():
             result = run_uflp(demand, hubs, distances)
         elif s_type == "P-median":
             result = run_p_median(demand, hubs, distances, cfg["p"])
-        elif s_type in ("CFLP", "Hybrid"):
+        elif s_type == "CFLP":
             result = run_cflp(demand, hubs, distances)
+        elif s_type == "Hybrid":
+            # S8: product-eligibility filter — only metro/secure hubs for high-value products
+            eligible_types = {"metro", "secure"}
+            hubs_hybrid = hubs[hubs["hub_type"].isin(eligible_types)] if "hub_type" in hubs.columns else hubs
+            if len(hubs_hybrid) == 0:
+                hubs_hybrid = hubs
+            dist_hybrid = distances[distances["hub_id"].isin(hubs_hybrid["hub_id"])] if "hub_id" in distances.columns else distances
+            result = run_cflp(demand, hubs_hybrid, dist_hybrid)
         elif s_type == "MCLP":
             result = run_mclp(demand, hubs, distances, cfg["p"], cfg["radius"])
         else:

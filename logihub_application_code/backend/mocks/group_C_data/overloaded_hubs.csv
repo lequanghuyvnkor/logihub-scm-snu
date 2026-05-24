@@ -1,4 +1,2 @@
 hub_id,utilization_pct,severity,reason
-GG_METRO,110.5,High,Metro demand spike during Q1 Durables_Electronics peak
-BS_PORT,98.2,Medium,Industrial_Materials summer peak strains port capacity
-IC_AIRPORT,105.8,High,Express launch flows concentrated in narrow window
+GG_METRO,110.5,High,Metro demand spike

@@ -1,11 +1,11 @@
-﻿{
+{
   "contract_version": "v1.0-locked",
   "run_info": {
-    "scenario_run_id": "run_fb8e2fde",
-    "run_uuid": "2456c574-ee9d-4632-835b-15b914807a9d",
+    "scenario_run_id": "run_59455172",
+    "run_uuid": "989e65e2-b0f9-4b07-9a98-28b150fb34e1",
     "engine_version": "v2.0-proxy",
     "run_mode": "mock",
-    "created_at": "2026-05-11T04:13:09.443829Z",
+    "created_at": "2026-05-24T12:41:04.212374Z",
     "created_by": "generate_midterm_mocks.py",
     "execution_time_ms": 15420.5,
     "status": "success"
@@ -23,8 +23,8 @@
     ],
     "geographic_scope": "South Korea (17 regions)",
     "analysis_period": "2023",
-    "target_company_context": "Aggregate Korean freight (industry-agnostic) — public OD data; not a representation of any single company",
-    "disclaimer": "This analysis is generated from public Korean Freight O/D aggregate data and does not represent any individual company or industry. The engine demonstrates the analysis architecture; replacing the input with enterprise shipment data is required before using any numbers for CAPEX or operational decisions."
+    "target_company_context": "Aggregate Korean freight (industry-agnostic) \u2014 public OD data; not a representation of any single company",
+    "disclaimer": "This analysis is generated from public Korean Freight O/D aggregate data and does not represent any individual company or industry. The engine demonstrates the analysis architecture; specifically updated for FMCG and Cold Chain operations."
   },
   "input_data_summary": {
     "total_rows_ingested": 1500000,
@@ -207,50 +207,29 @@
     ],
     "product_families": [
       {
-        "product_family": "Durables_Electronics",
-        "product_family_name": "Mobile Launch",
+        "product_family": "Fresh_Food",
+        "product_family_name": "Fresh Food",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "Industrial_Materials",
-        "product_family_name": "Bulky Appliance",
+        "product_family": "Beverages",
+        "product_family_name": "Beverages",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "FMCG_Packaged",
-        "product_family_name": "Finished Goods",
+        "product_family": "Packaged_Food",
+        "product_family_name": "Packaged Food",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
       },
       {
-        "product_family": "secure_node",
-        "product_family_name": "Secure Node",
-        "description": "Mocked",
-        "default_sla_radius_km": 150,
-        "default_unit": "ton"
-      },
-      {
-        "product_family": "Industrial_Materials",
-        "product_family_name": "Spare Parts",
-        "description": "Mocked",
-        "default_sla_radius_km": 150,
-        "default_unit": "ton"
-      },
-      {
-        "product_family": "Ecommerce_Misc",
-        "product_family_name": "Ecommerce Small",
-        "description": "Mocked",
-        "default_sla_radius_km": 150,
-        "default_unit": "ton"
-      },
-      {
-        "product_family": "FMCG_Packaged",
-        "product_family_name": "General Cargo",
+        "product_family": "Personal_Care",
+        "product_family_name": "Personal Care",
         "description": "Mocked",
         "default_sla_radius_km": 150,
         "default_unit": "ton"
@@ -271,13 +250,10 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "Durables_Electronics",
-          "Industrial_Materials",
-          "FMCG_Packaged",
-          "secure_node",
-          "Industrial_Materials",
-          "Ecommerce_Misc",
-          "FMCG_Packaged"
+          "Fresh_Food",
+          "Beverages",
+          "Packaged_Food",
+          "Personal_Care"
         ]
       },
       {
@@ -294,13 +270,10 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "Durables_Electronics",
-          "Industrial_Materials",
-          "FMCG_Packaged",
-          "secure_node",
-          "Industrial_Materials",
-          "Ecommerce_Misc",
-          "FMCG_Packaged"
+          "Fresh_Food",
+          "Beverages",
+          "Packaged_Food",
+          "Personal_Care"
         ]
       },
       {
@@ -317,13 +290,10 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "Durables_Electronics",
-          "Industrial_Materials",
-          "FMCG_Packaged",
-          "secure_node",
-          "Industrial_Materials",
-          "Ecommerce_Misc",
-          "FMCG_Packaged"
+          "Fresh_Food",
+          "Beverages",
+          "Packaged_Food",
+          "Personal_Care"
         ]
       },
       {
@@ -340,13 +310,10 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "Durables_Electronics",
-          "Industrial_Materials",
-          "FMCG_Packaged",
-          "secure_node",
-          "Industrial_Materials",
-          "Ecommerce_Misc",
-          "FMCG_Packaged"
+          "Fresh_Food",
+          "Beverages",
+          "Packaged_Food",
+          "Personal_Care"
         ]
       },
       {
@@ -363,13 +330,10 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "Durables_Electronics",
-          "Industrial_Materials",
-          "FMCG_Packaged",
-          "secure_node",
-          "Industrial_Materials",
-          "Ecommerce_Misc",
-          "FMCG_Packaged"
+          "Fresh_Food",
+          "Beverages",
+          "Packaged_Food",
+          "Personal_Care"
         ]
       },
       {
@@ -386,13 +350,10 @@
         "capacity_unit": "ton",
         "fixed_cost_usd_per_year": 100000,
         "eligible_product_families": [
-          "Durables_Electronics",
-          "Industrial_Materials",
-          "FMCG_Packaged",
-          "secure_node",
-          "Industrial_Materials",
-          "Ecommerce_Misc",
-          "FMCG_Packaged"
+          "Fresh_Food",
+          "Beverages",
+          "Packaged_Food",
+          "Personal_Care"
         ]
       }
     ]
@@ -404,119 +365,119 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "volume": 2185.43,
+        "demand_weight_ton": 2185.43,
         "unit": "ton",
         "share_pct": 4.96
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "volume": 4778.21,
+        "demand_weight_ton": 4778.21,
         "unit": "ton",
         "share_pct": 10.84
       },
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "volume": 3793.97,
+        "demand_weight_ton": 3793.97,
         "unit": "ton",
         "share_pct": 8.61
       },
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "volume": 3193.96,
+        "demand_weight_ton": 3193.96,
         "unit": "ton",
         "share_pct": 7.25
       },
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "volume": 1202.08,
+        "demand_weight_ton": 1202.08,
         "unit": "ton",
         "share_pct": 2.73
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "volume": 1201.98,
+        "demand_weight_ton": 1201.98,
         "unit": "ton",
         "share_pct": 2.73
       },
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "volume": 761.38,
+        "demand_weight_ton": 761.38,
         "unit": "ton",
         "share_pct": 1.73
       },
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "volume": 4397.79,
+        "demand_weight_ton": 4397.79,
         "unit": "ton",
         "share_pct": 9.98
       },
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "volume": 3205.02,
+        "demand_weight_ton": 3205.02,
         "unit": "ton",
         "share_pct": 7.27
       },
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "volume": 3686.33,
+        "demand_weight_ton": 3686.33,
         "unit": "ton",
         "share_pct": 8.36
       },
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "volume": 592.63,
+        "demand_weight_ton": 592.63,
         "unit": "ton",
         "share_pct": 1.34
       },
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "volume": 4864.59,
+        "demand_weight_ton": 4864.59,
         "unit": "ton",
         "share_pct": 11.04
       },
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "volume": 4245.99,
+        "demand_weight_ton": 4245.99,
         "unit": "ton",
         "share_pct": 9.63
       },
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "volume": 1455.53,
+        "demand_weight_ton": 1455.53,
         "unit": "ton",
         "share_pct": 3.3
       },
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "volume": 1318.21,
+        "demand_weight_ton": 1318.21,
         "unit": "ton",
         "share_pct": 2.99
       },
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "volume": 1325.32,
+        "demand_weight_ton": 1325.32,
         "unit": "ton",
         "share_pct": 3.01
       },
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "volume": 1869.09,
+        "demand_weight_ton": 1869.09,
         "unit": "ton",
         "share_pct": 4.24
       }
@@ -525,7 +486,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Durables_Electronics",
+        "product_family": "Fresh_Food",
         "month": "2023-01",
         "volume": 58.83,
         "unit": "ton",
@@ -534,7 +495,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Beverages",
         "month": "2023-02",
         "volume": 33.87,
         "unit": "ton",
@@ -543,7 +504,7 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Beverages",
         "month": "2023-03",
         "volume": 98.1,
         "unit": "ton",
@@ -552,440 +513,449 @@
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-04",
-        "volume": 49.1,
+        "volume": 66.8,
         "unit": "ton",
-        "seasonal_index": 1.05
+        "seasonal_index": 1.36
       },
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Durables_Electronics",
+        "product_family": "Beverages",
         "month": "2023-05",
-        "volume": 61.92,
+        "volume": 68.06,
         "unit": "ton",
-        "seasonal_index": 1.14
+        "seasonal_index": 1.27
       },
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Industrial_Materials",
+        "product_family": "Fresh_Food",
         "month": "2023-06",
-        "volume": 30.72,
+        "volume": 27.57,
         "unit": "ton",
-        "seasonal_index": 1.15
+        "seasonal_index": 1.31
       },
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "secure_node",
+        "product_family": "Packaged_Food",
         "month": "2023-07",
-        "volume": 12.19,
+        "volume": 61.48,
         "unit": "ton",
-        "seasonal_index": 1.25
+        "seasonal_index": 1.34
       },
       {
         "region_id": "Seoul",
         "region_name": "Seoul",
-        "product_family": "Durables_Electronics",
+        "product_family": "Personal_Care",
         "month": "2023-08",
-        "volume": 99.51,
-        "unit": "ton",
-        "seasonal_index": 1.13
-      },
-      {
-        "region_id": "Seoul",
-        "region_name": "Seoul",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-09",
-        "volume": 92.34,
-        "unit": "ton",
-        "seasonal_index": 1.06
-      },
-      {
-        "region_id": "Seoul",
-        "region_name": "Seoul",
-        "product_family": "Durables_Electronics",
-        "month": "2023-10",
-        "volume": 95.78,
-        "unit": "ton",
-        "seasonal_index": 1.03
-      },
-      {
-        "region_id": "Seoul",
-        "region_name": "Seoul",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-11",
-        "volume": 97.0,
-        "unit": "ton",
-        "seasonal_index": 1.47
-      },
-      {
-        "region_id": "Seoul",
-        "region_name": "Seoul",
-        "product_family": "Durables_Electronics",
-        "month": "2023-12",
-        "volume": 16.78,
-        "unit": "ton",
-        "seasonal_index": 1.01
-      },
-      {
-        "region_id": "Busan",
-        "region_name": "Busan",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-01",
-        "volume": 34.16,
-        "unit": "ton",
-        "seasonal_index": 1.14
-      },
-      {
-        "region_id": "Busan",
-        "region_name": "Busan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-02",
-        "volume": 60.11,
+        "volume": 25.94,
         "unit": "ton",
         "seasonal_index": 1.46
       },
       {
-        "region_id": "Busan",
-        "region_name": "Busan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-03",
-        "volume": 93.7,
+        "region_id": "Seoul",
+        "region_name": "Seoul",
+        "product_family": "Fresh_Food",
+        "month": "2023-09",
+        "volume": 35.16,
         "unit": "ton",
-        "seasonal_index": 0.85
+        "seasonal_index": 1.42
       },
       {
-        "region_id": "Busan",
-        "region_name": "Busan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-04",
-        "volume": 65.35,
+        "region_id": "Seoul",
+        "region_name": "Seoul",
+        "product_family": "Personal_Care",
+        "month": "2023-10",
+        "volume": 11.39,
         "unit": "ton",
-        "seasonal_index": 1.49
+        "seasonal_index": 1.45
       },
       {
-        "region_id": "Busan",
-        "region_name": "Busan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-05",
-        "volume": 32.87,
+        "region_id": "Seoul",
+        "region_name": "Seoul",
+        "product_family": "Fresh_Food",
+        "month": "2023-11",
+        "volume": 59.75,
+        "unit": "ton",
+        "seasonal_index": 1.2
+      },
+      {
+        "region_id": "Seoul",
+        "region_name": "Seoul",
+        "product_family": "Personal_Care",
+        "month": "2023-12",
+        "volume": 86.77,
         "unit": "ton",
         "seasonal_index": 1.01
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-06",
-        "volume": 76.67,
+        "product_family": "Fresh_Food",
+        "month": "2023-01",
+        "volume": 27.18,
         "unit": "ton",
-        "seasonal_index": 1.29
+        "seasonal_index": 0.99
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-07",
-        "volume": 73.8,
+        "product_family": "Packaged_Food",
+        "month": "2023-02",
+        "volume": 25.25,
         "unit": "ton",
         "seasonal_index": 1.19
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Industrial_Materials",
+        "product_family": "Packaged_Food",
+        "month": "2023-03",
+        "volume": 85.98,
+        "unit": "ton",
+        "seasonal_index": 1.45
+      },
+      {
+        "region_id": "Busan",
+        "region_name": "Busan",
+        "product_family": "Beverages",
+        "month": "2023-04",
+        "volume": 18.75,
+        "unit": "ton",
+        "seasonal_index": 1.23
+      },
+      {
+        "region_id": "Busan",
+        "region_name": "Busan",
+        "product_family": "Beverages",
+        "month": "2023-05",
+        "volume": 42.28,
+        "unit": "ton",
+        "seasonal_index": 0.98
+      },
+      {
+        "region_id": "Busan",
+        "region_name": "Busan",
+        "product_family": "Beverages",
+        "month": "2023-06",
+        "volume": 88.96,
+        "unit": "ton",
+        "seasonal_index": 1.32
+      },
+      {
+        "region_id": "Busan",
+        "region_name": "Busan",
+        "product_family": "Fresh_Food",
+        "month": "2023-07",
+        "volume": 22.3,
+        "unit": "ton",
+        "seasonal_index": 1.3
+      },
+      {
+        "region_id": "Busan",
+        "region_name": "Busan",
+        "product_family": "Packaged_Food",
         "month": "2023-08",
-        "volume": 82.84,
+        "volume": 36.42,
         "unit": "ton",
         "seasonal_index": 1.37
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Durables_Electronics",
+        "product_family": "Packaged_Food",
         "month": "2023-09",
-        "volume": 65.04,
+        "volume": 33.06,
         "unit": "ton",
-        "seasonal_index": 0.86
+        "seasonal_index": 1.23
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-10",
-        "volume": 55.14,
+        "volume": 56.02,
         "unit": "ton",
-        "seasonal_index": 1.36
+        "seasonal_index": 1.15
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Durables_Electronics",
+        "product_family": "Fresh_Food",
         "month": "2023-11",
-        "volume": 16.38,
+        "volume": 27.48,
         "unit": "ton",
-        "seasonal_index": 1.08
+        "seasonal_index": 0.85
       },
       {
         "region_id": "Busan",
         "region_name": "Busan",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Beverages",
         "month": "2023-12",
-        "volume": 90.1,
+        "volume": 81.62,
         "unit": "ton",
-        "seasonal_index": 1.04
+        "seasonal_index": 1.42
       },
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "secure_node",
+        "product_family": "Packaged_Food",
         "month": "2023-01",
-        "volume": 62.1,
+        "volume": 12.49,
         "unit": "ton",
-        "seasonal_index": 1.11
+        "seasonal_index": 1.21
       },
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-02",
-        "volume": 13.23,
-        "unit": "ton",
-        "seasonal_index": 1.13
-      },
-      {
-        "region_id": "Daegu",
-        "region_name": "Daegu",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-03",
-        "volume": 98.37,
-        "unit": "ton",
-        "seasonal_index": 1.39
-      },
-      {
-        "region_id": "Daegu",
-        "region_name": "Daegu",
-        "product_family": "Industrial_Materials",
-        "month": "2023-04",
-        "volume": 12.75,
+        "volume": 62.05,
         "unit": "ton",
         "seasonal_index": 0.83
       },
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Fresh_Food",
+        "month": "2023-03",
+        "volume": 23.95,
+        "unit": "ton",
+        "seasonal_index": 1.49
+      },
+      {
+        "region_id": "Daegu",
+        "region_name": "Daegu",
+        "product_family": "Beverages",
+        "month": "2023-04",
+        "volume": 63.17,
+        "unit": "ton",
+        "seasonal_index": 0.82
+      },
+      {
+        "region_id": "Daegu",
+        "region_name": "Daegu",
+        "product_family": "Personal_Care",
         "month": "2023-05",
-        "volume": 37.29,
+        "volume": 13.5,
         "unit": "ton",
-        "seasonal_index": 1.18
+        "seasonal_index": 1.01
       },
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Industrial_Materials",
+        "product_family": "Packaged_Food",
         "month": "2023-06",
-        "volume": 57.0,
-        "unit": "ton",
-        "seasonal_index": 1.34
-      },
-      {
-        "region_id": "Daegu",
-        "region_name": "Daegu",
-        "product_family": "secure_node",
-        "month": "2023-07",
-        "volume": 96.87,
-        "unit": "ton",
-        "seasonal_index": 1.12
-      },
-      {
-        "region_id": "Daegu",
-        "region_name": "Daegu",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-08",
-        "volume": 14.65,
+        "volume": 21.44,
         "unit": "ton",
         "seasonal_index": 1.17
       },
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-09",
-        "volume": 72.96,
+        "product_family": "Fresh_Food",
+        "month": "2023-07",
+        "volume": 34.44,
         "unit": "ton",
-        "seasonal_index": 0.9
+        "seasonal_index": 1.48
       },
       {
         "region_id": "Daegu",
         "region_name": "Daegu",
-        "product_family": "Industrial_Materials",
-        "month": "2023-10",
-        "volume": 97.26,
-        "unit": "ton",
-        "seasonal_index": 1.3
-      },
-      {
-        "region_id": "Daegu",
-        "region_name": "Daegu",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-11",
-        "volume": 81.57,
-        "unit": "ton",
-        "seasonal_index": 0.99
-      },
-      {
-        "region_id": "Daegu",
-        "region_name": "Daegu",
-        "product_family": "secure_node",
-        "month": "2023-12",
-        "volume": 76.96,
-        "unit": "ton",
-        "seasonal_index": 0.98
-      },
-      {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-01",
-        "volume": 96.64,
-        "unit": "ton",
-        "seasonal_index": 1.39
-      },
-      {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "Durables_Electronics",
-        "month": "2023-02",
-        "volume": 71.96,
+        "product_family": "Packaged_Food",
+        "month": "2023-08",
+        "volume": 17.68,
         "unit": "ton",
         "seasonal_index": 0.84
       },
       {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-03",
-        "volume": 24.08,
+        "region_id": "Daegu",
+        "region_name": "Daegu",
+        "product_family": "Personal_Care",
+        "month": "2023-09",
+        "volume": 47.02,
         "unit": "ton",
-        "seasonal_index": 0.98
+        "seasonal_index": 1.29
+      },
+      {
+        "region_id": "Daegu",
+        "region_name": "Daegu",
+        "product_family": "Personal_Care",
+        "month": "2023-10",
+        "volume": 75.35,
+        "unit": "ton",
+        "seasonal_index": 1.48
+      },
+      {
+        "region_id": "Daegu",
+        "region_name": "Daegu",
+        "product_family": "Personal_Care",
+        "month": "2023-11",
+        "volume": 74.31,
+        "unit": "ton",
+        "seasonal_index": 0.83
+      },
+      {
+        "region_id": "Daegu",
+        "region_name": "Daegu",
+        "product_family": "Personal_Care",
+        "month": "2023-12",
+        "volume": 34.37,
+        "unit": "ton",
+        "seasonal_index": 1.11
       },
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-04",
-        "volume": 18.45,
+        "product_family": "Packaged_Food",
+        "month": "2023-01",
+        "volume": 32.58,
         "unit": "ton",
         "seasonal_index": 0.93
       },
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-05",
-        "volume": 35.19,
-        "unit": "ton",
-        "seasonal_index": 1.47
-      },
-      {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-06",
-        "volume": 69.14,
-        "unit": "ton",
-        "seasonal_index": 1.1
-      },
-      {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-07",
-        "volume": 47.76,
-        "unit": "ton",
-        "seasonal_index": 0.97
-      },
-      {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-08",
-        "volume": 78.21,
-        "unit": "ton",
-        "seasonal_index": 0.81
-      },
-      {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-09",
-        "volume": 18.26,
-        "unit": "ton",
-        "seasonal_index": 0.87
-      },
-      {
-        "region_id": "Incheon",
-        "region_name": "Incheon",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-10",
-        "volume": 86.99,
+        "product_family": "Beverages",
+        "month": "2023-02",
+        "volume": 85.24,
         "unit": "ton",
         "seasonal_index": 1.29
       },
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "secure_node",
-        "month": "2023-11",
-        "volume": 11.54,
+        "product_family": "Fresh_Food",
+        "month": "2023-03",
+        "volume": 15.24,
         "unit": "ton",
-        "seasonal_index": 1.33
+        "seasonal_index": 1.44
       },
       {
         "region_id": "Incheon",
         "region_name": "Incheon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-12",
-        "volume": 52.61,
+        "product_family": "Packaged_Food",
+        "month": "2023-04",
+        "volume": 32.52,
         "unit": "ton",
-        "seasonal_index": 0.92
+        "seasonal_index": 1.18
       },
       {
-        "region_id": "Gwangju",
-        "region_name": "Gwangju",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-01",
-        "volume": 68.48,
-        "unit": "ton",
-        "seasonal_index": 0.83
-      },
-      {
-        "region_id": "Gwangju",
-        "region_name": "Gwangju",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-02",
-        "volume": 67.16,
-        "unit": "ton",
-        "seasonal_index": 0.83
-      },
-      {
-        "region_id": "Gwangju",
-        "region_name": "Gwangju",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-03",
-        "volume": 11.38,
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Personal_Care",
+        "month": "2023-05",
+        "volume": 26.46,
         "unit": "ton",
         "seasonal_index": 1.45
       },
       {
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Fresh_Food",
+        "month": "2023-06",
+        "volume": 95.94,
+        "unit": "ton",
+        "seasonal_index": 1.32
+      },
+      {
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Packaged_Food",
+        "month": "2023-07",
+        "volume": 49.21,
+        "unit": "ton",
+        "seasonal_index": 1.31
+      },
+      {
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Packaged_Food",
+        "month": "2023-08",
+        "volume": 32.3,
+        "unit": "ton",
+        "seasonal_index": 1.05
+      },
+      {
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Fresh_Food",
+        "month": "2023-09",
+        "volume": 20.81,
+        "unit": "ton",
+        "seasonal_index": 1.04
+      },
+      {
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Personal_Care",
+        "month": "2023-10",
+        "volume": 14.14,
+        "unit": "ton",
+        "seasonal_index": 0.83
+      },
+      {
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Beverages",
+        "month": "2023-11",
+        "volume": 98.16,
+        "unit": "ton",
+        "seasonal_index": 0.92
+      },
+      {
+        "region_id": "Incheon",
+        "region_name": "Incheon",
+        "product_family": "Personal_Care",
+        "month": "2023-12",
+        "volume": 18.81,
+        "unit": "ton",
+        "seasonal_index": 1.14
+      },
+      {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Durables_Electronics",
+        "product_family": "Packaged_Food",
+        "month": "2023-01",
+        "volume": 41.17,
+        "unit": "ton",
+        "seasonal_index": 1.13
+      },
+      {
+        "region_id": "Gwangju",
+        "region_name": "Gwangju",
+        "product_family": "Fresh_Food",
+        "month": "2023-02",
+        "volume": 45.87,
+        "unit": "ton",
+        "seasonal_index": 1.23
+      },
+      {
+        "region_id": "Gwangju",
+        "region_name": "Gwangju",
+        "product_family": "Fresh_Food",
+        "month": "2023-03",
+        "volume": 89.8,
+        "unit": "ton",
+        "seasonal_index": 0.98
+      },
+      {
+        "region_id": "Gwangju",
+        "region_name": "Gwangju",
+        "product_family": "Beverages",
         "month": "2023-04",
+        "volume": 66.33,
+        "unit": "ton",
+        "seasonal_index": 1.15
+      },
+      {
+        "region_id": "Gwangju",
+        "region_name": "Gwangju",
+        "product_family": "Fresh_Food",
+        "month": "2023-05",
         "volume": 58.54,
         "unit": "ton",
         "seasonal_index": 1.28
@@ -993,152 +963,161 @@
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-05",
-        "volume": 94.98,
-        "unit": "ton",
-        "seasonal_index": 1.41
-      },
-      {
-        "region_id": "Gwangju",
-        "region_name": "Gwangju",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-06",
-        "volume": 82.09,
+        "volume": 16.35,
         "unit": "ton",
-        "seasonal_index": 1.27
+        "seasonal_index": 1.25
       },
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Fresh_Food",
         "month": "2023-07",
-        "volume": 67.9,
+        "volume": 88.05,
         "unit": "ton",
-        "seasonal_index": 1.12
+        "seasonal_index": 1.25
       },
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-08",
-        "volume": 83.86,
+        "volume": 61.79,
         "unit": "ton",
-        "seasonal_index": 1.24
+        "seasonal_index": 1.07
       },
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Durables_Electronics",
+        "product_family": "Personal_Care",
         "month": "2023-09",
-        "volume": 96.51,
+        "volume": 21.57,
         "unit": "ton",
-        "seasonal_index": 1.43
+        "seasonal_index": 1.37
       },
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "secure_node",
+        "product_family": "Packaged_Food",
         "month": "2023-10",
-        "volume": 34.66,
+        "volume": 94.73,
         "unit": "ton",
-        "seasonal_index": 0.95
+        "seasonal_index": 1.07
       },
       {
         "region_id": "Gwangju",
         "region_name": "Gwangju",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Fresh_Food",
         "month": "2023-11",
-        "volume": 11.64,
+        "volume": 68.63,
+        "unit": "ton",
+        "seasonal_index": 0.94
+      },
+      {
+        "region_id": "Gwangju",
+        "region_name": "Gwangju",
+        "product_family": "Fresh_Food",
+        "month": "2023-12",
+        "volume": 16.24,
         "unit": "ton",
         "seasonal_index": 0.87
       },
       {
-        "region_id": "Gwangju",
-        "region_name": "Gwangju",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-12",
-        "volume": 40.29,
-        "unit": "ton",
-        "seasonal_index": 1.26
-      },
-      {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Beverages",
         "month": "2023-01",
-        "volume": 86.04,
+        "volume": 13.51,
         "unit": "ton",
-        "seasonal_index": 0.82
+        "seasonal_index": 1.23
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Packaged_Food",
         "month": "2023-02",
-        "volume": 33.46,
+        "volume": 16.41,
         "unit": "ton",
-        "seasonal_index": 1.15
+        "seasonal_index": 1.02
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Beverages",
         "month": "2023-03",
-        "volume": 72.71,
+        "volume": 71.35,
         "unit": "ton",
-        "seasonal_index": 1.24
+        "seasonal_index": 1.04
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Packaged_Food",
         "month": "2023-04",
-        "volume": 13.53,
+        "volume": 35.37,
         "unit": "ton",
-        "seasonal_index": 1.09
+        "seasonal_index": 0.88
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Fresh_Food",
         "month": "2023-05",
-        "volume": 35.38,
+        "volume": 41.35,
         "unit": "ton",
-        "seasonal_index": 0.92
+        "seasonal_index": 1.46
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Durables_Electronics",
+        "product_family": "Personal_Care",
         "month": "2023-06",
-        "volume": 61.17,
+        "volume": 76.16,
         "unit": "ton",
-        "seasonal_index": 1.2
+        "seasonal_index": 1.36
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Fresh_Food",
         "month": "2023-07",
-        "volume": 47.14,
+        "volume": 59.32,
         "unit": "ton",
-        "seasonal_index": 1.06
+        "seasonal_index": 1.1
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-08",
-        "volume": 62.25,
+        "volume": 82.62,
         "unit": "ton",
-        "seasonal_index": 1.41
+        "seasonal_index": 1.49
       },
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Personal_Care",
         "month": "2023-09",
+        "volume": 21.49,
+        "unit": "ton",
+        "seasonal_index": 0.98
+      },
+      {
+        "region_id": "Daejeon",
+        "region_name": "Daejeon",
+        "product_family": "Personal_Care",
+        "month": "2023-10",
+        "volume": 40.67,
+        "unit": "ton",
+        "seasonal_index": 1.45
+      },
+      {
+        "region_id": "Daejeon",
+        "region_name": "Daejeon",
+        "product_family": "Fresh_Food",
+        "month": "2023-11",
         "volume": 31.47,
         "unit": "ton",
         "seasonal_index": 1.28
@@ -1146,26 +1125,26 @@
       {
         "region_id": "Daejeon",
         "region_name": "Daejeon",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-10",
+        "product_family": "Packaged_Food",
+        "month": "2023-12",
         "volume": 77.91,
         "unit": "ton",
         "seasonal_index": 0.87
       },
       {
-        "region_id": "Daejeon",
-        "region_name": "Daejeon",
-        "product_family": "Durables_Electronics",
-        "month": "2023-11",
+        "region_id": "Ulsan",
+        "region_name": "Ulsan",
+        "product_family": "Fresh_Food",
+        "month": "2023-01",
         "volume": 58.09,
         "unit": "ton",
         "seasonal_index": 1.15
       },
       {
-        "region_id": "Daejeon",
-        "region_name": "Daejeon",
-        "product_family": "Durables_Electronics",
-        "month": "2023-12",
+        "region_id": "Ulsan",
+        "region_name": "Ulsan",
+        "product_family": "Fresh_Food",
+        "month": "2023-02",
         "volume": 38.8,
         "unit": "ton",
         "seasonal_index": 1.43
@@ -1173,8 +1152,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Durables_Electronics",
-        "month": "2023-01",
+        "product_family": "Fresh_Food",
+        "month": "2023-03",
         "volume": 14.81,
         "unit": "ton",
         "seasonal_index": 1.47
@@ -1182,8 +1161,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-02",
+        "product_family": "Packaged_Food",
+        "month": "2023-04",
         "volume": 18.22,
         "unit": "ton",
         "seasonal_index": 1.02
@@ -1191,8 +1170,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-03",
+        "product_family": "Beverages",
+        "month": "2023-05",
         "volume": 70.91,
         "unit": "ton",
         "seasonal_index": 1.14
@@ -1200,8 +1179,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-04",
+        "product_family": "Beverages",
+        "month": "2023-06",
         "volume": 66.87,
         "unit": "ton",
         "seasonal_index": 1.11
@@ -1209,8 +1188,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-05",
+        "product_family": "Packaged_Food",
+        "month": "2023-07",
         "volume": 64.22,
         "unit": "ton",
         "seasonal_index": 1.19
@@ -1218,8 +1197,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-06",
+        "product_family": "Fresh_Food",
+        "month": "2023-08",
         "volume": 77.71,
         "unit": "ton",
         "seasonal_index": 1.35
@@ -1227,8 +1206,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Durables_Electronics",
-        "month": "2023-07",
+        "product_family": "Fresh_Food",
+        "month": "2023-09",
         "volume": 20.21,
         "unit": "ton",
         "seasonal_index": 1.45
@@ -1236,8 +1215,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-08",
+        "product_family": "Beverages",
+        "month": "2023-10",
         "volume": 15.18,
         "unit": "ton",
         "seasonal_index": 1.18
@@ -1245,8 +1224,8 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-09",
+        "product_family": "Fresh_Food",
+        "month": "2023-11",
         "volume": 76.33,
         "unit": "ton",
         "seasonal_index": 1.18
@@ -1254,26 +1233,26 @@
       {
         "region_id": "Ulsan",
         "region_name": "Ulsan",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-10",
+        "product_family": "Packaged_Food",
+        "month": "2023-12",
         "volume": 20.54,
         "unit": "ton",
         "seasonal_index": 0.9
       },
       {
-        "region_id": "Ulsan",
-        "region_name": "Ulsan",
-        "product_family": "Industrial_Materials",
-        "month": "2023-11",
+        "region_id": "Sejong",
+        "region_name": "Sejong",
+        "product_family": "Beverages",
+        "month": "2023-01",
         "volume": 85.33,
         "unit": "ton",
         "seasonal_index": 1.41
       },
       {
-        "region_id": "Ulsan",
-        "region_name": "Ulsan",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-12",
+        "region_id": "Sejong",
+        "region_name": "Sejong",
+        "product_family": "Beverages",
+        "month": "2023-02",
         "volume": 17.57,
         "unit": "ton",
         "seasonal_index": 1.29
@@ -1281,8 +1260,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Industrial_Materials",
-        "month": "2023-01",
+        "product_family": "Beverages",
+        "month": "2023-03",
         "volume": 45.7,
         "unit": "ton",
         "seasonal_index": 1.42
@@ -1290,8 +1269,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Industrial_Materials",
-        "month": "2023-02",
+        "product_family": "Beverages",
+        "month": "2023-04",
         "volume": 17.32,
         "unit": "ton",
         "seasonal_index": 0.86
@@ -1299,8 +1278,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-03",
+        "product_family": "Packaged_Food",
+        "month": "2023-05",
         "volume": 62.32,
         "unit": "ton",
         "seasonal_index": 1.4
@@ -1308,8 +1287,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-04",
+        "product_family": "Beverages",
+        "month": "2023-06",
         "volume": 83.15,
         "unit": "ton",
         "seasonal_index": 1.46
@@ -1317,8 +1296,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Durables_Electronics",
-        "month": "2023-05",
+        "product_family": "Fresh_Food",
+        "month": "2023-07",
         "volume": 63.27,
         "unit": "ton",
         "seasonal_index": 1.05
@@ -1326,8 +1305,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "secure_node",
-        "month": "2023-06",
+        "product_family": "Personal_Care",
+        "month": "2023-08",
         "volume": 17.52,
         "unit": "ton",
         "seasonal_index": 1.34
@@ -1335,8 +1314,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-07",
+        "product_family": "Beverages",
+        "month": "2023-09",
         "volume": 73.46,
         "unit": "ton",
         "seasonal_index": 0.97
@@ -1344,8 +1323,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-08",
+        "product_family": "Packaged_Food",
+        "month": "2023-10",
         "volume": 20.01,
         "unit": "ton",
         "seasonal_index": 1.14
@@ -1353,8 +1332,8 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "Industrial_Materials",
-        "month": "2023-09",
+        "product_family": "Fresh_Food",
+        "month": "2023-11",
         "volume": 46.47,
         "unit": "ton",
         "seasonal_index": 1.2
@@ -1362,26 +1341,26 @@
       {
         "region_id": "Sejong",
         "region_name": "Sejong",
-        "product_family": "secure_node",
-        "month": "2023-10",
+        "product_family": "Personal_Care",
+        "month": "2023-12",
         "volume": 20.69,
         "unit": "ton",
         "seasonal_index": 0.88
       },
       {
-        "region_id": "Sejong",
-        "region_name": "Sejong",
-        "product_family": "Durables_Electronics",
-        "month": "2023-11",
+        "region_id": "Gyeonggi",
+        "region_name": "Gyeonggi",
+        "product_family": "Fresh_Food",
+        "month": "2023-01",
         "volume": 76.98,
         "unit": "ton",
         "seasonal_index": 1.28
       },
       {
-        "region_id": "Sejong",
-        "region_name": "Sejong",
-        "product_family": "secure_node",
-        "month": "2023-12",
+        "region_id": "Gyeonggi",
+        "region_name": "Gyeonggi",
+        "product_family": "Personal_Care",
+        "month": "2023-02",
         "volume": 96.6,
         "unit": "ton",
         "seasonal_index": 1.06
@@ -1389,8 +1368,8 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Durables_Electronics",
-        "month": "2023-01",
+        "product_family": "Fresh_Food",
+        "month": "2023-03",
         "volume": 17.46,
         "unit": "ton",
         "seasonal_index": 1.17
@@ -1398,8 +1377,8 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Industrial_Materials",
-        "month": "2023-02",
+        "product_family": "Fresh_Food",
+        "month": "2023-04",
         "volume": 96.69,
         "unit": "ton",
         "seasonal_index": 0.81
@@ -1407,956 +1386,938 @@
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Industrial_Materials",
-        "month": "2023-03",
-        "volume": 13.88,
-        "unit": "ton",
-        "seasonal_index": 1.42
-      },
-      {
-        "region_id": "Gyeonggi",
-        "region_name": "Gyeonggi",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-04",
-        "volume": 93.22,
-        "unit": "ton",
-        "seasonal_index": 1.44
-      },
-      {
-        "region_id": "Gyeonggi",
-        "region_name": "Gyeonggi",
-        "product_family": "secure_node",
+        "product_family": "Personal_Care",
         "month": "2023-05",
-        "volume": 59.85,
+        "volume": 60.04,
         "unit": "ton",
-        "seasonal_index": 1.48
+        "seasonal_index": 1.03
       },
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Industrial_Materials",
+        "product_family": "Personal_Care",
         "month": "2023-06",
-        "volume": 24.96,
+        "volume": 57.49,
         "unit": "ton",
-        "seasonal_index": 0.95
+        "seasonal_index": 1.5
       },
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Fresh_Food",
         "month": "2023-07",
-        "volume": 50.91,
+        "volume": 32.77,
+        "unit": "ton",
+        "seasonal_index": 1.29
+      },
+      {
+        "region_id": "Gyeonggi",
+        "region_name": "Gyeonggi",
+        "product_family": "Fresh_Food",
+        "month": "2023-08",
+        "volume": 57.08,
         "unit": "ton",
         "seasonal_index": 1.24
       },
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-08",
-        "volume": 44.58,
+        "product_family": "Beverages",
+        "month": "2023-09",
+        "volume": 36.5,
         "unit": "ton",
-        "seasonal_index": 1.32
+        "seasonal_index": 1.5
       },
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-09",
-        "volume": 35.29,
+        "product_family": "Beverages",
+        "month": "2023-10",
+        "volume": 62.59,
+        "unit": "ton",
+        "seasonal_index": 1.43
+      },
+      {
+        "region_id": "Gyeonggi",
+        "region_name": "Gyeonggi",
+        "product_family": "Fresh_Food",
+        "month": "2023-11",
+        "volume": 92.37,
         "unit": "ton",
         "seasonal_index": 1.47
       },
       {
         "region_id": "Gyeonggi",
         "region_name": "Gyeonggi",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-10",
-        "volume": 51.01,
-        "unit": "ton",
-        "seasonal_index": 1.23
-      },
-      {
-        "region_id": "Gyeonggi",
-        "region_name": "Gyeonggi",
-        "product_family": "Industrial_Materials",
-        "month": "2023-11",
-        "volume": 26.93,
+        "product_family": "Personal_Care",
+        "month": "2023-12",
+        "volume": 90.12,
         "unit": "ton",
         "seasonal_index": 1.12
       },
       {
-        "region_id": "Gyeonggi",
-        "region_name": "Gyeonggi",
-        "product_family": "Industrial_Materials",
-        "month": "2023-12",
-        "volume": 30.65,
-        "unit": "ton",
-        "seasonal_index": 0.99
-      },
-      {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Personal_Care",
         "month": "2023-01",
-        "volume": 97.7,
+        "volume": 40.21,
         "unit": "ton",
-        "seasonal_index": 1.49
+        "seasonal_index": 0.92
       },
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Personal_Care",
         "month": "2023-02",
-        "volume": 12.91,
+        "volume": 51.73,
         "unit": "ton",
-        "seasonal_index": 1.0
+        "seasonal_index": 1.05
       },
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Beverages",
         "month": "2023-03",
-        "volume": 83.24,
+        "volume": 33.93,
         "unit": "ton",
-        "seasonal_index": 1.28
+        "seasonal_index": 1.05
       },
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Industrial_Materials",
+        "product_family": "Personal_Care",
         "month": "2023-04",
-        "volume": 21.99,
+        "volume": 98.76,
         "unit": "ton",
-        "seasonal_index": 0.85
+        "seasonal_index": 1.29
       },
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Fresh_Food",
         "month": "2023-05",
-        "volume": 95.48,
+        "volume": 35.18,
         "unit": "ton",
-        "seasonal_index": 1.31
+        "seasonal_index": 1.09
       },
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Fresh_Food",
         "month": "2023-06",
-        "volume": 92.73,
-        "unit": "ton",
-        "seasonal_index": 0.86
-      },
-      {
-        "region_id": "Gangwon",
-        "region_name": "Gangwon",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-07",
-        "volume": 87.95,
-        "unit": "ton",
-        "seasonal_index": 0.83
-      },
-      {
-        "region_id": "Gangwon",
-        "region_name": "Gangwon",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-08",
-        "volume": 47.01,
-        "unit": "ton",
-        "seasonal_index": 1.34
-      },
-      {
-        "region_id": "Gangwon",
-        "region_name": "Gangwon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-09",
-        "volume": 98.85,
+        "volume": 71.63,
         "unit": "ton",
         "seasonal_index": 0.91
       },
       {
         "region_id": "Gangwon",
         "region_name": "Gangwon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-10",
-        "volume": 77.46,
-        "unit": "ton",
-        "seasonal_index": 1.08
-      },
-      {
-        "region_id": "Gangwon",
-        "region_name": "Gangwon",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-11",
-        "volume": 85.79,
-        "unit": "ton",
-        "seasonal_index": 1.39
-      },
-      {
-        "region_id": "Gangwon",
-        "region_name": "Gangwon",
-        "product_family": "Industrial_Materials",
-        "month": "2023-12",
-        "volume": 13.31,
-        "unit": "ton",
-        "seasonal_index": 0.89
-      },
-      {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-01",
-        "volume": 15.07,
-        "unit": "ton",
-        "seasonal_index": 1.41
-      },
-      {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "Durables_Electronics",
-        "month": "2023-02",
-        "volume": 58.09,
-        "unit": "ton",
-        "seasonal_index": 1.32
-      },
-      {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-03",
-        "volume": 59.99,
-        "unit": "ton",
-        "seasonal_index": 1.34
-      },
-      {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-04",
-        "volume": 78.14,
-        "unit": "ton",
-        "seasonal_index": 1.06
-      },
-      {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-05",
-        "volume": 50.55,
-        "unit": "ton",
-        "seasonal_index": 0.89
-      },
-      {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-06",
-        "volume": 34.73,
-        "unit": "ton",
-        "seasonal_index": 0.95
-      },
-      {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "Durables_Electronics",
+        "product_family": "Beverages",
         "month": "2023-07",
-        "volume": 70.45,
+        "volume": 16.86,
+        "unit": "ton",
+        "seasonal_index": 1.46
+      },
+      {
+        "region_id": "Gangwon",
+        "region_name": "Gangwon",
+        "product_family": "Packaged_Food",
+        "month": "2023-08",
+        "volume": 75.31,
         "unit": "ton",
         "seasonal_index": 1.23
       },
       {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "secure_node",
-        "month": "2023-08",
-        "volume": 34.18,
+        "region_id": "Gangwon",
+        "region_name": "Gangwon",
+        "product_family": "Beverages",
+        "month": "2023-09",
+        "volume": 17.45,
+        "unit": "ton",
+        "seasonal_index": 1.41
+      },
+      {
+        "region_id": "Gangwon",
+        "region_name": "Gangwon",
+        "product_family": "Packaged_Food",
+        "month": "2023-10",
+        "volume": 14.07,
         "unit": "ton",
         "seasonal_index": 0.82
       },
       {
-        "region_id": "Chungbuk",
-        "region_name": "Chungbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-09",
-        "volume": 56.83,
+        "region_id": "Gangwon",
+        "region_name": "Gangwon",
+        "product_family": "Fresh_Food",
+        "month": "2023-11",
+        "volume": 79.98,
         "unit": "ton",
-        "seasonal_index": 1.34
+        "seasonal_index": 1.14
+      },
+      {
+        "region_id": "Gangwon",
+        "region_name": "Gangwon",
+        "product_family": "Packaged_Food",
+        "month": "2023-12",
+        "volume": 23.54,
+        "unit": "ton",
+        "seasonal_index": 1.22
       },
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-10",
-        "volume": 37.7,
+        "product_family": "Packaged_Food",
+        "month": "2023-01",
+        "volume": 45.37,
+        "unit": "ton",
+        "seasonal_index": 1.38
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Fresh_Food",
+        "month": "2023-02",
+        "volume": 85.45,
+        "unit": "ton",
+        "seasonal_index": 1.13
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Packaged_Food",
+        "month": "2023-03",
+        "volume": 22.05,
+        "unit": "ton",
+        "seasonal_index": 0.81
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Packaged_Food",
+        "month": "2023-04",
+        "volume": 87.83,
         "unit": "ton",
         "seasonal_index": 1.37
       },
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "secure_node",
-        "month": "2023-11",
-        "volume": 60.48,
+        "product_family": "Packaged_Food",
+        "month": "2023-05",
+        "volume": 77.49,
+        "unit": "ton",
+        "seasonal_index": 1.44
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Packaged_Food",
+        "month": "2023-06",
+        "volume": 79.21,
+        "unit": "ton",
+        "seasonal_index": 1.46
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Beverages",
+        "month": "2023-07",
+        "volume": 44.01,
+        "unit": "ton",
+        "seasonal_index": 0.97
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Fresh_Food",
+        "month": "2023-08",
+        "volume": 21.62,
+        "unit": "ton",
+        "seasonal_index": 1.47
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Fresh_Food",
+        "month": "2023-09",
+        "volume": 28.65,
         "unit": "ton",
         "seasonal_index": 1.41
       },
       {
         "region_id": "Chungbuk",
         "region_name": "Chungbuk",
-        "product_family": "Durables_Electronics",
+        "product_family": "Personal_Care",
+        "month": "2023-10",
+        "volume": 65.63,
+        "unit": "ton",
+        "seasonal_index": 1.05
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Personal_Care",
+        "month": "2023-11",
+        "volume": 12.0,
+        "unit": "ton",
+        "seasonal_index": 1.15
+      },
+      {
+        "region_id": "Chungbuk",
+        "region_name": "Chungbuk",
+        "product_family": "Beverages",
         "month": "2023-12",
-        "volume": 63.1,
+        "volume": 79.51,
         "unit": "ton",
-        "seasonal_index": 1.14
+        "seasonal_index": 1.16
       },
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-01",
-        "volume": 77.96,
+        "volume": 83.47,
         "unit": "ton",
-        "seasonal_index": 1.23
+        "seasonal_index": 1.48
       },
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Industrial_Materials",
+        "product_family": "Beverages",
         "month": "2023-02",
-        "volume": 82.45,
-        "unit": "ton",
-        "seasonal_index": 1.43
-      },
-      {
-        "region_id": "Chungnam",
-        "region_name": "Chungnam",
-        "product_family": "secure_node",
-        "month": "2023-03",
-        "volume": 98.24,
-        "unit": "ton",
-        "seasonal_index": 1.23
-      },
-      {
-        "region_id": "Chungnam",
-        "region_name": "Chungnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-04",
-        "volume": 45.3,
-        "unit": "ton",
-        "seasonal_index": 1.11
-      },
-      {
-        "region_id": "Chungnam",
-        "region_name": "Chungnam",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-05",
-        "volume": 75.38,
-        "unit": "ton",
-        "seasonal_index": 1.18
-      },
-      {
-        "region_id": "Chungnam",
-        "region_name": "Chungnam",
-        "product_family": "Durables_Electronics",
-        "month": "2023-06",
-        "volume": 80.53,
+        "volume": 88.9,
         "unit": "ton",
         "seasonal_index": 1.08
       },
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-07",
-        "volume": 57.12,
+        "product_family": "Personal_Care",
+        "month": "2023-03",
+        "volume": 53.2,
+        "unit": "ton",
+        "seasonal_index": 1.09
+      },
+      {
+        "region_id": "Chungnam",
+        "region_name": "Chungnam",
+        "product_family": "Fresh_Food",
+        "month": "2023-04",
+        "volume": 65.83,
         "unit": "ton",
         "seasonal_index": 1.29
       },
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-08",
-        "volume": 23.24,
+        "product_family": "Packaged_Food",
+        "month": "2023-05",
+        "volume": 91.28,
         "unit": "ton",
-        "seasonal_index": 1.45
+        "seasonal_index": 1.23
       },
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-09",
-        "volume": 79.2,
-        "unit": "ton",
-        "seasonal_index": 0.85
-      },
-      {
-        "region_id": "Chungnam",
-        "region_name": "Chungnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-10",
-        "volume": 98.2,
-        "unit": "ton",
-        "seasonal_index": 1.14
-      },
-      {
-        "region_id": "Chungnam",
-        "region_name": "Chungnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-11",
-        "volume": 28.82,
+        "product_family": "Beverages",
+        "month": "2023-06",
+        "volume": 41.55,
         "unit": "ton",
         "seasonal_index": 1.21
       },
       {
         "region_id": "Chungnam",
         "region_name": "Chungnam",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Beverages",
+        "month": "2023-07",
+        "volume": 59.93,
+        "unit": "ton",
+        "seasonal_index": 0.86
+      },
+      {
+        "region_id": "Chungnam",
+        "region_name": "Chungnam",
+        "product_family": "Beverages",
+        "month": "2023-08",
+        "volume": 41.34,
+        "unit": "ton",
+        "seasonal_index": 1.16
+      },
+      {
+        "region_id": "Chungnam",
+        "region_name": "Chungnam",
+        "product_family": "Personal_Care",
+        "month": "2023-09",
+        "volume": 91.94,
+        "unit": "ton",
+        "seasonal_index": 1.01
+      },
+      {
+        "region_id": "Chungnam",
+        "region_name": "Chungnam",
+        "product_family": "Beverages",
+        "month": "2023-10",
+        "volume": 87.61,
+        "unit": "ton",
+        "seasonal_index": 1.46
+      },
+      {
+        "region_id": "Chungnam",
+        "region_name": "Chungnam",
+        "product_family": "Personal_Care",
+        "month": "2023-11",
+        "volume": 51.34,
+        "unit": "ton",
+        "seasonal_index": 1.39
+      },
+      {
+        "region_id": "Chungnam",
+        "region_name": "Chungnam",
+        "product_family": "Fresh_Food",
         "month": "2023-12",
-        "volume": 16.83,
+        "volume": 33.24,
         "unit": "ton",
-        "seasonal_index": 0.89
+        "seasonal_index": 1.12
       },
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Beverages",
         "month": "2023-01",
-        "volume": 62.63,
-        "unit": "ton",
-        "seasonal_index": 1.08
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "secure_node",
-        "month": "2023-02",
-        "volume": 26.37,
+        "volume": 65.87,
         "unit": "ton",
         "seasonal_index": 1.04
       },
       {
         "region_id": "Jeonbuk",
         "region_name": "Jeonbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-03",
-        "volume": 88.69,
-        "unit": "ton",
-        "seasonal_index": 1.16
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-04",
-        "volume": 64.17,
-        "unit": "ton",
-        "seasonal_index": 0.96
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-05",
-        "volume": 25.2,
-        "unit": "ton",
-        "seasonal_index": 1.0
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-06",
-        "volume": 12.86,
-        "unit": "ton",
-        "seasonal_index": 1.18
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-07",
-        "volume": 51.47,
-        "unit": "ton",
-        "seasonal_index": 0.94
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-08",
-        "volume": 21.59,
-        "unit": "ton",
-        "seasonal_index": 1.03
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-09",
-        "volume": 13.54,
-        "unit": "ton",
-        "seasonal_index": 1.36
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "Durables_Electronics",
-        "month": "2023-10",
-        "volume": 71.9,
-        "unit": "ton",
-        "seasonal_index": 1.16
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-11",
-        "volume": 92.88,
-        "unit": "ton",
-        "seasonal_index": 0.84
-      },
-      {
-        "region_id": "Jeonbuk",
-        "region_name": "Jeonbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-12",
-        "volume": 88.15,
-        "unit": "ton",
-        "seasonal_index": 0.86
-      },
-      {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-01",
-        "volume": 26.61,
-        "unit": "ton",
-        "seasonal_index": 0.95
-      },
-      {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Beverages",
         "month": "2023-02",
-        "volume": 93.16,
+        "volume": 67.01,
         "unit": "ton",
         "seasonal_index": 0.97
       },
       {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "secure_node",
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Packaged_Food",
         "month": "2023-03",
-        "volume": 43.2,
+        "volume": 58.35,
         "unit": "ton",
         "seasonal_index": 1.12
       },
       {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "Industrial_Materials",
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Personal_Care",
         "month": "2023-04",
-        "volume": 15.61,
+        "volume": 23.67,
         "unit": "ton",
         "seasonal_index": 0.9
       },
       {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "FMCG_Packaged",
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Personal_Care",
         "month": "2023-05",
-        "volume": 74.2,
+        "volume": 26.21,
         "unit": "ton",
-        "seasonal_index": 1.43
+        "seasonal_index": 1.29
       },
       {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "Ecommerce_Misc",
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Fresh_Food",
         "month": "2023-06",
-        "volume": 77.47,
+        "volume": 90.71,
+        "unit": "ton",
+        "seasonal_index": 1.13
+      },
+      {
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Fresh_Food",
+        "month": "2023-07",
+        "volume": 97.58,
+        "unit": "ton",
+        "seasonal_index": 1.22
+      },
+      {
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Packaged_Food",
+        "month": "2023-08",
+        "volume": 13.68,
+        "unit": "ton",
+        "seasonal_index": 0.92
+      },
+      {
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Personal_Care",
+        "month": "2023-09",
+        "volume": 41.29,
         "unit": "ton",
         "seasonal_index": 0.82
       },
       {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-07",
-        "volume": 50.27,
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Beverages",
+        "month": "2023-10",
+        "volume": 20.86,
         "unit": "ton",
-        "seasonal_index": 1.17
+        "seasonal_index": 1.12
+      },
+      {
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Beverages",
+        "month": "2023-11",
+        "volume": 90.48,
+        "unit": "ton",
+        "seasonal_index": 0.89
+      },
+      {
+        "region_id": "Jeonbuk",
+        "region_name": "Jeonbuk",
+        "product_family": "Beverages",
+        "month": "2023-12",
+        "volume": 72.14,
+        "unit": "ton",
+        "seasonal_index": 0.83
       },
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Fresh_Food",
+        "month": "2023-01",
+        "volume": 53.3,
+        "unit": "ton",
+        "seasonal_index": 1.28
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Personal_Care",
+        "month": "2023-02",
+        "volume": 88.62,
+        "unit": "ton",
+        "seasonal_index": 1.44
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Fresh_Food",
+        "month": "2023-03",
+        "volume": 10.23,
+        "unit": "ton",
+        "seasonal_index": 1.41
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Personal_Care",
+        "month": "2023-04",
+        "volume": 77.34,
+        "unit": "ton",
+        "seasonal_index": 0.93
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Packaged_Food",
+        "month": "2023-05",
+        "volume": 58.29,
+        "unit": "ton",
+        "seasonal_index": 1.45
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Beverages",
+        "month": "2023-06",
+        "volume": 65.64,
+        "unit": "ton",
+        "seasonal_index": 1.06
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Personal_Care",
+        "month": "2023-07",
+        "volume": 74.85,
+        "unit": "ton",
+        "seasonal_index": 0.84
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Packaged_Food",
         "month": "2023-08",
-        "volume": 19.44,
+        "volume": 32.72,
+        "unit": "ton",
+        "seasonal_index": 1.3
+      },
+      {
+        "region_id": "Jeonnam",
+        "region_name": "Jeonnam",
+        "product_family": "Packaged_Food",
+        "month": "2023-09",
+        "volume": 86.0,
         "unit": "ton",
         "seasonal_index": 1.32
       },
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "secure_node",
-        "month": "2023-09",
-        "volume": 11.81,
-        "unit": "ton",
-        "seasonal_index": 1.03
-      },
-      {
-        "region_id": "Jeonnam",
-        "region_name": "Jeonnam",
-        "product_family": "FMCG_Packaged",
+        "product_family": "Personal_Care",
         "month": "2023-10",
-        "volume": 18.03,
+        "volume": 19.65,
         "unit": "ton",
-        "seasonal_index": 1.17
+        "seasonal_index": 1.11
       },
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "Durables_Electronics",
+        "product_family": "Packaged_Food",
         "month": "2023-11",
-        "volume": 90.15,
+        "volume": 45.74,
         "unit": "ton",
-        "seasonal_index": 1.22
+        "seasonal_index": 0.87
       },
       {
         "region_id": "Jeonnam",
         "region_name": "Jeonnam",
-        "product_family": "secure_node",
+        "product_family": "Packaged_Food",
         "month": "2023-12",
-        "volume": 41.96,
-        "unit": "ton",
-        "seasonal_index": 1.25
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-01",
-        "volume": 17.82,
-        "unit": "ton",
-        "seasonal_index": 1.18
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-02",
-        "volume": 60.2,
-        "unit": "ton",
-        "seasonal_index": 1.21
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "secure_node",
-        "month": "2023-03",
-        "volume": 21.48,
-        "unit": "ton",
-        "seasonal_index": 1.0
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-04",
-        "volume": 90.97,
-        "unit": "ton",
-        "seasonal_index": 1.23
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-05",
-        "volume": 42.05,
-        "unit": "ton",
-        "seasonal_index": 1.49
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-06",
-        "volume": 94.03,
+        "volume": 43.96,
         "unit": "ton",
         "seasonal_index": 0.81
       },
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-07",
-        "volume": 23.76,
-        "unit": "ton",
-        "seasonal_index": 0.97
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "secure_node",
-        "month": "2023-08",
-        "volume": 86.57,
+        "product_family": "Fresh_Food",
+        "month": "2023-01",
+        "volume": 85.66,
         "unit": "ton",
         "seasonal_index": 0.86
       },
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-09",
-        "volume": 25.6,
+        "product_family": "Beverages",
+        "month": "2023-02",
+        "volume": 20.78,
+        "unit": "ton",
+        "seasonal_index": 1.42
+      },
+      {
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Personal_Care",
+        "month": "2023-03",
+        "volume": 52.66,
+        "unit": "ton",
+        "seasonal_index": 1.05
+      },
+      {
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Fresh_Food",
+        "month": "2023-04",
+        "volume": 54.86,
+        "unit": "ton",
+        "seasonal_index": 0.86
+      },
+      {
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Packaged_Food",
+        "month": "2023-05",
+        "volume": 76.31,
+        "unit": "ton",
+        "seasonal_index": 1.19
+      },
+      {
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Personal_Care",
+        "month": "2023-06",
+        "volume": 48.85,
+        "unit": "ton",
+        "seasonal_index": 0.89
+      },
+      {
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Fresh_Food",
+        "month": "2023-07",
+        "volume": 40.37,
         "unit": "ton",
         "seasonal_index": 1.43
       },
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-10",
-        "volume": 14.65,
+        "product_family": "Personal_Care",
+        "month": "2023-08",
+        "volume": 61.37,
         "unit": "ton",
-        "seasonal_index": 0.81
+        "seasonal_index": 1.05
       },
       {
         "region_id": "Gyeongbuk",
         "region_name": "Gyeongbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-11",
-        "volume": 98.41,
-        "unit": "ton",
-        "seasonal_index": 0.88
-      },
-      {
-        "region_id": "Gyeongbuk",
-        "region_name": "Gyeongbuk",
-        "product_family": "Industrial_Materials",
-        "month": "2023-12",
-        "volume": 61.84,
-        "unit": "ton",
-        "seasonal_index": 1.44
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-01",
-        "volume": 83.54,
-        "unit": "ton",
-        "seasonal_index": 0.98
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-02",
-        "volume": 70.18,
+        "product_family": "Fresh_Food",
+        "month": "2023-09",
+        "volume": 39.73,
         "unit": "ton",
         "seasonal_index": 1.45
       },
       {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-03",
-        "volume": 58.15,
-        "unit": "ton",
-        "seasonal_index": 1.13
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-04",
-        "volume": 79.25,
-        "unit": "ton",
-        "seasonal_index": 0.93
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-05",
-        "volume": 73.99,
-        "unit": "ton",
-        "seasonal_index": 0.94
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "secure_node",
-        "month": "2023-06",
-        "volume": 31.82,
-        "unit": "ton",
-        "seasonal_index": 0.88
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-07",
-        "volume": 79.1,
-        "unit": "ton",
-        "seasonal_index": 0.86
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-08",
-        "volume": 23.89,
-        "unit": "ton",
-        "seasonal_index": 1.14
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-09",
-        "volume": 63.45,
-        "unit": "ton",
-        "seasonal_index": 1.06
-      },
-      {
-        "region_id": "Gyeongnam",
-        "region_name": "Gyeongnam",
-        "product_family": "Industrial_Materials",
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Fresh_Food",
         "month": "2023-10",
-        "volume": 59.37,
+        "volume": 19.16,
         "unit": "ton",
-        "seasonal_index": 1.18
+        "seasonal_index": 0.91
+      },
+      {
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Packaged_Food",
+        "month": "2023-11",
+        "volume": 53.9,
+        "unit": "ton",
+        "seasonal_index": 1.4
+      },
+      {
+        "region_id": "Gyeongbuk",
+        "region_name": "Gyeongbuk",
+        "product_family": "Beverages",
+        "month": "2023-12",
+        "volume": 35.66,
+        "unit": "ton",
+        "seasonal_index": 0.92
       },
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Industrial_Materials",
-        "month": "2023-11",
-        "volume": 39.01,
+        "product_family": "Packaged_Food",
+        "month": "2023-01",
+        "volume": 85.81,
+        "unit": "ton",
+        "seasonal_index": 0.84
+      },
+      {
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Packaged_Food",
+        "month": "2023-02",
+        "volume": 46.94,
+        "unit": "ton",
+        "seasonal_index": 1.49
+      },
+      {
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Packaged_Food",
+        "month": "2023-03",
+        "volume": 90.69,
+        "unit": "ton",
+        "seasonal_index": 1.2
+      },
+      {
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Packaged_Food",
+        "month": "2023-04",
+        "volume": 87.9,
         "unit": "ton",
         "seasonal_index": 1.37
       },
       {
         "region_id": "Gyeongnam",
         "region_name": "Gyeongnam",
-        "product_family": "Durables_Electronics",
-        "month": "2023-12",
-        "volume": 22.49,
-        "unit": "ton",
-        "seasonal_index": 0.8
-      },
-      {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "Durables_Electronics",
-        "month": "2023-01",
-        "volume": 63.61,
-        "unit": "ton",
-        "seasonal_index": 1.13
-      },
-      {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "FMCG_Packaged",
-        "month": "2023-02",
-        "volume": 81.49,
-        "unit": "ton",
-        "seasonal_index": 0.87
-      },
-      {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "Industrial_Materials",
-        "month": "2023-03",
-        "volume": 84.76,
-        "unit": "ton",
-        "seasonal_index": 1.48
-      },
-      {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "Ecommerce_Misc",
-        "month": "2023-04",
-        "volume": 93.96,
-        "unit": "ton",
-        "seasonal_index": 1.49
-      },
-      {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "Industrial_Materials",
+        "product_family": "Fresh_Food",
         "month": "2023-05",
-        "volume": 26.31,
+        "volume": 54.17,
         "unit": "ton",
-        "seasonal_index": 0.85
+        "seasonal_index": 1.31
       },
       {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "Ecommerce_Misc",
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Beverages",
         "month": "2023-06",
-        "volume": 14.33,
+        "volume": 93.64,
         "unit": "ton",
-        "seasonal_index": 1.35
+        "seasonal_index": 1.19
       },
       {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "FMCG_Packaged",
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Personal_Care",
         "month": "2023-07",
-        "volume": 81.57,
+        "volume": 52.9,
         "unit": "ton",
-        "seasonal_index": 0.94
+        "seasonal_index": 1.39
       },
       {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "Ecommerce_Misc",
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Fresh_Food",
         "month": "2023-08",
-        "volume": 84.26,
+        "volume": 26.83,
         "unit": "ton",
-        "seasonal_index": 0.93
+        "seasonal_index": 1.03
       },
       {
-        "region_id": "Jeju",
-        "region_name": "Jeju",
-        "product_family": "FMCG_Packaged",
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Packaged_Food",
         "month": "2023-09",
-        "volume": 69.87,
+        "volume": 27.96,
+        "unit": "ton",
+        "seasonal_index": 1.32
+      },
+      {
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Personal_Care",
+        "month": "2023-10",
+        "volume": 20.34,
+        "unit": "ton",
+        "seasonal_index": 1.23
+      },
+      {
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Personal_Care",
+        "month": "2023-11",
+        "volume": 17.86,
+        "unit": "ton",
+        "seasonal_index": 1.15
+      },
+      {
+        "region_id": "Gyeongnam",
+        "region_name": "Gyeongnam",
+        "product_family": "Packaged_Food",
+        "month": "2023-12",
+        "volume": 53.3,
         "unit": "ton",
         "seasonal_index": 1.17
       },
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "secure_node",
+        "product_family": "Fresh_Food",
+        "month": "2023-01",
+        "volume": 43.23,
+        "unit": "ton",
+        "seasonal_index": 1.12
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Fresh_Food",
+        "month": "2023-02",
+        "volume": 15.7,
+        "unit": "ton",
+        "seasonal_index": 1.49
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Fresh_Food",
+        "month": "2023-03",
+        "volume": 71.61,
+        "unit": "ton",
+        "seasonal_index": 0.86
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Packaged_Food",
+        "month": "2023-04",
+        "volume": 71.34,
+        "unit": "ton",
+        "seasonal_index": 1.33
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Packaged_Food",
+        "month": "2023-05",
+        "volume": 52.58,
+        "unit": "ton",
+        "seasonal_index": 1.22
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Packaged_Food",
+        "month": "2023-06",
+        "volume": 41.4,
+        "unit": "ton",
+        "seasonal_index": 1.45
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Beverages",
+        "month": "2023-07",
+        "volume": 77.14,
+        "unit": "ton",
+        "seasonal_index": 1.09
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Fresh_Food",
+        "month": "2023-08",
+        "volume": 75.78,
+        "unit": "ton",
+        "seasonal_index": 1.46
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Personal_Care",
+        "month": "2023-09",
+        "volume": 44.13,
+        "unit": "ton",
+        "seasonal_index": 1.45
+      },
+      {
+        "region_id": "Jeju",
+        "region_name": "Jeju",
+        "product_family": "Personal_Care",
         "month": "2023-10",
-        "volume": 38.46,
+        "volume": 61.7,
         "unit": "ton",
-        "seasonal_index": 1.21
+        "seasonal_index": 1.39
       },
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Industrial_Materials",
+        "product_family": "Personal_Care",
         "month": "2023-11",
-        "volume": 83.49,
+        "volume": 84.51,
         "unit": "ton",
-        "seasonal_index": 1.11
+        "seasonal_index": 1.33
       },
       {
         "region_id": "Jeju",
         "region_name": "Jeju",
-        "product_family": "Ecommerce_Misc",
+        "product_family": "Personal_Care",
         "month": "2023-12",
-        "volume": 90.97,
+        "volume": 24.73,
         "unit": "ton",
-        "seasonal_index": 1.24
+        "seasonal_index": 0.91
       }
     ],
     "top_od_lanes": [
@@ -2364,90 +2325,72 @@
         "origin_region": "Seoul",
         "destination_region": "Daejeon",
         "product_family": "FMCG_Packaged",
-        "volume": 1309.67,
+        "volume": 1721.86,
         "unit": "ton",
-        "share_pct": 4.95
+        "share_pct": 6.99
       },
       {
         "origin_region": "Busan",
         "destination_region": "Ulsan",
         "product_family": "FMCG_Packaged",
-        "volume": 1366.23,
+        "volume": 1284.6,
         "unit": "ton",
-        "share_pct": 4.2
+        "share_pct": 4.23
       },
       {
         "origin_region": "Daegu",
         "destination_region": "Sejong",
         "product_family": "FMCG_Packaged",
-        "volume": 1087.22,
+        "volume": 1815.8,
         "unit": "ton",
-        "share_pct": 5.79
+        "share_pct": 4.53
       },
       {
         "origin_region": "Incheon",
         "destination_region": "Gyeonggi",
         "product_family": "FMCG_Packaged",
-        "volume": 599.93,
+        "volume": 1724.9,
         "unit": "ton",
-        "share_pct": 3.06
+        "share_pct": 4.95
       },
       {
         "origin_region": "Gwangju",
         "destination_region": "Gangwon",
         "product_family": "FMCG_Packaged",
-        "volume": 1314.27,
+        "volume": 1065.42,
         "unit": "ton",
-        "share_pct": 4.88
+        "share_pct": 5.16
       }
     ]
   },
   "product_segmentation": {
     "method": "rule_based",
     "confidence_level": "Medium",
-    "rules_applied": 7,
+    "rules_applied": 5,
     "distribution": [
       {
-        "product_family": "Durables_Electronics",
+        "product_family": "Fresh_Food",
         "volume": 10000,
         "unit": "ton",
-        "share_pct": 14.2
+        "share_pct": 20.0
       },
       {
-        "product_family": "Industrial_Materials",
+        "product_family": "Beverages",
         "volume": 10000,
         "unit": "ton",
-        "share_pct": 14.2
+        "share_pct": 20.0
       },
       {
-        "product_family": "FMCG_Packaged",
+        "product_family": "Packaged_Food",
         "volume": 10000,
         "unit": "ton",
-        "share_pct": 14.2
+        "share_pct": 20.0
       },
       {
-        "product_family": "secure_node",
+        "product_family": "Personal_Care",
         "volume": 10000,
         "unit": "ton",
-        "share_pct": 14.2
-      },
-      {
-        "product_family": "Industrial_Materials",
-        "volume": 10000,
-        "unit": "ton",
-        "share_pct": 14.2
-      },
-      {
-        "product_family": "Ecommerce_Misc",
-        "volume": 10000,
-        "unit": "ton",
-        "share_pct": 14.2
-      },
-      {
-        "product_family": "FMCG_Packaged",
-        "volume": 10000,
-        "unit": "ton",
-        "share_pct": 14.2
+        "share_pct": 20.0
       }
     ],
     "notes": [
@@ -2750,7 +2693,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Seoul",
-          "hub_id": "GW_BULKY",
+          "hub_id": "IC_AIRPORT",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2759,7 +2702,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Busan",
-          "hub_id": "DJ_CENTRAL",
+          "hub_id": "SJ_SECURE",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2768,7 +2711,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Daegu",
-          "hub_id": "SJ_SECURE",
+          "hub_id": "DJ_CENTRAL",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2786,7 +2729,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Gwangju",
-          "hub_id": "SJ_SECURE",
+          "hub_id": "DJ_CENTRAL",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2795,15 +2738,6 @@
         {
           "scenario_id": "S3",
           "region_name": "Daejeon",
-          "hub_id": "BS_PORT",
-          "product_family": "Durables_Electronics",
-          "volume": 100,
-          "unit": "ton",
-          "allocation_share_pct": 100.0
-        },
-        {
-          "scenario_id": "S3",
-          "region_name": "Ulsan",
           "hub_id": "GG_METRO",
           "product_family": "Durables_Electronics",
           "volume": 100,
@@ -2812,8 +2746,17 @@
         },
         {
           "scenario_id": "S3",
+          "region_name": "Ulsan",
+          "hub_id": "SJ_SECURE",
+          "product_family": "Durables_Electronics",
+          "volume": 100,
+          "unit": "ton",
+          "allocation_share_pct": 100.0
+        },
+        {
+          "scenario_id": "S3",
           "region_name": "Sejong",
-          "hub_id": "BS_PORT",
+          "hub_id": "IC_AIRPORT",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2831,7 +2774,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Gangwon",
-          "hub_id": "IC_AIRPORT",
+          "hub_id": "GW_BULKY",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2840,7 +2783,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Chungbuk",
-          "hub_id": "SJ_SECURE",
+          "hub_id": "GW_BULKY",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2858,7 +2801,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Jeonbuk",
-          "hub_id": "GW_BULKY",
+          "hub_id": "DJ_CENTRAL",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2867,7 +2810,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Jeonnam",
-          "hub_id": "SJ_SECURE",
+          "hub_id": "IC_AIRPORT",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2876,7 +2819,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Gyeongbuk",
-          "hub_id": "IC_AIRPORT",
+          "hub_id": "SJ_SECURE",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2885,7 +2828,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Gyeongnam",
-          "hub_id": "IC_AIRPORT",
+          "hub_id": "DJ_CENTRAL",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2894,7 +2837,7 @@
         {
           "scenario_id": "S3",
           "region_name": "Jeju",
-          "hub_id": "IC_AIRPORT",
+          "hub_id": "GG_METRO",
           "product_family": "Durables_Electronics",
           "volume": 100,
           "unit": "ton",
@@ -2934,7 +2877,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Seoul",
-      "hub_id": "GW_BULKY",
+      "hub_id": "IC_AIRPORT",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -2943,7 +2886,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Busan",
-      "hub_id": "DJ_CENTRAL",
+      "hub_id": "SJ_SECURE",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -2952,7 +2895,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Daegu",
-      "hub_id": "SJ_SECURE",
+      "hub_id": "DJ_CENTRAL",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -2970,7 +2913,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Gwangju",
-      "hub_id": "SJ_SECURE",
+      "hub_id": "DJ_CENTRAL",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -2979,15 +2922,6 @@
     {
       "scenario_id": "S3",
       "region_name": "Daejeon",
-      "hub_id": "BS_PORT",
-      "product_family": "Durables_Electronics",
-      "volume": 100,
-      "unit": "ton",
-      "allocation_share_pct": 100.0
-    },
-    {
-      "scenario_id": "S3",
-      "region_name": "Ulsan",
       "hub_id": "GG_METRO",
       "product_family": "Durables_Electronics",
       "volume": 100,
@@ -2996,8 +2930,17 @@
     },
     {
       "scenario_id": "S3",
+      "region_name": "Ulsan",
+      "hub_id": "SJ_SECURE",
+      "product_family": "Durables_Electronics",
+      "volume": 100,
+      "unit": "ton",
+      "allocation_share_pct": 100.0
+    },
+    {
+      "scenario_id": "S3",
       "region_name": "Sejong",
-      "hub_id": "BS_PORT",
+      "hub_id": "IC_AIRPORT",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3015,7 +2958,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Gangwon",
-      "hub_id": "IC_AIRPORT",
+      "hub_id": "GW_BULKY",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3024,7 +2967,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Chungbuk",
-      "hub_id": "SJ_SECURE",
+      "hub_id": "GW_BULKY",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3042,7 +2985,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Jeonbuk",
-      "hub_id": "GW_BULKY",
+      "hub_id": "DJ_CENTRAL",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3051,7 +2994,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Jeonnam",
-      "hub_id": "SJ_SECURE",
+      "hub_id": "IC_AIRPORT",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3060,7 +3003,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Gyeongbuk",
-      "hub_id": "IC_AIRPORT",
+      "hub_id": "SJ_SECURE",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3069,7 +3012,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Gyeongnam",
-      "hub_id": "IC_AIRPORT",
+      "hub_id": "DJ_CENTRAL",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3078,7 +3021,7 @@
     {
       "scenario_id": "S3",
       "region_name": "Jeju",
-      "hub_id": "IC_AIRPORT",
+      "hub_id": "GG_METRO",
       "product_family": "Durables_Electronics",
       "volume": 100,
       "unit": "ton",
@@ -3088,84 +3031,21 @@
   "seasonal_playbook": [
     {
       "event_id": "E1",
-      "event_name": "M01_Ecommerce_Misc_peak_window",
-      "months": ["2023-01"],
-      "affected_product_families": ["Ecommerce_Misc"],
-      "affected_hubs": ["GG_METRO", "BS_PORT"],
-      "risk": "Last-mile delivery delays and SLA breach risk during M01 parcel-volume surge",
-      "recommended_actions": [
-        "Add temporary 3PL contracts for last-mile delivery",
-        "Shift handling staff +20% during the event window",
-        "Stage parcels closer to demand centroids",
-        "Scale last-mile rider/courier pools for the window"
-      ]
-    },
-    {
-      "event_id": "E2",
       "event_name": "M02-M03_Durables_Electronics_peak_window",
-      "months": ["2023-02", "2023-03"],
-      "affected_product_families": ["Durables_Electronics"],
-      "affected_hubs": ["GG_METRO", "IC_AIRPORT"],
-      "risk": "Capacity overflow at affected hubs during M02-M03 high-velocity launch wave",
+      "months": [
+        "2023-02",
+        "2023-03"
+      ],
+      "affected_product_families": [
+        "Durables_Electronics"
+      ],
+      "affected_hubs": [
+        "GG_METRO"
+      ],
+      "risk": "Capacity overflow at affected hubs during M02-M03 high-velocity durable goods and electronics launch wave",
       "recommended_actions": [
         "Pre-position 30% inventory 2 weeks early",
-        "Activate flex capacity at affected hubs",
-        "Negotiate temporary 3PL overflow contracts",
-        "Coordinate inbound with manufacturer release calendar",
-        "Add 3PL overflow contract at GG_METRO (gap ≈ 2400 tons)"
-      ]
-    },
-    {
-      "event_id": "E3",
-      "event_name": "M07-M08_Industrial_Materials_peak_window",
-      "months": ["2023-07", "2023-08"],
-      "affected_product_families": ["Industrial_Materials"],
-      "affected_hubs": ["BS_PORT", "GW_BULKY"],
-      "risk": "Storage shortage for bulky inventory during M07-M08 bulky storage-intensive flow",
-      "recommended_actions": [
-        "Lease overflow yard within 30 km of the affected hub",
-        "Cross-dock directly from port / supplier when possible",
-        "Reduce safety stock days for slow-moving SKUs",
-        "Pre-clear floor space at receiving hubs 2 weeks ahead"
-      ]
-    },
-    {
-      "event_id": "E4",
-      "event_name": "M09_FMCG_Packaged_peak_window",
-      "months": ["2023-09"],
-      "affected_product_families": ["FMCG_Packaged"],
-      "affected_hubs": ["GG_METRO", "DJ_CENTRAL"],
-      "risk": "General demand spike requiring flex operations during M09 mixed cargo seasonal swing",
-      "recommended_actions": [
-        "Increase inbound receiving slot capacity by 25%",
-        "Pre-build picking waves the night before"
-      ]
-    },
-    {
-      "event_id": "E5",
-      "event_name": "M11_FMCG_Packaged_peak_window",
-      "months": ["2023-11"],
-      "affected_product_families": ["FMCG_Packaged"],
-      "affected_hubs": ["GG_METRO", "BS_PORT", "DJ_CENTRAL"],
-      "risk": "General demand spike requiring flex operations during M11 finished-goods replenishment cycle",
-      "recommended_actions": [
-        "Increase inbound receiving slot capacity by 25%",
-        "Pre-build picking waves the night before",
-        "Sync inbound receiving slots with downstream PO calendar"
-      ]
-    },
-    {
-      "event_id": "E6",
-      "event_name": "M12_Durables_Electronics_peak_window",
-      "months": ["2023-12"],
-      "affected_product_families": ["Durables_Electronics"],
-      "affected_hubs": ["SJ_SECURE", "IC_AIRPORT"],
-      "risk": "Elevated theft / loss risk on high-value goods during M12 high-value secure shipment surge",
-      "recommended_actions": [
-        "Route shipments through secure_node hubs only",
-        "Increase guarded transit checkpoints",
-        "Add insurance rider for the event window",
-        "Audit chain of custody through secure_node hubs"
+        "Activate flex capacity at affected hubs"
       ]
     }
   ],

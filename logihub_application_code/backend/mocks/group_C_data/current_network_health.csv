@@ -1,9 +1,2 @@
 hub_id,status,utilization_pct
 GG_METRO,overload,110.5
-BS_PORT,watchlist,98.2
-DJ_CENTRAL,healthy,72.4
-IC_AIRPORT,overload,105.8
-GW_BULKY,healthy,68.0
-SJ_SECURE,underused,55.0
-US_CROSSDOCK,underused,38.2
-GB_OVERFLOW,underused,42.5

@@ -18,16 +18,16 @@ def main():
     
     np.random.seed(42)
     regions = ["Seoul", "Busan", "Daegu", "Incheon", "Gwangju", "Daejeon", "Ulsan", "Sejong", "Gyeonggi", "Gangwon", "Chungbuk", "Chungnam", "Jeonbuk", "Jeonnam", "Gyeongbuk", "Gyeongnam", "Jeju"]
-    product_families = ["Fresh_Food", "FMCG_Packaged", "Industrial_Materials", "Durables_Electronics", "Ecommerce_Misc"]
+    product_families = ["Fresh_Food", "FMCG_Packaged", "Pharmaceuticals", "Industrial_Materials", "Durables_Electronics", "Ecommerce_Misc"]
     months = [f"2023-{str(i).zfill(2)}" for i in range(1, 13)]
     hubs = ["GG_METRO", "BS_PORT", "DJ_CENTRAL", "IC_AIRPORT", "GW_BULKY", "SJ_SECURE"]
     scenarios_list = [f"S{i}" for i in range(9)]
     
     # ------------------ GROUP A: DEMAND ------------------
     print("Generating Group A (Demand) Mocks...")
-    regional_demand = [{"region_id": r, "region_name": r, "volume": round(np.random.uniform(500, 5000), 2), "unit": "ton", "share_pct": 0.0} for r in regions]
-    total_vol = sum(d["volume"] for d in regional_demand)
-    for d in regional_demand: d["share_pct"] = round((d["volume"] / total_vol) * 100, 2)
+    regional_demand = [{"region_id": r, "region_name": r, "demand_weight_ton": round(np.random.uniform(500, 5000), 2), "unit": "ton", "share_pct": 0.0} for r in regions]
+    total_vol = sum(d["demand_weight_ton"] for d in regional_demand)
+    for d in regional_demand: d["share_pct"] = round((d["demand_weight_ton"] / total_vol) * 100, 2)
     pd.DataFrame(regional_demand).to_csv(os.path.join(group_a_dir, "regional_demand.csv"), index=False)
     
     monthly_demand = [{"region_id": r, "region_name": r, "month": m, "volume": round(np.random.uniform(50, 500), 2), "unit": "ton"} for r in regions for m in months]
@@ -44,7 +44,7 @@ def main():
 
     # ------------------ GROUP B: COSTS & OPTIMIZATION ------------------
     print("Generating Group B (Cost & Optimization) Mocks...")
-    transport_cost = [{"lane_id": f"{r1}-{r2}", "origin": r1, "destination": r2, "cost_per_ton_km": 0.15, "distance_km": round(np.random.uniform(50, 400), 2)} for r1 in regions[:5] for r2 in regions[5:10]]
+    transport_cost = [{"lane_id": f"{r1}-{r2}", "origin": r1, "destination": r2, "cost_per_ton_km": round(np.random.uniform(0.15, 0.25), 2), "cold_chain_premium_pct": 25.0, "toll_fee_usd": round(np.random.uniform(10, 50), 2), "distance_km": round(np.random.uniform(50, 400), 2)} for r1 in regions[:5] for r2 in regions[5:10]]
     pd.DataFrame(transport_cost).to_csv(os.path.join(group_b_dir, "transport_cost_by_lane.csv"), index=False)
     
     fixed_cost = [{"hub_id": h, "fixed_cost_usd_per_year": round(np.random.uniform(50000, 200000), 2), "capacity_tons": round(np.random.uniform(10000, 50000), 2)} for h in hubs]
@@ -59,7 +59,7 @@ def main():
     seasonal_flex = [{"hub_id": h, "month": m, "flex_cost_usd": round(np.random.uniform(0, 10000), 2)} for h in hubs for m in ["2023-11", "2023-12"]]
     pd.DataFrame(seasonal_flex).to_csv(os.path.join(group_b_dir, "seasonal_flex_cost.csv"), index=False)
     
-    sla_penalty = [{"lane_id": f"{r1}-{r2}", "penalty_usd": round(np.random.uniform(100, 500), 2)} for r1, r2 in zip(regions[:3], regions[3:6])]
+    sla_penalty = [{"lane_id": f"{r1}-{r2}", "penalty_usd": round(np.random.uniform(500, 2000), 2), "reason": "Fresh Food Spoilage Risk"} for r1, r2 in zip(regions[:3], regions[3:6])]
     pd.DataFrame(sla_penalty).to_csv(os.path.join(group_b_dir, "sla_penalty_by_lane.csv"), index=False)
     
     utilization = [{"scenario_id": "S3", "hub_id": h, "month": m, "assigned_volume": 12000, "effective_capacity": 15000, "utilization_pct": 80.0, "status": "healthy"} for h in hubs for m in months[:2]]
@@ -94,8 +94,28 @@ def main():
     recommended_net = [{"scenario_id": "S3", "hub_id": h, "status": "healthy"} for h in hubs[:4]]
     pd.DataFrame(recommended_net).to_csv(os.path.join(group_c_dir, "recommended_network.csv"), index=False)
 
-    rules = {"rules": [{"region": "Seoul", "family": "Durables_Electronics", "confidence": 0.9}]}
-    with open(os.path.join(group_c_dir, "classifier_rules.json"), "w") as f: json.dump(rules, f, indent=2)
+    rules = {
+        "version": "2.0",
+        "source": "Group_A_Classification_2026",
+        "categories": [
+            {"family": "Fresh_Food", "confidence": 0.95, "keywords": ["신선식품", "농산물", "축산물", "수산물", "냉장식품", "냉동식품", "냉동·냉장 식품", "식자재", "양곡", "정부양곡"], "temperature_zones": ["Cold_Chain", "Frozen"]},
+            {"family": "FMCG_Packaged", "confidence": 0.93, "keywords": ["가공식품", "포장식품", "상온식품", "생활용품", "일상생활용품", "생필품", "화장품", "생수", "음료", "주류"], "temperature_zones": ["Ambient"]},
+            {"family": "Pharmaceuticals", "confidence": 0.97, "keywords": ["의약품", "의약외품", "의료기기", "의료용품", "병원 위생재료", "건강기능식품", "건강보조식품", "동물의약품", "의료기기 관련 장비", "건강기능식품 원료"], "temperature_zones": ["Cold_Chain", "Ambient", "Controlled"]},
+            {"family": "Industrial_Materials", "confidence": 0.92, "keywords": ["철강제품", "철제품", "코일", "석탄류", "석고", "망간", "화학제품", "비료", "제지류", "수출입 기자재"], "temperature_zones": ["Ambient", "Outdoor"]},
+            {"family": "Durables_Electronics", "confidence": 0.94, "keywords": ["가전제품", "전자제품", "모바일 기기", "TV", "가구류", "자동차", "자동차부품", "타이어", "반도체", "반도체 장비 및 부품"], "temperature_zones": ["Ambient", "Climate_Controlled"]},
+            {"family": "Ecommerce_Misc", "confidence": 0.88, "keywords": ["택배물품", "택배화물", "택배상품", "택배소화물", "의류", "신발", "서적", "문구류", "일반화물", "컨테이너 화물"], "temperature_zones": ["Ambient"]}
+        ],
+        "rules": [
+            {"region": "Seoul", "family": "Durables_Electronics", "confidence": 0.9},
+            {"region": "Gyeonggi", "family": "Ecommerce_Misc", "confidence": 0.88},
+            {"region": "Busan", "family": "Industrial_Materials", "confidence": 0.91},
+            {"region": "Incheon", "family": "FMCG_Packaged", "confidence": 0.90},
+            {"region": "Daegu", "family": "Fresh_Food", "confidence": 0.92},
+            {"region": "Gwangju", "family": "Fresh_Food", "confidence": 0.89},
+            {"region": "Daejeon", "family": "Pharmaceuticals", "confidence": 0.93}
+        ]
+    }
+    with open(os.path.join(group_c_dir, "classifier_rules.json"), "w", encoding="utf-8") as f: json.dump(rules, f, indent=2, ensure_ascii=False)
         
     # NOTE: seasonal_playbook.json is now generated by seasonal_playbook_generator.py
     # (industry-agnostic, data-driven). This script writes a minimal valid placeholder
@@ -143,7 +163,7 @@ def main():
             "geographic_scope": "South Korea (17 regions)",
             "analysis_period": "2023",
             "target_company_context": "Aggregate Korean freight (industry-agnostic) — public OD data; not a representation of any single company",
-            "disclaimer": "This analysis is generated from public Korean Freight O/D aggregate data and does not represent any individual company or industry. The engine demonstrates the analysis architecture; replacing the input with enterprise shipment data is required before using any numbers for CAPEX or operational decisions."
+            "disclaimer": "This analysis is generated from public Korean Freight O/D aggregate data and does not represent any individual company or industry. The engine demonstrates the analysis architecture; specifically updated for FMCG and Cold Chain operations."
         },
         "input_data_summary": {
             "total_rows_ingested": 1500000,

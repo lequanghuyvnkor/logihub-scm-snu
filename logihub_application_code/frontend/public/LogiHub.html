@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=1280"/>
-<title>LogiHub · Logistics Decision Engine</title>
+<title>LogiHub · 9-Scenario Optimizer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="styles-v2.css"/>
 </head>
 <body>
 <div id="root"></div>
@@ -18,11 +19,17 @@
 
 <script src="data.js"></script>
 <script src="api-bridge.js"></script>
+<!-- v1 shared components + page content (used as base by v2 wrappers) -->
 <script type="text/babel" src="shell.jsx"></script>
 <script type="text/babel" src="pages-onboard.jsx"></script>
 <script type="text/babel" src="pages-system.jsx"></script>
 <script type="text/babel" src="pages-engine.jsx"></script>
 <script type="text/babel" src="pages-report.jsx"></script>
-<script type="text/babel" src="app.jsx"></script>
+<!-- v2 shell, pages and entry point -->
+<script type="text/babel" src="shell-v2.jsx"></script>
+<script type="text/babel" src="pages-v2-setup.jsx"></script>
+<script type="text/babel" src="pages-v2-decision.jsx"></script>
+<script type="text/babel" src="pages-v2-explore.jsx"></script>
+<script type="text/babel" src="app-v2.jsx"></script>
 </body>
 </html>

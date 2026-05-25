@@ -24,29 +24,41 @@ def load_config():
 
 
 def load_real_data(json_path, dist_path):
-    """Integrate Group A's real O/D data and geographic distance data"""
+    """Integrate Group A's real O/D data and geographic distance data with fine-grained handling costs"""
     print(f"[INFO] Loading Group A master data... ({json_path})")
     with open(json_path, 'r', encoding='utf-8-sig') as f:
         data = json.load(f)
 
+    # Load updated config to reference the 12-category product benchmarks
+    config = load_config()
+    product_benchmarks = config.get("product_benchmarks", {})
+
     I = [r['region_id'] for r in data['master_data']['regions']]
     J = [h['hub_id'] for h in data['master_data']['candidate_hubs']]
-
     demand = {item['region_id']: item['volume'] for item in data['demand']['annual_demand_by_region']}
 
     f_costs, cap = {}, {}
+    v_costs = {} # 품목별 세분화 하역비를 담을 딕셔너리
+    
     for hub in data['master_data']['candidate_hubs']:
         h_id = hub['hub_id']
         f_costs[h_id] = hub['fixed_cost_usd_per_year']
         cap[h_id] = hub['effective_capacity']
-
-    # Handling cost benchmark (temporary fixed value, product family differences reflected in pre-processing)
-    v_costs = {j: 2000 for j in J}
+        
+        # [핵심 업데이트] 하드코딩 2000 삭제 -> 허브별 취급 품목 믹스에 맞는 실제 하역비 산정
+        eligible_families = hub.get('eligible_product_families', [])
+        costs_found = []
+        
+        for family in eligible_families:
+            if family in product_benchmarks:
+                costs_found.append(product_benchmarks[family]['handling_cost_usd_per_ton'])
+        
+        # 만약 매핑되는 품목 원가가 있다면 평균값을 사용하고, 없으면 표준 기본값(1500) 적용
+        v_costs[h_id] = int(np.mean(costs_found)) if costs_found else 1500
 
     elig = {}
     for i in I:
         for hub in data['master_data']['candidate_hubs']:
-            # If at least one product family is eligible, set to 1
             elig[(i, hub['hub_id'])] = 1 if len(hub.get('eligible_product_families', [])) > 0 else 0
 
     print(f"[INFO] Loading distance matrix... ({dist_path})")

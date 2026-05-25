@@ -232,6 +232,8 @@ async def optimize_all(
 
     # Derive a simple recommendation: pick the plan with best (coverage + cost balance)
     def _score(r):
+        if not r or r.get("status") != "Optimal" or "metrics" not in r:
+            return -999999999.0
         cov  = r["metrics"].get("coverage_within_150km_pct", 0) / 100
         cost = r["metrics"].get("total_cost_usd", 1e9)
         # normalised score: higher coverage wins, lower cost wins
@@ -319,6 +321,8 @@ async def optimize_all_scenarios():
                 errors[cfg["id"]] = str(e)
 
     def _score(r):
+        if not r or r.get("status") != "Optimal" or "metrics" not in r:
+            return -999999999.0
         cov  = r["metrics"].get("coverage_within_150km_pct", 0) / 100
         cost = r["metrics"].get("total_cost_usd", 1e9)
         return cov - (cost / 1_000_000)

@@ -512,6 +512,27 @@ function LiveResultView({ data }) {
   const [selected, setSelected] = useStateE("P2");
   const r = data[selected];
   if (!r) return null;
+  if (r.status !== "Optimal") {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ display: "flex", gap: 8 }}>
+          {["P1","P2","P3"].map(id => (
+            <button key={id} onClick={() => setSelected(id)}
+              className={"btn" + (selected === id ? " primary" : "")}>
+              {id} {id === data.recommended ? "★" : ""}
+            </button>
+          ))}
+          <span style={{ marginLeft: 8, fontSize: 11.5, color: "var(--ink-3)", lineHeight: "30px" }}>
+            Recommended: <b style={{ color: "var(--accent-ink)" }}>{data.recommended}</b>
+          </span>
+        </div>
+        <div style={{ padding: 24, borderRadius: 10, background: "var(--danger-soft)", border: "1px solid var(--danger)", color: "var(--danger)", display: "flex", alignItems: "center", gap: 8 }}>
+          <window.Icon name="warn" size={16}/>
+          <span>Solver returned status <b>{r.status}</b>: {r.error || "Optimization failed"}</span>
+        </div>
+      </div>
+    );
+  }
   const m = r.metrics;
 
   return (

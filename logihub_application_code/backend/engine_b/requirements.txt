@@ -1,0 +1,13 @@
+python -m venv .venv
+
+# Windows 사용자 (cmd 기준)
+.venv\Scripts\activate
+
+# Mac / Linux 사용자
+source .venv/bin/activate
+
+# 필수 라이브러리 일괄 설치
+pip install pulp pandas numpy
+
+# 실행 방법 (cmd)
+python cli.py --data mock_engine_output_final.json

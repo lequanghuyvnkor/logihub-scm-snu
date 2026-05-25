@@ -1,3 +1,1 @@
-"""LogiHub Group A data-demand engine."""
-
-__version__ = "1.0.0"
+"""LogiHub Group A A1-A5 data pipeline package with 6 product families."""

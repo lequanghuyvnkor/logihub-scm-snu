@@ -1,4 +1,7 @@
-"""A1-A4 data pipeline used by the A5 standalone CLI."""
+"""A1-A4 data pipeline used by the A5 standalone CLI.
+
+Revision: 6-product-family version with Pharmaceuticals included.
+"""
 from __future__ import annotations
 
 import json
@@ -183,6 +186,20 @@ def write_region_master(output_dir: Path) -> str:
     return target.name
 
 
+
+
+def write_commodity_mapping(output_dir: Path) -> str:
+    """Write the heuristic commodity-to-product-family mapping for auditability."""
+    target = output_dir / "commodity_product_family_mapping.csv"
+    mapping = pd.DataFrame(
+        sorted(COMMODITY_TO_PRODUCT_FAMILY.items()),
+        columns=["commodity", "product_family"],
+    )
+    mapping["mapping_status"] = "heuristic_pending_group_c_classifier"
+    mapping.to_csv(target, index=False, encoding="utf-8-sig")
+    return target.name
+
+
 def run_pipeline(input_dir: str | Path, output_dir: str | Path, logger: logging.Logger | None = None) -> PipelineResult:
     input_path = Path(input_dir)
     output_path = Path(output_dir)
@@ -218,6 +235,7 @@ def run_pipeline(input_dir: str | Path, output_dir: str | Path, logger: logging.
         df.to_csv(output_path / name, index=False, encoding="utf-8-sig")
         output_files.append(name)
     output_files.append(write_region_master(output_path))
+    output_files.append(write_commodity_mapping(output_path))
 
     matrix_numeric = od_matrix[REGIONS_17]
     matrix_total = float(matrix_numeric.to_numpy().sum())

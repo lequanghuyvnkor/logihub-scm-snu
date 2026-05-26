@@ -1,0 +1,6 @@
+﻿Scenario,Type,# Hubs,Annual Cost (USD),Cost vs Baseline (%),SLA Compliance (%),Coverage within 200km (%),Peak Hub Utilization (%),Risk Level,Recommended
+Baseline (2 Hubs),Current,2,641622,0.0,72.4,61.2,112.5,High,
+S1: +Incheon (3 Hubs),Cost-Optimized,3,596122,-7.1,81.5,72.8,89.3,Medium,
+S2: +Gwangju (3 Hubs),Service-Optimized,3,603622,-5.9,84.1,78.4,96.2,Medium,
+S3: 4-Hub (Recommended),Balanced,4,535500,-16.5,91.8,88.6,74.1,Low,YES
+S4: 5-Hub (Max Coverage),Service-Optimized,5,567500,-11.6,96.3,94.1,61.8,Low,

@@ -1,0 +1,8 @@
+﻿Item,Value (USD),Type,Label
+Baseline Annual Cost (S0),641622,start,"$641,622"
+Transport Cost Reduction,-106122,saving,"-$106,122"
+Spoilage Loss Avoidance,-112000,saving,"-$112,000"
+SLA Penalty Avoidance,-34500,saving,"-$34,500"
+New Hub Fixed Costs (+2 hubs),103000,cost,"+$103,000"
+Net Annual Cost (S3),392000,end,"$392,000"
+NET ANNUAL SAVING,249622,total,"$249,622 saved"

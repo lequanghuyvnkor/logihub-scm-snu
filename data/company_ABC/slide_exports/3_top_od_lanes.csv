@@ -1,0 +1,16 @@
+﻿Lane,Origin,Destination,Volume (tons),Share (%),Lane Type
+Busan → Gyeonggi,Busan,Gyeonggi,471.1,6.83,inter-region
+Busan → Incheon,Busan,Incheon,430.7,6.24,inter-region
+Busan → Seoul,Busan,Seoul,421.5,6.11,inter-region
+Incheon → Seoul,Incheon,Seoul,354.4,5.14,inter-region
+Jeonnam → Seoul,Jeonnam,Seoul,349.4,5.06,inter-region
+Jeonnam → Gyeonggi,Jeonnam,Gyeonggi,321.4,4.66,inter-region
+Gyeongbuk → Seoul,Gyeongbuk,Seoul,274.0,3.97,inter-region
+Chungnam → Seoul,Chungnam,Seoul,270.8,3.92,inter-region
+Gyeongnam → Seoul,Gyeongnam,Seoul,266.7,3.86,inter-region
+Chungnam → Gyeonggi,Chungnam,Gyeonggi,243.3,3.53,inter-region
+Incheon → Gyeonggi,Incheon,Gyeonggi,237.7,3.44,inter-region
+Busan → Gwangju,Busan,Gwangju,233.0,3.38,inter-region
+Jeonnam → Busan,Jeonnam,Busan,226.7,3.28,inter-region
+Gyeonggi → Daejeon,Gyeonggi,Daejeon,216.8,3.14,inter-region
+Busan → Daegu,Busan,Daegu,203.4,2.95,inter-region

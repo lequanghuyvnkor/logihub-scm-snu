@@ -1,0 +1,9 @@
+﻿Hub,Current Utilization (%),S3 Utilization (%),Status Current,Status S3
+"ABC Busan
+(existing)",112.5,74.1,OVERLOAD,Healthy
+"ABC Gyeonggi
+(existing)",87.3,68.5,Watchlist,Healthy
+"Incheon Port Hub
+(new)",0,71.2,Not Active,Healthy
+"Gwangju Fresh Hub
+(new)",0,58.4,Not Active,Healthy

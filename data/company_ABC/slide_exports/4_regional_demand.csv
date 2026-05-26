@@ -1,0 +1,14 @@
+﻿Region,Inbound (tons),Outbound (tons),Total Flow (tons),Inbound Share (%),Role
+Seoul,2790.1,135.4,2925.5,40.43,Demand Center
+Busan,574.2,1759.7,2333.9,8.32,Supply Hub
+Gyeonggi,1395.7,576.8,1972.5,20.22,Demand Center
+Incheon,738.1,592.1,1330.2,10.7,Balanced
+Jeonnam,0,1056.1,1056.1,0.0,Supply Hub
+Daegu,502.4,188.1,690.5,7.28,Demand Center
+Chungnam,0,681.7,681.7,0.0,Supply Hub
+Gwangju,516.0,146.3,662.3,7.48,Demand Center
+Gyeongbuk,0,598.4,598.4,0.0,Supply Hub
+Gyeongnam,0,588.8,588.8,0.0,Supply Hub
+Daejeon,384.5,150.0,534.5,5.57,Demand Center
+Gangwon,0,303.2,303.2,0.0,Supply Hub
+Jeonbuk,0,124.3,124.3,0.0,Supply Hub

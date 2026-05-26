@@ -1,0 +1,52 @@
+{
+  "company_name": "ABC Food Logistics Co., Ltd.",
+  "enterprise_scale": "Medium",
+  "annual_revenue_krw_billion": 320,
+  "primary_product_category": "Fresh_Food",
+  "sub_categories": [
+    "Fresh_Seafood",
+    "Frozen_Seafood",
+    "Fresh_Meat",
+    "Processed_Meat"
+  ],
+  "delivery_sla_hours": {
+    "Fresh_Seafood": 12,
+    "Frozen_Seafood": 24,
+    "Fresh_Meat": 12,
+    "Processed_Meat": 24
+  },
+  "capex_budget_usd_per_year": 480000,
+  "priority_regions": [
+    "Busan",
+    "Gyeonggi",
+    "Seoul",
+    "Gyeongnam"
+  ],
+  "existing_warehouses": [
+    {
+      "code": "ABC_BSN",
+      "name": "ABC Busan Cold Storage",
+      "region": "Busan",
+      "address": "Busan Metropolitan City, Nam-gu",
+      "capacity_tons": 800,
+      "lease_type": "long_term",
+      "annual_fixed_cost_usd": 95000,
+      "product_category": "Fresh_Food"
+    },
+    {
+      "code": "ABC_GG",
+      "name": "ABC Gyeonggi Distribution Center",
+      "region": "Gyeonggi",
+      "address": "Gyeonggi-do, Icheon-si",
+      "capacity_tons": 600,
+      "lease_type": "long_term",
+      "annual_fixed_cost_usd": 78000,
+      "product_category": "Fresh_Food"
+    }
+  ],
+  "data_period": {
+    "start": "2025-12-01",
+    "end": "2026-05-31"
+  },
+  "notes": "ABC Corp specializes in seafood (sourced from Busan, Jeonnam, Gyeongnam) and meat (sourced from Gyeonggi, Chungnam, Gyeongbuk). Primary markets: Seoul Metro, Gyeonggi, Incheon."
+}

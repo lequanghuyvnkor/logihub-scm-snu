@@ -4,6 +4,23 @@ Welcome to **LogiHub Intelligence**, an end-to-end logistics network optimizatio
 
 ---
 
+## 🆕 Recent Updates (May 25-26, 2026)
+
+**lequanghuyvnkor:**
+- Converted PDF documents to Markdown, organized in `docs/` with proper numbering.
+- Introduced a mid-level company size threshold across 8 product groups.
+- Restructured groups A1-A5 to support 6 product families, adding Pharmaceuticals.
+- Fixed optimizer crashes and filtered out private warehouses from the dataset.
+- Added live-reload support for development, automatically refreshing the browser on JSX/CSS changes.
+- Streamlined the frontend workflow (13 steps reduced to 11) and added cache-busting to script tags.
+
+**seouldsv7-alt:**
+- Configured a new `requirements.txt` for standardized Python environments.
+- Continuously improved and refined `advanced_engine.py` and `config.json`.
+- Updated Command Line Interface logic in `cli.py`.
+
+---
+
 ## 🗺️ Project Architecture & Repository Map
 
 This repository is organized into distinct, clean modules separating academic research, backend optimization algorithms, and the interactive web interface:

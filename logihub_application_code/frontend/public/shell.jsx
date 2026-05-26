@@ -226,98 +226,197 @@ const KoreaMap = ({
   selectedRegion = null,
   legend = null,
 }) => {
-  // tile size on the 4:5 grid (normalized 0..1)
-  const tileW = 0.11, tileH = 0.065;
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const layersRef = useRef([]);
 
-  // Get accent color intensity for region tile
-  const tint = (intensity) => {
-    if (intensity == null) return null;
-    const a = 0.10 + intensity * 0.75;
-    return `color-mix(in oklch, oklch(56% 0.11 205) ${(a*100).toFixed(0)}%, white)`;
+  // Helper to map IDs to South Korea geographical lat/lng coordinates
+  const getRealLatLng = (id) => {
+    const coords = {
+      // Regions (Sido / Provinces of South Korea)
+      seoul: [37.5665, 126.9780],
+      gyeonggi: [37.4138, 127.5183],
+      incheon: [37.4563, 126.7052],
+      gangwon: [37.8228, 128.1555],
+      chungbuk: [36.6356, 127.4913],
+      chungnam: [36.5184, 126.8000],
+      sejong: [36.4800, 127.2890],
+      daejeon: [36.3504, 127.3845],
+      jeonbuk: [35.7175, 127.1449],
+      jeonnam: [34.8679, 126.9910],
+      gwangju: [35.1595, 126.8526],
+      gyeongbuk: [36.5760, 128.5056],
+      daegu: [35.8711, 128.6014],
+      gyeongnam: [35.4606, 128.2132],
+      ulsan: [35.5389, 129.3114],
+      busan: [35.1796, 129.0756],
+      jeju: [33.4996, 126.5312],
+
+      // Hubs
+      H01: [37.5665, 126.9780], // Seoul Metro Hub
+      H02: [37.4563, 126.7052], // Incheon Gateway
+      H03: [37.0084, 127.2652], // Anseong DC
+      H04: [36.3504, 127.3845], // Daejeon Central
+      H05: [36.9910, 127.9259], // Chungju Inland
+      H06: [37.3422, 127.9201], // Wonju Flex
+      H07: [35.1595, 126.8526], // Gwangju Southwest
+      H08: [35.9483, 126.9578], // Iksan Junction
+      H09: [35.8711, 128.6014], // Daegu East
+      H10: [35.1041, 129.0413], // Busan Port DC
+      H11: [35.2281, 128.6811], // Changwon Coastal
+      H12: [33.4996, 126.5312], // Jeju Island Hub
+      
+      // Declared/Existing Warehouses
+      WS01: [37.5565, 126.9380], // Mapo Seoul
+      WS02: [37.0084, 127.2652], // Anseong
+      WS03: [37.4063, 126.6352], // Yeonsu Incheon
+      WS04: [36.3604, 127.3545], // Yuseong Daejeon
+      WS05: [35.0996, 128.9614], // Saha Busan
+      WS06: [35.1795, 126.8926], // Buk Gwangju
+    };
+    return coords[id] || [36.5, 127.5];
   };
 
-  return (
-    <div className="korea-grid">
-      {/* Background frame */}
-      <svg className="svg-chart" viewBox="0 0 100 125" preserveAspectRatio="none" style={{ position: "absolute", inset: 12, width: "calc(100% - 24px)", height: "calc(100% - 24px)" }}>
-        {/* dotted background grid */}
-        <defs>
-          <pattern id="dotgrid" width="6" height="6" patternUnits="userSpaceOnUse">
-            <circle cx="3" cy="3" r="0.4" fill="#D2D5CE"/>
-          </pattern>
-        </defs>
-        <rect x="0" y="0" width="100" height="125" fill="url(#dotgrid)" />
-        {/* Flow lines */}
-        {flowLines.map((fl, i) => {
-          const r = window.REGION_BY_ID[fl.regionId]; const h = window.HUB_BY_ID[fl.hubId];
-          if (!r || !h) return null;
-          return (
-            <line key={i}
-              x1={h.x * 100} y1={h.y * 125}
-              x2={r.x * 100} y2={r.y * 125}
-              stroke="oklch(46% 0.09 205)" strokeOpacity={(fl.weight || 0.5)}
-              strokeWidth={0.5 + (fl.weight || 0.5) * 1.5}
-              strokeDasharray="2 2"
-            />
-          );
-        })}
-      </svg>
+  useEffect(() => {
+    if (!mapInstanceRef.current && mapRef.current) {
+      // Initialize real Leaflet map
+      const map = L.map(mapRef.current, {
+        zoomControl: false,
+        attributionControl: false
+      }).setView([35.8, 127.7], 7); // Beautiful scale to see all S.Korea
 
-      {/* Region tiles */}
-      {window.REGIONS.map((r) => {
-        const intensity = highlightRegions[r.id];
-        const sel = selectedRegion === r.id;
-        return (
-          <div key={r.id}
-            className={"region-tile" + (sel ? " selected" : "")}
-            onClick={() => onRegionClick?.(r.id)}
-            style={{
-              left:   `calc(${(r.x - tileW/2) * 100}% + 12px - 0px)`,
-              top:    `calc(${(r.y - tileH/2) * 100}% + 12px - 0px)`,
-              width:  `${tileW * 100}%`,
-              height: `${tileH * 100}%`,
-              background: tint(intensity) || "var(--surface)",
-              color: intensity > 0.55 ? "white" : "var(--ink-2)",
-              padding: "4px 6px",
-              fontSize: "9.5px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}>
-            <div className="r-name" style={{ fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.name}</div>
-            {intensity != null && (
-              <div className="r-val" style={{ color: intensity > 0.55 ? "white" : "var(--ink)", fontSize: "9px", fontFamily: "var(--font-mono)", marginTop: "2px" }}>
-                {window.fmtNum(r.demand)}
-              </div>
-            )}
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 18,
+      }).addTo(map);
+
+      L.control.zoom({ position: 'topright' }).addTo(map);
+
+      mapInstanceRef.current = map;
+    }
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    // Clear previous elements
+    layersRef.current.forEach(layer => map.removeLayer(layer));
+    layersRef.current = [];
+
+    const newLayers = [];
+
+    // 1. Draw Region Circles with Shaded Intensity (demand)
+    window.REGIONS.forEach(r => {
+      const intensity = highlightRegions[r.id];
+      const isSelected = selectedRegion === r.id;
+      
+      if (intensity != null || isSelected) {
+        const latLng = getRealLatLng(r.id);
+        const radius = 12000 + (intensity || 0) * 16000;
+        const color = isSelected ? "#3b82f6" : "#4b5563";
+        const fillColor = isSelected ? "#3b82f6" : "oklch(56% 0.11 205)";
+        
+        const circle = L.circle(latLng, {
+          color: color,
+          fillColor: fillColor,
+          fillOpacity: isSelected ? 0.4 : 0.08 + (intensity || 0) * 0.45,
+          weight: isSelected ? 3 : 1.2,
+          radius: radius
+        }).addTo(map);
+
+        circle.bindTooltip(`
+          <div style="font-family: var(--font-sans); padding: 4px; border-radius: 4px;">
+            <div style="font-weight: 700; color: #1e293b;">${r.name}</div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 2px;">Demand: <b>${window.fmtNum(r.demand)}</b></div>
           </div>
-        );
-      })}
+        `, {
+          direction: "top",
+          opacity: 0.95
+        });
 
-      {/* Hub pins */}
-      {showHubs && hubs.map((h) => {
+        circle.on('click', () => onRegionClick?.(r.id));
+        newLayers.push(circle);
+      }
+    });
+
+    // 2. Draw Flow Connections (Region to assigned Hub)
+    flowLines.forEach((fl, idx) => {
+      const rLatLng = getRealLatLng(fl.regionId);
+      const hLatLng = getRealLatLng(fl.hubId);
+
+      if (rLatLng && hLatLng) {
+        const polyline = L.polyline([hLatLng, rLatLng], {
+          color: "oklch(46% 0.09 205)",
+          weight: 1.5 + (fl.weight || 0.5) * 1.5,
+          opacity: 0.5,
+          dashArray: "3, 6"
+        }).addTo(map);
+        newLayers.push(polyline);
+      }
+    });
+
+    // 3. Draw Hub/Warehouse Markers
+    if (showHubs) {
+      hubs.forEach(h => {
+        const latLng = getRealLatLng(h.id);
         const st = hubStatus[h.id] || "normal";
-        const cls = "hub-pin"
-          + (selectedHub === h.id ? " selected" : "")
-          + (st === "overload" ? " overload" : "")
-          + (st === "underused" ? " underused" : "");
-        return (
-          <div key={h.id}
-            className={cls}
-            onClick={(e) => { e.stopPropagation(); onHubClick?.(h.id); }}
-            style={{
-              left:  `calc(${h.x * 100}% + 12px - 0px)`,
-              top:   `calc(${h.y * 100}% + 12px - 0px)`,
-            }}
-            title={h.name}
-          >
-            {selectedHub === h.id && <span className="hub-label">{h.name}</span>}
-          </div>
-        );
-      })}
+        const isSelected = selectedHub === h.id;
 
+        const iconColor = st === "overload" ? "#ef4444" : st === "underused" ? "#94a3b8" : "#22c55e";
+        const flexBorder = isSelected ? "box-shadow: 0 0 0 3px rgba(59,130,246,0.5);" : "";
+        
+        const markerHtml = `
+          <div style="
+            width: ${isSelected ? '16px' : '12px'}; 
+            height: ${isSelected ? '16px' : '12px'}; 
+            background: ${iconColor}; 
+            border: 2px solid white; 
+            border-radius: 50%;
+            display: block;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            ${flexBorder}
+          "></div>
+        `;
+
+        const markerIcon = L.divIcon({
+          html: markerHtml,
+          className: 'custom-hub-div-icon',
+          iconSize: isSelected ? [16, 16] : [12, 12],
+          iconAnchor: isSelected ? [8, 8] : [6, 6]
+        });
+
+        const marker = L.marker(latLng, { icon: markerIcon }).addTo(map);
+        
+        marker.bindTooltip(`
+          <div style="font-family: var(--font-sans); padding: 4px;">
+            <div style="font-weight: 700; color: #1e293b;">${h.name || h.id}</div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 1px;">Region: ${window.REGION_BY_ID[h.region]?.name || h.region}</div>
+          </div>
+        `, {
+          direction: "top",
+          opacity: 0.95
+        });
+
+        marker.on('click', () => onHubClick?.(h.id));
+        newLayers.push(marker);
+      });
+    }
+
+    layersRef.current = newLayers;
+  }, [highlightRegions, showHubs, hubs, selectedHub, hubStatus, flowLines, selectedRegion]);
+
+  return (
+    <div className="korea-grid" style={{ height: "100%", width: "100%", padding: 0, overflow: "hidden" }}>
+      <div ref={mapRef} style={{ width: "100%", height: "100%", zIndex: 1 }} />
       {legend && (
-        <div style={{ position: "absolute", left: 16, bottom: 16, background: "rgba(255,255,255,0.92)", border: "1px solid var(--border)", borderRadius: 8, padding: "8px 10px" }}>
+        <div style={{ position: "absolute", left: 16, bottom: 16, zIndex: 1000, background: "rgba(255,255,255,0.92)", border: "1px solid var(--border)", borderRadius: 8, padding: "8px 10px" }}>
           {legend}
         </div>
       )}

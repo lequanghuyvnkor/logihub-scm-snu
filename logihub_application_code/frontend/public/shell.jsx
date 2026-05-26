@@ -227,7 +227,7 @@ const KoreaMap = ({
   legend = null,
 }) => {
   // tile size on the 4:5 grid (normalized 0..1)
-  const tileW = 0.16, tileH = 0.08;
+  const tileW = 0.11, tileH = 0.065;
 
   // Get accent color intensity for region tile
   const tint = (intensity) => {
@@ -278,10 +278,15 @@ const KoreaMap = ({
               height: `${tileH * 100}%`,
               background: tint(intensity) || "var(--surface)",
               color: intensity > 0.55 ? "white" : "var(--ink-2)",
+              padding: "4px 6px",
+              fontSize: "9.5px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between"
             }}>
-            <div className="r-name">{r.name}</div>
+            <div className="r-name" style={{ fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.name}</div>
             {intensity != null && (
-              <div className="r-val" style={{ color: intensity > 0.55 ? "white" : "var(--ink)" }}>
+              <div className="r-val" style={{ color: intensity > 0.55 ? "white" : "var(--ink)", fontSize: "9px", fontFamily: "var(--font-mono)", marginTop: "2px" }}>
                 {window.fmtNum(r.demand)}
               </div>
             )}

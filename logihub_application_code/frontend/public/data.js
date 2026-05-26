@@ -2,9 +2,9 @@
 
 // 17 Korean regions with approximate normalized positions (0..1, 0..1) on a portrait map.
 window.REGIONS = [
-  { id: "seoul",    name: "Seoul",        sido: "Seoul",            x: 0.42, y: 0.28, demand: 184500, share: 0.205, growth: +0.08 },
-  { id: "gyeonggi", name: "Gyeonggi",     sido: "Gyeonggi-do",      x: 0.39, y: 0.34, demand: 168300, share: 0.187, growth: +0.11 },
-  { id: "incheon",  name: "Incheon",      sido: "Incheon",          x: 0.30, y: 0.30, demand:  62100, share: 0.069, growth: +0.04 },
+  { id: "seoul",    name: "Seoul",        sido: "Seoul",            x: 0.43, y: 0.25, demand: 184500, share: 0.205, growth: +0.08 },
+  { id: "gyeonggi", name: "Gyeonggi",     sido: "Gyeonggi-do",      x: 0.41, y: 0.35, demand: 168300, share: 0.187, growth: +0.11 },
+  { id: "incheon",  name: "Incheon",      sido: "Incheon",          x: 0.27, y: 0.29, demand:  62100, share: 0.069, growth: +0.04 },
   { id: "gangwon",  name: "Gangwon",      sido: "Gangwon-do",       x: 0.65, y: 0.24, demand:  31400, share: 0.035, growth: -0.02 },
   { id: "chungbuk", name: "Chungbuk",     sido: "Chungcheongbuk-do",x: 0.52, y: 0.43, demand:  39800, share: 0.044, growth: +0.03 },
   { id: "chungnam", name: "Chungnam",     sido: "Chungcheongnam-do",x: 0.36, y: 0.46, demand:  51200, share: 0.057, growth: +0.05 },

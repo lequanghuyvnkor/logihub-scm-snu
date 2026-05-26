@@ -6,16 +6,10 @@ Welcome to **LogiHub Intelligence**, an end-to-end logistics network optimizatio
 
 ## 🗺️ Project Architecture & Repository Map
 
-This repository is organized into distinct, clean modules separating academic research, backend optimization algorithms, the interactive web interface, and AI capabilities:
+This repository is organized into distinct, clean modules separating academic research, backend optimization algorithms, and the interactive web interface:
 
 ```text
 LogiHub_Project_Archive/
-│
-├── 📁 AutoResearchClaw/               # 🆕 AI Research Assistant Framework (researchclaw, llm, agents)
-│   ├── 📁 researchclaw/               # Core AI modules (agents, llm, memory, skills, metaclaw_bridge)
-│   ├── 📁 experiments/                # AI benchmarking and testing
-│   ├── 📁 website/ & 📁 frontend/     # UI for the AutoResearchClaw
-│   └── 📁 docs/ & 📁 tests/           # Documentation and test suites
 │
 ├── 📁 logistics_hub_research/       # Core Academic Research & Pre-processing
 │   ├── 📁 data_processed/            # Cleaned, geocoded, and structured dataset (CSV format)
@@ -60,8 +54,6 @@ LogiHub_Project_Archive/
 4. **100% Clean & Production Ready**:
    - Fully optimized `.gitignore` prevents repository bloat from multi-megabyte research PDFs and Excel sheets while preserving rapid-deployment codebase.
 
-5. **AutoResearchClaw (AI Research Assistant)**:
-   - A newly integrated automated AI framework utilizing LLMs to streamline literature review, benchmarking, and codebase interaction, driving smart decision-making.
 
 ---
 

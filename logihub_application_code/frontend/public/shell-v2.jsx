@@ -54,16 +54,15 @@ const NAV_V2 = [
     items: [
       { id: "forecast", num: "07", name: "Demand Forecast",      icon: "chart",    tabpill: true },
       { id: "seasonal", num: "08", name: "Seasonal & Playbook",  icon: "calendar", tabpill: true },
-      { id: "scenarios",num: "09", name: "Scenarios",            icon: "tune",     tabpill: true },
-      { id: "case",     num: "10", name: "Business Case",        icon: "money",    tabpill: true },
-      { id: "export",   num: "11", name: "Roadmap & Export",     icon: "download", tabpill: true },
+      { id: "case",     num: "09", name: "Business Case",        icon: "money",    tabpill: true },
+      { id: "export",   num: "10", name: "Roadmap & Export",     icon: "download", tabpill: true },
     ]
   },
 ];
 window.NAV_V2 = NAV_V2;
 
 // Order map used by StepFooter to find prev/next
-const STEP_ORDER = ["overview","profile","upload","owned","optimize","map","roles","forecast","seasonal","scenarios","case","export"];
+const STEP_ORDER = ["overview","profile","upload","owned","optimize","map","roles","forecast","seasonal","case","export"];
 window.STEP_ORDER = STEP_ORDER;
 
 // Tier-A and tier-B require gating; tier-C uses a softer "available" state.
@@ -223,7 +222,7 @@ function TopBarV2({ stepId, dataMode = "proxy", flow, onResume }) {
         )}
         {!info.tier && <span className="stage-pill">Overview</span>}
         <span className="sep">/</span>
-        {stepIdx >= 0 && <span className="crumb-count">Step {stepIdx} of 11</span>}
+        {stepIdx >= 0 && <span className="crumb-count">Step {stepIdx} of 10</span>}
         <span className="crumb-step">{info.name}</span>
       </div>
       <div className="topbar-right">
@@ -257,7 +256,7 @@ function PipelineV2({ stepId, flow }) {
     if (["profile","upload","owned"].includes(id)) return 0;
     if (id === "optimize") return 1;
     if (["map","roles"].includes(id)) return 2;
-    if (["forecast","seasonal","scenarios","case"].includes(id)) return 3;
+    if (["forecast","seasonal","case"].includes(id)) return 3;
     if (id === "export") return 4;
     return -1;
   };
@@ -271,7 +270,7 @@ function PipelineV2({ stepId, flow }) {
     { num: "03", name: "Decide",   meta: "Map · Roles · pick scenario",
       doneCheck: f => f.optimizationStatus === "done" && (f.visitedSteps.includes("map") || f.visitedSteps.includes("roles")) },
     { num: "04", name: "Explore",  meta: "Forecast · Scenarios · Case",
-      doneCheck: f => ["forecast","scenarios","case"].some(s => f.visitedSteps.includes(s)) },
+      doneCheck: f => ["forecast","case"].some(s => f.visitedSteps.includes(s)) },
     { num: "05", name: "Export",   meta: "PDF · PPTX · CSV bundle",
       doneCheck: f => f.visitedSteps.includes("export") },
   ];
@@ -326,7 +325,7 @@ function StepFooter({ stepId, flow, onNavigate, gate, customNext, customBack }) 
       </div>
       <div className="step-footer-center">
         <div className="step-progress">
-          <span>Step {idx} of 11</span>
+          <span>Step {idx} of 10</span>
           <div className="dots">
             {STEP_ORDER.slice(1).map((s, i) => {
               const st = getStepStatus(s, flow);
@@ -369,7 +368,7 @@ function StepHeader({ tier, num, name, sub, badges }) {
           </span>
         )}
         <div className="page-eyebrow" style={{ margin: 0 }}>
-          Step {num} of 11 · {name}
+          Step {num} of 10 · {name}
         </div>
         {badges}
       </div>

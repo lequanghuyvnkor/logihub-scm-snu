@@ -147,7 +147,104 @@ window.PageDiagnosis = PageDiagnosis;
 // 09 — WAREHOUSE ROLES (F-11)
 // ════════════════════════════════════════════════════════════
 function PageRoles() {
-  const [active, setActive] = useStateR(null);
+  const [activeScenario, setActiveScenario] = useStateR(() => {
+    const best = window.SCENARIOS ? window.SCENARIOS.find(s => s.rank === 1) : null;
+    return best ? best.id : "S2";
+  });
+  const [active, setActive] = useStateR(null); // active role
+
+  const scenario = window.SCENARIO_BY_ID[activeScenario] || window.SCENARIOS[2];
+  const hubs = window.HUBS || [];
+
+  // Classify warehouses dynamically based on active scenario
+  const selectedHubIds = scenario.selectedHubs || [];
+  
+  // Find the National Anchor: the active warehouse with the maximum capacity
+  let nationalAnchorId = null;
+  let maxCapacity = -1;
+  hubs.forEach(h => {
+    if (selectedHubIds.includes(h.id)) {
+      const cap = (h.base || 0) + (h.flex || 0);
+      if (cap > maxCapacity) {
+        maxCapacity = cap;
+        nationalAnchorId = h.id;
+      }
+    }
+  });
+
+  const roles = [
+    {
+      id: "national",
+      name: "National Anchor",
+      en: "National Anchor",
+      rule: "P1 output — largest warehouse, nationwide service",
+      whs: nationalAnchorId ? [nationalAnchorId] : []
+    },
+    {
+      id: "regional",
+      name: "Regional Hub",
+      en: "Regional Hub",
+      rule: "P2 output — warehouse covering a macro-region",
+      whs: hubs.filter(h => selectedHubIds.includes(h.id) && h.id !== nationalAnchorId && (h.type === "regional" || h.type === "metro")).map(h => h.id)
+    },
+    {
+      id: "cold",
+      name: "Cold Distribution Station",
+      en: "Cold Distribution",
+      rule: "Cold + FNB > 50% & top 30% capacity",
+      whs: hubs.filter(h => selectedHubIds.includes(h.id) && (h.type === "port" || h.type === "crossdock" || h.name.toLowerCase().includes("cold"))).map(h => h.id)
+    },
+    {
+      id: "secure",
+      name: "Security Bay",
+      en: "Security Bay",
+      rule: "Electronics + premium > 60% with high-security",
+      whs: hubs.filter(h => selectedHubIds.includes(h.id) && h.type === "secure").map(h => h.id)
+    },
+    {
+      id: "lastmile",
+      name: "Last-mile Relief",
+      en: "Last-mile Relief",
+      rule: "Small site within 30 km urban radius",
+      whs: hubs.filter(h => selectedHubIds.includes(h.id) && (h.type === "launch" || (h.base || 0) < 10000) && h.id !== nationalAnchorId).map(h => h.id)
+    },
+    {
+      id: "port",
+      name: "Port Trans-shipment",
+      en: "Port Trans-shipment",
+      rule: "< 50 km to port & top 50% capacity",
+      whs: hubs.filter(h => selectedHubIds.includes(h.id) && (h.type === "port" || h.region === "incheon" || h.region === "busan")).map(h => h.id)
+    },
+    {
+      id: "relief",
+      name: "Blind-zone Relief",
+      en: "Blind-zone Relief",
+      rule: "Newly-leased site covering a blind zone",
+      whs: hubs.filter(h => selectedHubIds.includes(h.id) && (h.region === "jeju" || h.region === "gangwon" || h.region === "jeonnam")).map(h => h.id)
+    },
+    {
+      id: "standby",
+      name: "Standby Warehouse",
+      en: "Standby (downgrade)",
+      rule: "Money-burning warehouse downgraded; opens only when load > 95%",
+      whs: hubs.filter(h => !selectedHubIds.includes(h.id)).map(h => h.id)
+    }
+  ];
+
+  const anchorHub = hubs.find(h => h.id === nationalAnchorId);
+  const regionalHubsList = hubs.filter(h => roles.find(r => r.id === "regional").whs.includes(h.id));
+  const regionalHubNames = regionalHubsList.length > 0 
+    ? regionalHubsList.map(h => h.name).join(", ")
+    : "No other regional hubs";
+  const standbyCount = roles.find(r => r.id === "standby").whs.length;
+
+  const recWhat = anchorHub 
+    ? `${anchorHub.name} becomes the National Anchor; ${regionalHubNames} become Regional Hubs.`
+    : "No hubs active in this scenario.";
+  
+  const recWhy = `Engine output for ${scenario.name}: National Anchor has the largest capacity (${anchorHub ? ((anchorHub.base || 0) + (anchorHub.flex || 0)).toLocaleString() : 0} t) and serves as central node. Regional Hubs cover their macro-regions.`;
+  
+  const recAction = `Place ${standbyCount} inactive warehouses in Standby — only open them during peak season overflow.`;
 
   return (
     <div className="page">
@@ -156,21 +253,38 @@ function PageRoles() {
         <h1 className="page-title">Each warehouse plays a distinct role</h1>
         <div className="page-sub">
           Eight standard roles — the engine auto-assigns every warehouse into one (or several) roles based on capacity,
-          certifications, location, and the output of Plans P1 + P2.
+          certifications, location, and the output of the active scenario optimization.
+        </div>
+      </div>
+
+      {/* Scenario selector */}
+      <div className="card" style={{ marginBottom: 16 }}>
+        <div className="card-head">Scenario Selector</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          {(window.SCENARIOS || []).map(s => (
+            <button key={s.id}
+              className={"btn" + (s.id === activeScenario ? " next" : "")}
+              onClick={() => {
+                setActiveScenario(s.id);
+                setActive(null);
+              }}>
+              {s.id} · {s.tag || s.name}
+            </button>
+          ))}
         </div>
       </div>
 
       <window.KPIStrip>
         <window.KPI label="Roles defined"         value="8" foot="Each role has a specific rule"/>
-        <window.KPI label="Warehouses classified" value="13" foot="6 owned + 7 directory candidates"/>
-        <window.KPI label="National anchors"      value={window.ROLES.find(r => r.id === "national").whs.length} foot="P1 output — largest warehouse"/>
-        <window.KPI label="Regional hubs"         value={window.ROLES.find(r => r.id === "regional").whs.length} foot="P2 output — macro-region coverage"/>
-        <window.KPI label="Standby (downgrade)"   value={window.ROLES.find(r => r.id === "standby").whs.length}
-          foot={<><span className="badge danger"><span className="dot"></span>WH-GWJ-01 burns money</span></>}/>
+        <window.KPI label="Warehouses classified" value={hubs.length} foot={`${hubs.filter(h => selectedHubIds.includes(h.id)).length} Active + ${hubs.filter(h => !selectedHubIds.includes(h.id)).length} Inactive`}/>
+        <window.KPI label="National anchors"      value={roles.find(r => r.id === "national").whs.length} foot="Dynamic max-capacity anchor"/>
+        <window.KPI label="Regional hubs"         value={roles.find(r => r.id === "regional").whs.length} foot="Macro-region coverage hubs"/>
+        <window.KPI label="Standby (downgrade)"   value={roles.find(r => r.id === "standby").whs.length}
+          foot={<><span className="badge danger"><span className="dot"></span>{standbyCount} standby sites</span></>}/>
       </window.KPIStrip>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
-        {window.ROLES.map(r => (
+        {roles.map(r => (
           <div key={r.id} onClick={() => setActive(active === r.id ? null : r.id)}
             className="scenario-card"
             style={{ ...(active === r.id ? { borderColor: "var(--accent)", boxShadow: "0 0 0 3px var(--accent-soft)" } : {}) }}>
@@ -186,13 +300,13 @@ function PageRoles() {
       </div>
 
       <div className="two-col">
-        <window.Card title="Assignments matrix" sub="Columns = roles · ✓ = warehouse assigned">
+        <window.Card title="Assignments matrix" sub={`Columns = roles · ✓ = warehouse assigned · Active Scenario: ${scenario.name}`}>
           <div style={{ overflowX: "auto" }}>
             <table className="tbl" style={{ minWidth: 720 }}>
               <thead>
                 <tr>
                   <th>Warehouse</th>
-                  {window.ROLES.map(r => (
+                  {roles.map(r => (
                     <th key={r.id} style={{ writingMode: "vertical-lr", textOrientation: "mixed", padding: "20px 4px", fontSize: 10 }}>
                       {r.en}
                     </th>
@@ -200,26 +314,17 @@ function PageRoles() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { code: "WH-SEL-01", name: "Mapo Seoul" },
-                  { code: "WH-ANS-01", name: "Anseong DC" },
-                  { code: "WH-INC-02", name: "Yeonsu Incheon" },
-                  { code: "WH-DAJ-01", name: "Yuseong Daejeon" },
-                  { code: "WH-BSN-01", name: "Saha Busan" },
-                  { code: "WH-GWJ-01", name: "Buk Gwangju" },
-                  { code: "D-08461",   name: "GS Anseong (new)" },
-                  { code: "D-02118",   name: "Yongsan East Bay" },
-                  { code: "D-09312",   name: "Busan Gamcheon Cold" },
-                  { code: "D-12089",   name: "Jeju Aewol (Relief)" },
-                  { code: "D-06724",   name: "Pyeongtaek Port" },
-                ].map(w => (
-                  <tr key={w.code} className="hoverable">
+                {hubs.map(w => (
+                  <tr key={w.id} className="hoverable" style={{ opacity: selectedHubIds.includes(w.id) ? 1 : 0.6 }}>
                     <td>
-                      <span className="mono" style={{ fontSize: 11, color: "var(--ink-3)" }}>{w.code}</span>
+                      <span className="mono" style={{ fontSize: 11, color: "var(--ink-3)" }}>{w.id}</span>
+                      <span style={{ marginLeft: 8, fontSize: 10 }} className={"badge " + (selectedHubIds.includes(w.id) ? "healthy" : "critical")}>
+                        {selectedHubIds.includes(w.id) ? "Active" : "Standby"}
+                      </span>
                       <div style={{ fontSize: 12, color: "var(--ink)", fontWeight: 500 }}>{w.name}</div>
                     </td>
-                    {window.ROLES.map(r => {
-                      const assigned = r.whs.includes(w.code);
+                    {roles.map(r => {
+                      const assigned = r.whs.includes(w.id);
                       return (
                         <td key={r.id} className="num"
                           style={{ background: assigned ? "var(--accent-soft)" : "transparent" }}>
@@ -235,9 +340,9 @@ function PageRoles() {
         </window.Card>
 
         <window.RecPanel
-          what="Anseong DC becomes the National Anchor; Daejeon + Saha Busan become Regional Hubs; Yeonsu Incheon keeps the Last-mile Relief role."
-          why="Engine output: Anseong is the largest capacity (24.2k m³) and central. Daejeon + Busan optimally cover their macro-regions. Yongsan Bay is added as the new security site, drawn from the high-security directory."
-          action="Place WH-GWJ-01 in Standby — only open when Gwangju load > 95%. Open Jeju Aewol as a Blind-zone Relief station to clear the blind zone."
+          what={recWhat}
+          why={recWhy}
+          action={recAction}
           impact="Every warehouse has a clear operator rule — no more 'do-anything warehouses' (the root cause behind Diagnosis bullet 3)."/>
       </div>
     </div>
@@ -257,20 +362,9 @@ function PagePlaybook() {
 
   return (
     <div className="page">
-      <div className="page-head">
-        <div className="page-eyebrow">10 · Event Playbook · F-12 · US-12</div>
-        <h1 className="page-title">Per-event response playbook</h1>
-        <div className="page-sub">
-          The engine filters the 30-event library by industry ({industry.name}), then generates a playbook with name + dates,
-          affected group + uplift, warehouse status at peak, 3 action steps (chosen from the 12 standard actions — Appendix A),
-          and a retreat rule.
-        </div>
-      </div>
-
       <window.KPIStrip>
         <window.KPI label="Industry filter" value={industry.en} foot="Only prints relevant events"/>
         <window.KPI label="Playbooks generated" value={window.PLAYBOOKS.length} foot="Of 30+ events on file"/>
-        <window.KPI label="Standard actions"  value="12" foot="Appendix A · A1 – A12"/>
         <window.KPI label="Next peak" value="11.11" foot={<><span className="badge danger"><span className="dot"></span>+92% fashion + electronics</span></>}/>
         <window.KPI label="Lead time" value="6" unit="weeks" foot="Earliest activation window"/>
       </window.KPIStrip>
@@ -349,22 +443,6 @@ function PagePlaybook() {
         </div>
       </window.Card>
 
-      <window.Card title="Reference · 12 standard actions (Appendix A)"
-        sub="The engine picks 3 of these 12 actions per event">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
-          {window.STANDARD_ACTIONS.map(a => (
-            <div key={a.id} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 10,
-              padding: "10px 12px", border: "1px solid var(--border)", borderRadius: 8, background: "var(--surface)" }}>
-              <span className="mono" style={{ fontSize: 11, color: "var(--accent)", fontWeight: 600 }}>{a.id}</span>
-              <div>
-                <div style={{ fontSize: 12.5, color: "var(--ink)", fontWeight: 500 }}>{a.name}</div>
-                <div style={{ fontSize: 11, color: "var(--ink-3)", marginTop: 1 }}>{a.en}</div>
-                <div style={{ fontSize: 10.5, color: "var(--ink-4)", marginTop: 3 }}>When: {a.when}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </window.Card>
     </div>
   );
 }
@@ -453,57 +531,31 @@ function PageBusinessCase() {
         </window.Card>
 
         <window.RecPanel
-          what={"ROI " + roi.ROI_ratio.toFixed(2) + "× · payback " + roi.payback_months + " months — falling in the 'pilot first' band per PRD §F-13."}
+          what={"ROI " + roi.ROI_ratio.toFixed(2) + "× · payback " + roi.payback_months + " months — falling in the 'pilot first' band."}
           why="Annual value comes from three sources: 1) logistics-cost reduction ₩4.31B; 2) revenue loss avoided ₩1.83B; 3) reputation loss avoided ₩641M. Total ₩6.78B / yr."
           action={"Pilot " + roi.pilotRegion + " for 8 weeks (T+5 – T+6 of the roadmap). Measure: cost/m³ down 12%, lead time ≤ 24h."}
-          impact="After a successful pilot, scale nationally at T+7 – T+8. If the pilot misses its KPIs, retreat to Plan P3 (resilience-first)."/>
+          impact="After a successful pilot, scale nationally at T+7 – T+8. If the pilot misses its KPIs, retreat to a more resilient plan."/>
       </div>
 
-      <window.Card title="Cumulative cash impact · 24 months · Plan P2 vs current"
+      <window.Card title="Cumulative cash impact · 24 months · Recommended Plan vs current"
         sub="Break-even at month 8 · cumulative value +₩6.5B after 24 months">
         <PaybackChart paybackMonths={roi.payback_months}
           monthlySaving={roi.annual_value / 12}
           oneTimeCost={roi.incremental_fixed_cost}/>
       </window.Card>
 
-      <div className="three-col">
-        <window.Card title="Comparison · current vs P2" sub="₩ million per year">
+      <div className="two-col">
+        <window.Card title="Comparison · Current vs Recommended" sub="₩ million per year">
           <CompareBars/>
         </window.Card>
 
-        <window.Card title="Trade-offs · F-13"
-          sub="3-plan comparison — engine picks P2">
-          <table className="tbl">
-            <thead><tr><th>Metric</th><th className="num">P1</th><th className="num">P2</th><th className="num">P3</th></tr></thead>
-            <tbody>
-              {[
-                ["Cost",       p => "₩" + p.total_cost.toLocaleString() + "M"],
-                ["Delay",      p => p.avg_delay.toFixed(2) + "d"],
-                ["Coverage",   p => window.fmtPct(p.geo_coverage)],
-                ["Resilience", p => p.resilience + "/100"],
-                ["Payback",    p => p.payback + " mo"],
-              ].map(([k, f]) => (
-                <tr key={k}>
-                  <td style={{ color: "var(--ink-2)" }}>{k}</td>
-                  {window.PLANS.map(p => (
-                    <td key={p.id} className="num" style={p.id === "P2" ? { background: "var(--accent-soft)", color: "var(--accent-ink)", fontWeight: 600 } : null}>
-                      {f(p)}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </window.Card>
-
-        <window.Card title="Implementation risk" sub="What we accept by choosing P2">
+        <window.Card title="Implementation risk" sub="What we accept by choosing this plan">
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {[
-              { kind: "warn", k: "Pilot duration",  v: "8 weeks Seoul + Gyeonggi", note: "Risk: insufficient signal" },
-              { kind: "warn", k: "WMS rollout",     v: "3 sites simultaneous",     note: "Risk: integration delay" },
-              { kind: "ok",   k: "Budget cap",      v: "₩6.0B / yr respected",     note: "P2 stays within budget" },
-              { kind: "ok",   k: "Service SLA",     v: "93% within 24h",           note: "Acceptance criteria met" },
-              { kind: "warn", k: "Reversibility",   v: "WH-GWJ-01 lease ends Q3",  note: "Closure window narrow" },
+              { kind: "warn", k: "Pilot duration",  v: "8 weeks " + roi.pilotRegion, note: "Risk: insufficient signal" },
+              { kind: "warn", k: "WMS rollout",     v: "Multiple sites simultaneous",note: "Risk: integration delay" },
+              { kind: "ok",   k: "Budget cap",      v: "₩6.0B / yr respected",       note: "Stays within budget" },
+              { kind: "ok",   k: "Service SLA",     v: "≥ 90% within 24h",           note: "Acceptance criteria met" },
             ].map((r, i) => (
               <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                 <span className={"badge " + (r.kind === "ok" ? "healthy" : "warn")} style={{ marginTop: 1, minWidth: 50, justifyContent: "center" }}>
@@ -542,15 +594,15 @@ function RoiTier({ code, label, cond, active }) {
 
 function CompareBars() {
   const rows = [
-    { k: "Transport",   curr: 2_820, p2: 2_510 },
-    { k: "Fixed",       curr: 1_400, p2: 1_180 },
-    { k: "Handling",    curr:   490, p2:   470 },
+    { k: "Transport",   curr: 2_820, rec: 2_510 },
+    { k: "Fixed",       curr: 1_400, rec: 1_180 },
+    { k: "Handling",    curr:   490, rec:   470 },
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
       {rows.map(r => {
-        const max = Math.max(r.curr, r.p2);
-        const delta = r.p2 - r.curr;
+        const max = Math.max(r.curr, r.rec);
+        const delta = r.rec - r.curr;
         return (
           <div key={r.k}>
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, marginBottom: 4 }}>
@@ -565,9 +617,9 @@ function CompareBars() {
               <span className="mono" style={{ fontSize: 11, textAlign: "right" }}>₩{r.curr.toLocaleString()}</span>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "40px 1fr 60px", gap: 6, alignItems: "center" }}>
-              <span style={{ fontSize: 10, color: "var(--accent)" }}>P2</span>
-              <div className="bar"><span style={{ width: (r.p2/max*100)+"%", background: "var(--accent)" }}></span></div>
-              <span className="mono" style={{ fontSize: 11, textAlign: "right" }}>₩{r.p2.toLocaleString()}</span>
+              <span style={{ fontSize: 10, color: "var(--accent)" }}>Rec</span>
+              <div className="bar"><span style={{ width: (r.rec/max*100)+"%", background: "var(--accent)" }}></span></div>
+              <span className="mono" style={{ fontSize: 11, textAlign: "right" }}>₩{r.rec.toLocaleString()}</span>
             </div>
           </div>
         );
@@ -639,39 +691,51 @@ function PageRoadmap() {
         <Gantt phases={phases}/>
       </window.Card>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {phases.map((p, i) => (
           <div key={p.id} style={{ border: "1px solid var(--border)", borderRadius: 12, background: "var(--surface)",
-            padding: 14, display: "flex", flexDirection: "column", gap: 10, minHeight: 380 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <span className="mono" style={{ fontSize: 10.5, color: "var(--accent)", fontWeight: 600 }}>{p.id} · {p.phase}</span>
-              <span className="badge outline" style={{ fontSize: 10 }}>Phase {i + 1}</span>
-            </div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)" }}>{p.theme}</div>
-            <div style={{ fontSize: 11, color: "var(--ink-3)" }}>{p.en}</div>
-            <div className="divider"></div>
-            <div style={{ fontSize: 11, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: -4 }}>Tasks</div>
-            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 4 }}>
-              {p.tasks.map((t, j) => (
-                <li key={j} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 6, alignItems: "flex-start", fontSize: 11.5, color: "var(--ink-2)", lineHeight: 1.4 }}>
-                  <span style={{ width: 4, height: 4, borderRadius: 2, background: "var(--accent)", marginTop: 6 }}></span>
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="divider"></div>
+            padding: 16, display: "grid", gridTemplateColumns: "1.5fr 2fr 1fr", gap: 24, alignItems: "start" }}>
+            
+            {/* Col 1: Identity & Context */}
             <div>
-              <div style={{ fontSize: 10.5, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Owner</div>
-              <div style={{ fontSize: 11.5, color: "var(--ink)", fontWeight: 500, marginTop: 1 }}>{p.owner}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                <span className="mono" style={{ fontSize: 11, color: "var(--accent)", fontWeight: 600 }}>{p.id}</span>
+                <span className="badge outline" style={{ fontSize: 10 }}>Phase {i + 1}</span>
+                <span className="mono" style={{ fontSize: 11, color: "var(--ink-3)" }}>{p.phase}</span>
+              </div>
+              <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)", marginBottom: 4 }}>{p.theme}</div>
+              <div style={{ fontSize: 11.5, color: "var(--ink-2)", lineHeight: 1.5 }}>{p.en}</div>
             </div>
+
+            {/* Col 2: Task Checklist */}
             <div>
-              <div style={{ fontSize: 10.5, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Budget</div>
-              <div className="mono" style={{ fontSize: 13, color: "var(--ink)", fontWeight: 600, marginTop: 1 }}>₩{window.fmtKRW(p.budgetKRW)}</div>
+              <div style={{ fontSize: 11, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6 }}>Key Tasks</div>
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 6 }}>
+                {p.tasks.map((t, j) => (
+                  <li key={j} style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: 12, color: "var(--ink)", lineHeight: 1.4 }}>
+                    <span style={{ color: "var(--accent)", marginTop: 2 }}><window.Icon name="check" size={12}/></span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div>
-              <div style={{ fontSize: 10.5, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em" }}>KPI</div>
-              <div style={{ fontSize: 11.5, color: "var(--ink-2)", marginTop: 1, lineHeight: 1.4 }}>{p.kpi}</div>
+
+            {/* Col 3: Details */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, borderLeft: "1px solid var(--border)", paddingLeft: 24 }}>
+              <div>
+                <div style={{ fontSize: 10.5, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Owner</div>
+                <div style={{ fontSize: 12, color: "var(--ink)", fontWeight: 500, marginTop: 2 }}>{p.owner}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10.5, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Budget</div>
+                <div className="mono" style={{ fontSize: 13, color: "var(--ink)", fontWeight: 600, marginTop: 2 }}>₩{window.fmtKRW(p.budgetKRW)}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10.5, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.05em" }}>KPI / Success Metric</div>
+                <div style={{ fontSize: 12, color: "var(--ink)", fontWeight: 500, marginTop: 2, lineHeight: 1.4 }}>{p.kpi}</div>
+              </div>
             </div>
+
           </div>
         ))}
       </div>

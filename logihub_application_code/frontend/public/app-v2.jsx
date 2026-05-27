@@ -47,7 +47,6 @@ function AppV2() {
     case "roles":     page = <window.PageRoles2    {...pageProps}/>; break;
     case "forecast":  page = <window.PageForecast2     {...pageProps}/>; break;
     case "seasonal":  page = <window.PageSeasonal2     {...pageProps}/>; break;
-    case "scenarios": page = <window.PageScenarios     {...pageProps}/>; break;
     case "case":      page = <window.PageBusinessCase2 {...pageProps}/>; break;
     case "export":    page = <window.PageExportAll     {...pageProps}/>; break;
     default:          page = <window.PageOverview2 {...pageProps}/>;

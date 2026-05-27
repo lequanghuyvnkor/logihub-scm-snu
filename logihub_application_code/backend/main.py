@@ -82,6 +82,7 @@ def _build_hubs_df(group_b_dir: str) -> pd.DataFrame:
         "fixed_cost":   raw["fixed_cost_usd_per_year"].astype(float),
         "storage_item": raw["hub_type"],          # metro / port / regional / launch / secure
         "hub_type":     raw["hub_type"],
+        "region_id":    raw["region_id"],
     })
 
 
@@ -144,6 +145,10 @@ async def upload_data(od_file: UploadFile = File(None), warehouse_file: UploadFi
             df_dist = compute_distance_matrix(DATA_STORE["demand"], DATA_STORE["hubs"])
             DATA_STORE["distances"] = df_dist
             result["distance_matrix_computed"] = True
+            
+            # Return full hubs for frontend syncing
+            if "hub_id" in DATA_STORE["hubs"].columns:
+                result["hubs"] = DATA_STORE["hubs"].to_dict(orient="records")
         except Exception as e:
             result["distance_matrix_error"] = str(e)
 
@@ -189,6 +194,7 @@ async def load_defaults():
                 "distance_pairs":   int(len(df_dist)),
                 "hub_ids":          df_hubs["hub_id"].tolist(),
                 "region_ids":       df_demand["region_id"].tolist(),
+                "hubs":             df_hubs.to_dict(orient="records"),
             },
         }
     except Exception as e:

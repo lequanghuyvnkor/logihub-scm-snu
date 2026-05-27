@@ -232,6 +232,14 @@ const KoreaMap = ({
 
   // Helper to map IDs to South Korea geographical lat/lng coordinates
   const getRealLatLng = (id) => {
+    // Dynamic lookup from window.HUB_BY_ID (populated by the backend solver data)
+    if (window.HUB_BY_ID && window.HUB_BY_ID[id]) {
+      const h = window.HUB_BY_ID[id];
+      if (h.lat != null && h.lon != null) {
+        return [Number(h.lat), Number(h.lon)];
+      }
+    }
+    
     const coords = {
       // Regions (Sido / Provinces of South Korea)
       seoul: [37.5665, 126.9780],
@@ -252,7 +260,7 @@ const KoreaMap = ({
       busan: [35.1796, 129.0756],
       jeju: [33.4996, 126.5312],
 
-      // Hubs
+      // Hubs (Static UI Fallbacks)
       H01: [37.5665, 126.9780], // Seoul Metro Hub
       H02: [37.4563, 126.7052], // Incheon Gateway
       H03: [37.0084, 127.2652], // Anseong DC

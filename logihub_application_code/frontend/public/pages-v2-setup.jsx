@@ -384,7 +384,7 @@ function PageUpload2({ navigate, flow, setFlow }) {
     costs:    { uploaded: false },
   };
   const [slots, setSlots] = useStateSetup(initialSlots);
-  const [previewMode, setPreviewMode] = useStateSetup("all");
+  const [previewSlot, setPreviewSlot] = useStateSetup(null);
 
   const slotDefs = [
     { key: "shipping", required: true,
@@ -482,7 +482,7 @@ function PageUpload2({ navigate, flow, setFlow }) {
                   <div className="fmeta">{s.size} · {s.rows}</div>
                   <div style={{ display: "flex", gap: 6, marginTop: "auto" }}>
                     <button className="btn ghost" style={{ fontSize: 11 }}>Replace</button>
-                    <button className="btn ghost" style={{ fontSize: 11 }}>Preview</button>
+                    <button className="btn ghost" style={{ fontSize: 11 }} onClick={() => setPreviewSlot(def.key)}>Preview</button>
                     <button className="btn ghost" style={{ fontSize: 11, marginLeft: "auto", color: "var(--danger)" }}
                       onClick={() => setSlots({ ...slots, [def.key]: { uploaded: false } })}>Remove</button>
                   </div>
@@ -576,6 +576,120 @@ function PageUpload2({ navigate, flow, setFlow }) {
 
       <window.StepFooter stepId="upload" flow={flow} onNavigate={navigate}
         gate={{ ok: flow.uploadValidated, msg: !flow.uploadValidated ? (shippingDone ? "Click Confirm to proceed" : "Upload shipping history first") : null }}/>
+
+      {previewSlot && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.5)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ background: "var(--surface)", width: 800, maxWidth: "90vw", maxHeight: "90vh", borderRadius: 12, display: "flex", flexDirection: "column", boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}>
+            <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: 16 }}>Preview: {slotDefs.find(d => d.key === previewSlot)?.title}</h3>
+                <div style={{ fontSize: 12, color: "var(--ink-3)", marginTop: 4 }}>Showing sample data</div>
+              </div>
+              <button className="btn ghost" onClick={() => setPreviewSlot(null)}>✕ Close</button>
+            </div>
+            <div style={{ padding: 20, overflow: "auto" }}>
+              {previewSlot === "shipping" ? (
+                <table className="tbl">
+                  <thead>
+                    <tr><th>Date</th><th>Origin</th><th>Dest</th><th>SKU</th><th className="num">Weight (kg)</th><th>Truck</th><th className="num">Lead (h)</th><th className="num">Confidence</th></tr>
+                  </thead>
+                  <tbody>
+                    {window.UPLOAD_PREVIEW.map((r, i) => (
+                      <tr key={i} className="hoverable">
+                        <td className="mono">{r.date}</td>
+                        <td style={r.flag?.includes("origin") ? {color:"var(--danger)", fontWeight: 600} : {}}>{r.origin}</td>
+                        <td style={r.flag?.includes("dest") ? {color:"var(--danger)", fontWeight: 600} : {}}>{r.dest}</td>
+                        <td className="mono">{r.sku}</td>
+                        <td className="num">{r.w}</td>
+                        <td className="mono" style={{fontSize: 11}}>{r.truck || "—"}</td>
+                        <td className="num">{r.lead || "—"}</td>
+                        <td className="num">
+                          <span className={"badge " + (r.conf >= 0.95 ? "healthy" : r.conf >= 0.8 ? "warn" : "danger")} style={{fontSize: 10}}>
+                            {window.fmtPct(r.conf, 0)}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : previewSlot === "existing" ? (
+                <table className="tbl">
+                  <thead>
+                    <tr><th>Code</th><th>Address</th><th className="num">Capacity (m³)</th><th>Kind</th><th className="num">Fixed Cost</th><th>Main Group</th><th className="num">Usage</th><th className="num">Cost/m³</th></tr>
+                  </thead>
+                  <tbody>
+                    {window.OWNED_WAREHOUSES.map((r, i) => (
+                      <tr key={i} className="hoverable">
+                        <td className="mono">{r.code}</td>
+                        <td>{r.addr}</td>
+                        <td className="num">{window.fmtNum(r.cap_m3)}</td>
+                        <td>{r.kind}</td>
+                        <td className="num">₩{window.fmtKRW(r.fixedCostKRW)}</td>
+                        <td>{r.mainGroup}</td>
+                        <td className="num">{window.fmtPct(r.usage)}</td>
+                        <td className="num">₩{window.fmtNum(r.costPerM3)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : previewSlot === "sku" ? (
+                <table className="tbl">
+                  <thead>
+                    <tr><th>SKU Code</th><th>Product Family</th><th className="num">Density (t/m³)</th><th>Required Certifications</th></tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { code: "EL-TELE-01", group: "Electronics", tPerM3: 0.12, certs: "High-security" },
+                      { code: "FA-COAT-12", group: "Fashion", tPerM3: 0.08, certs: "Standard" },
+                      { code: "FO-MEAT-04", group: "Food & Beverage", tPerM3: 0.45, certs: "Cold-deep (< −18°C)" },
+                      { code: "FO-MILK-22", group: "Food & Beverage", tPerM3: 0.92, certs: "Cold-mild (0–10°C)" },
+                      { code: "BE-CREM-08", group: "Beauty & Cosmetics", tPerM3: 0.35, certs: "Cold-mild (0–10°C)" },
+                      { code: "LI-CHAI-03", group: "Lifestyle & Home", tPerM3: 0.15, certs: "Standard" },
+                      { code: "SP-TENT-07", group: "Sports & Outdoors", tPerM3: 0.22, certs: "Standard" },
+                    ].map((r, i) => (
+                      <tr key={i} className="hoverable">
+                        <td className="mono" style={{ fontWeight: 600, color: "var(--accent-ink)" }}>{r.code}</td>
+                        <td>{r.group}</td>
+                        <td className="num">{r.tPerM3.toFixed(2)}</td>
+                        <td>
+                          <span className="badge info">{r.certs}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : previewSlot === "costs" ? (
+                <table className="tbl">
+                  <thead>
+                    <tr><th>Region</th><th className="num">Rent / m³</th><th className="num">Primary Tariff</th><th className="num">Handling Fee</th></tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { region: "Seoul Metro", rentM3: "₩ 92,000", tariff: "₩ 4,200 / km", handling: "₩ 1,800 / unit" },
+                      { region: "Gyeonggi Province", rentM3: "₩ 58,000", tariff: "₩ 3,800 / km", handling: "₩ 1,500 / unit" },
+                      { region: "Incheon Gateway", rentM3: "₩ 75,000", tariff: "₩ 3,900 / km", handling: "₩ 1,600 / unit" },
+                      { region: "Daejeon Hub", rentM3: "₩ 67,000", tariff: "₩ 3,500 / km", handling: "₩ 1,400 / unit" },
+                      { region: "Busan Port", rentM3: "₩ 65,000", tariff: "₩ 3,600 / km", handling: "₩ 1,450 / unit" },
+                      { region: "Jeju Island", rentM3: "₩ 124,000", tariff: "₩ 6,800 / km", handling: "₩ 2,400 / unit" },
+                    ].map((r, i) => (
+                      <tr key={i} className="hoverable">
+                        <td style={{ fontWeight: 600 }}>{r.region}</td>
+                        <td className="num mono" style={{ color: "var(--ok)" }}>{r.rentM3}</td>
+                        <td className="num mono">{r.tariff}</td>
+                        <td className="num mono">{r.handling}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div style={{ textAlign: "center", padding: "40px 20px", color: "var(--ink-3)" }}>
+                  Preview not available for {previewSlot} in this prototype.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

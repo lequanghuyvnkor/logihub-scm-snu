@@ -62,6 +62,21 @@
     const res = await apiFetch("/api/load-defaults", { method: "POST" }, 20_000);
     if (res.status === "success") {
       window.API_STATE.dataLoaded = true;
+      if (res.data.hubs) {
+        window.HUBS = res.data.hubs.map(h => ({
+          id: h.hub_id,
+          name: h.company_name || h.hub_id,
+          region: (h.region_id || h.hub_id).toLowerCase(), // backend region_id lowercased
+          type: h.hub_type || "Standard",
+          base: h.capacity_tons,
+          flex: 0,
+          fixed: h.fixed_cost,
+          lat: h.lat,
+          lon: h.lon,
+          status: "candidate"
+        }));
+        window.HUB_BY_ID = Object.fromEntries(window.HUBS.map(h => [h.id, h]));
+      }
       window.dispatchEvent(new CustomEvent("logihub:backend-ready", { detail: res.data }));
     }
     return res;
@@ -76,6 +91,21 @@
     const res = await apiFetch("/api/upload", { method: "POST", body: form }, 30_000);
     if (res.status === "success") {
       window.API_STATE.dataLoaded = true;
+      if (res.data.hubs) {
+        window.HUBS = res.data.hubs.map(h => ({
+          id: h.hub_id,
+          name: h.company_name || h.hub_id,
+          region: (h.region_id || h.hub_id).toLowerCase(), // backend region_id lowercased
+          type: h.hub_type || "Standard",
+          base: h.capacity_tons,
+          flex: 0,
+          fixed: h.fixed_cost,
+          lat: h.lat,
+          lon: h.lon,
+          status: "candidate"
+        }));
+        window.HUB_BY_ID = Object.fromEntries(window.HUBS.map(h => [h.id, h]));
+      }
       window.dispatchEvent(new CustomEvent("logihub:upload-done", { detail: res.data }));
     }
     return res;
@@ -124,6 +154,7 @@
       if (res.status !== "success") throw new Error(res.detail || "9-scenario run failed");
 
       window.API_STATE.liveScenarios = res.data;
+      _patchScenarios(res.data);
       window.dispatchEvent(new CustomEvent("logihub:scenarios-updated", { detail: res.data }));
       return res.data;
     } finally {
@@ -239,6 +270,82 @@
     // Update ROI_V2 recommended plan
     if (window.ROI_V2 && data.recommended) {
       window.ROI_V2.recommendedPlan = data.recommended;
+    }
+  }
+
+  function _patchScenarios(data) {
+    if (!window.SCENARIOS || !window.SCENARIO_BY_ID || !data.scenarios) return;
+
+    const USD_TO_KRW  = 1_350;
+    const MONTHS      = 12;
+
+    // Merge preview scenarios into main SCENARIOS if they aren't there yet
+    if (window.SCENARIOS_PREVIEW) {
+      window.SCENARIOS_PREVIEW.forEach(preview => {
+        if (!window.SCENARIO_BY_ID[preview.id]) {
+          const newScen = { ...preview, totalCost: 0, saving: 0, rank: 99 };
+          window.SCENARIOS.push(newScen);
+          window.SCENARIO_BY_ID[preview.id] = newScen;
+        }
+      });
+    }
+
+    const currentCostKRW = window.SCENARIO_BY_ID["S0"]
+      ? window.SCENARIO_BY_ID["S0"]._mockCost || window.SCENARIO_BY_ID["S0"].totalCost
+      : 4_710;
+
+    window.SCENARIOS.forEach(scenario => {
+      const r = data.scenarios[scenario.id];
+      if (!r || r.status !== "Optimal") return;
+
+      const m = r.metrics;
+
+      if (!scenario._mockCost) scenario._mockCost = scenario.totalCost || 0;
+
+      const annualUSD  = m.total_cost_usd || 0;
+      const monthlyKRW_M = (annualUSD * USD_TO_KRW) / (1_000_000 * MONTHS);
+
+      scenario.totalCost  = Math.round(monthlyKRW_M) || scenario._mockCost;
+      scenario.coveragePct = (m.coverage_within_150km_pct || 0) / 100;
+      scenario.selectedHubs = (r.opened_hubs || []).map(h => h.id);
+
+      const mockRef    = scenario._mockCost || currentCostKRW;
+      scenario.saving  = mockRef > 0 ? Math.max(0, 1 - scenario.totalCost / mockRef) : scenario.saving;
+
+      scenario.liveMetrics = {
+        total_cost_usd:        m.total_cost_usd,
+        avg_distance_km:       m.avg_distance_km,
+        avg_lead_time_hrs:     m.avg_lead_time_hrs,
+        co2_emissions_kg:      m.co2_emissions_kg,
+        coverage_pct:          m.coverage_within_150km_pct,
+        total_tons:            m.total_tons,
+        opened_hubs:           r.opened_hubs,
+        assignments:           r.assignments,
+      };
+
+      if (r.assignments) {
+        if (!window.ALLOCATION) window.ALLOCATION = {};
+        window.ALLOCATION[scenario.id] = {};
+        r.assignments.forEach(a => {
+          const regLower = (a.region_id || "").toLowerCase();
+          window.ALLOCATION[scenario.id][regLower] = a.hub_id;
+        });
+      }
+
+      if (window.SCENARIO_BY_ID[scenario.id]) {
+        Object.assign(window.SCENARIO_BY_ID[scenario.id], scenario);
+      }
+    });
+
+    if (data.recommended) {
+      window.SCENARIOS.forEach(s => {
+        if (s.id === data.recommended) s.rank = 1;
+        else if (s.rank === 1) s.rank = 2; 
+      });
+      // also update ROI_V2
+      if (window.ROI_V2) {
+        window.ROI_V2.recommendedPlan = data.recommended;
+      }
     }
   }
 

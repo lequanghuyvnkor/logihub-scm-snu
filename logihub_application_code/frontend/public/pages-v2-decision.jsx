@@ -33,6 +33,38 @@ function PageWarehouseMap({ navigate, flow, setFlow }) {
   const hubs = window.HUBS || [];
   const health = window.NETWORK_HEALTH || {};
 
+  // Dynamically compute utilization and overloaded hubs based on active scenario's assignments
+  if (scenario && scenario.liveMetrics && scenario.liveMetrics.assignments) {
+    window.UTILIZATION = {};
+    const assignments = scenario.liveMetrics.assignments;
+    let overloadedCount = 0;
+    hubs.forEach(hub => {
+      const isSelected = scenario.selectedHubs?.includes(hub.id);
+      if (isSelected) {
+        const assignedDemand = assignments
+          .filter(a => a.hub_id === hub.id)
+          .reduce((sum, a) => sum + (a.demand_tons || 0), 0);
+        
+        const capacity = (hub.base || 0) + (hub.flex || 0) || 50000;
+        const baseUtil = assignedDemand / capacity;
+        
+        const monthlyDemand = window.MONTHLY_DEMAND || [68, 72, 79, 81, 78, 75, 73, 70, 86, 92, 98, 88];
+        const avgIdx = monthlyDemand.reduce((sum, v) => sum + v, 0) / 12;
+        
+        const utils = monthlyDemand.map(idx => {
+          return parseFloat((baseUtil * (idx / avgIdx)).toFixed(3));
+        });
+        window.UTILIZATION[hub.id] = utils;
+        if (utils[10] > 0.9) {
+          overloadedCount++;
+        }
+      } else {
+        window.UTILIZATION[hub.id] = Array(12).fill(0.0);
+      }
+    });
+    scenario.overloaded = overloadedCount;
+  }
+
   const ACTION_LABEL = { keep: "Keep", open: "Open", downgrade: "Downgrade", close: "Close" };
   const ACTION_CLS   = { keep: "healthy", open: "info", downgrade: "warn", close: "critical" };
 
